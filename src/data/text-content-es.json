@@ -1,0 +1,64 @@
+{
+  "appBar": {
+    "item1": "Inicio",
+    "item2": "Sobre Mí",
+    "item3": "Experiencia",
+    "item4": "Habilidades",
+    "item5": "Mis Proyectos",
+    "item6": "Contactame"
+  },
+  "headerSection": {
+    "title": "Hola soy Cristopher",
+    "title2": "¡Bienvenido a mi espacio!",
+    "subtitle": "Soy un desarrollador apasionado por crear soluciones innovadoras",
+    "description": "Me encanta aprender, colaborar y enfrentar desafíos tecnológicos.",
+    "description2": "Este sitio fue desarrollado con las siguientes tecnologías:",
+    "button": "Visita mi linkedin",
+    "button2": "Descarga mi CV",
+    "typingStart": "const myPortfolio = getInstance( coding, cretivity, passion )",
+    "typingEnd": "Este espacio fue desarrollado con las siguientes tecnologías:"
+  },
+  "aboutMeSection": {
+    "title": "Algo sobre mí...",
+    "description": "La curiosidad es mi motor. Me encanta aprender cosas nuevas, desde los misterios del universo hasta los últimos avances tecnológicos. Me apasiona la naturaleza, los autos y el deporte. Disfruto explorar nuevos lugares, conocer gente y adquirir nuevas habilidades.",
+    "card1Subtitle": "Habilidades Blandas",
+    "card1Description": "Además de mis habilidades técnicas, soy una persona adaptable y con un fuerte sentido de colaboración. Disfruto trabajando en equipo y aportando soluciones creativas a los problemas. Mi experiencia en diversos proyectos me ha permitido desarrollar un pensamiento crítico que me ayuda a tomar decisiones informadas. La ética laboral y el liderazgo son valores fundamentales para mí, y creo que estas cualidades, combinadas con mi pasión por el deporte, me permiten mantener un equilibrio saludable entre mi vida profesional y personal.",
+    "card2Subtitle": "Habilidades Duras",
+    "card2Description": "Con una sólida formación en programación y un amplio conjunto de habilidades técnicas, me considero un desarrollador versátil. Tengo dominio en diversos lenguajes de programación, frameworks y herramientas para el desarrollo de aplicaciones web y móviles. Creo firmemente en la importancia de diseñar sistemas escalables y mantenibles, por lo que implemento prácticas como TDD, control de versiones y metodologías ágiles. Mi experiencia con plataformas en la nube me capacita para crear soluciones robustas y escalables."
+  },
+  "experienceSection": {
+    "title": "Mi experiencia",
+    "subtitle1": "Software specialist",
+    "description1": "Desarrollador con experiencia en el desarrollo de software y las bases de datos.",
+    "items1": ["Tarea 1", "Tarea 2", "Tarea 3", "Tarea 4", "Tarea 5"],
+    "subtitle2": "Full Stack Developer",
+    "description2": "Desarrollador con experiencia en el desarrollo de software y las bases de datos.",
+    "items2": ["Tarea 1", "Tarea 2", "Tarea 3", "Tarea 4", "Tarea 5"]
+  },
+  "skillsSection": {
+    "title": "Habilidades",
+    "subtitle": "Algunas de las herramientas con las que he trabajado",
+    "items": [
+      { "src": "", "label": "React" },
+      { "src": "", "label": "Next js" },
+      { "src": "", "label": "Html" },
+      { "src": "", "label": "Node" },
+      { "src": "", "label": "Material UI" },
+      { "src": "", "label": "Python" }
+    ]
+  },
+  "projectSection": {
+    "title": "Mis proyectos",
+    "description": "Conoce algunnos de los proyectos en los que he estado involucrado",
+    "items": [
+      { "src": "", "label": "Landing" },
+      { "src": "", "label": "Pluggin" },
+      { "src": "", "label": "Portal App" },
+      { "src": "", "label": "Sistema contable" },
+      { "src": "", "label": "Python" }
+    ]
+  },
+  "contactSection": {
+    "title": "Contáctame en:"
+  }
+}
