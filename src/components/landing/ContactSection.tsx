@@ -4,6 +4,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 
 // third-party
 import Slider, { Settings } from 'react-slick';
@@ -15,6 +16,34 @@ import BackgroundImag from '@/assets/images/landing/bg-heand.png';
 import dataContentEsp from '@/data/text-content-es.json';
 
 // =============================|| LANDING - STARTUP PROJECT ||============================= //
+
+const mediaContact = [
+  {
+    id: 'linkedin',
+    title: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/cristopher-palacios-791704160'
+  },
+  {
+    id: 'dev',
+    title: 'Dev Community',
+    url: 'https://dev.to/cristopher_palacios_4a172'
+  },
+  {
+    id: 'github',
+    title: 'GitHub',
+    url: 'https://github.com/CristopherPalacios'
+  },
+  {
+    id: 'instagram',
+    title: 'Instagram',
+    url: 'https://www.instagram.com/cris.ldu.12'
+  },
+  {
+    id: 'facebook',
+    title: 'Facebook',
+    url: 'https://www.facebook.com/cris.ldu.12/?locale=es_LA'
+  },
+];
 
 const ContactSection = () => {
   const settings: Settings = {
@@ -29,7 +58,7 @@ const ContactSection = () => {
     verticalSwiping: true,
     focusOnSelect: true,
     autoplay: true,
-    autoplaySpeed: 2000
+    autoplaySpeed: 10000
   };
 
   return (
@@ -83,24 +112,17 @@ const ContactSection = () => {
               </Typography>
             </Box>
             <Slider {...settings}>
-              <Typography color="text.hint" variant="h2">
-                LinkedIn
-              </Typography>
-              <Typography color="text.hint" variant="h2">
-                Highly Responsive
-              </Typography>
-              <Typography color="text.hint" variant="h2">
-                Design Consistency
-              </Typography>
-              <Typography color="text.hint" variant="h2">
-                Effective Support
-              </Typography>
-              <Typography color="text.hint" variant="h2">
-                Standardization
-              </Typography>
-              <Typography color="text.hint" variant="h2">
-                Compatibility
-              </Typography>
+              {mediaContact.map((item) => (
+                <Typography
+                  key={item.id}
+                  component={Link}
+                  href={item.url}
+                  target="_blank"
+                  variant="h2"
+                >
+                  {item.title}
+                </Typography>
+              ))}
             </Slider>
           </Stack>
         </Box>

@@ -133,7 +133,7 @@ const HeaderSection = () => {
                   <Grid item>
                     <Button
                       component={Link}
-                      href="https://links.codedthemes.com/hsqll"
+                      href="/assets/cv.pdf"
                       target="_blank"
                       size="large"
                       variant="contained"
