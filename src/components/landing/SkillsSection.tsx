@@ -32,32 +32,20 @@ import TS from '../../assets/images/landing/logos/typescript.svg';
 
 export const frameworks = [
   {
-    title: 'AWS',
-    logo: AWS
+    title: 'React',
+    logo: React
   },
   {
-    title: 'Bootstrap 5',
-    logo: Bootstrap,
-  },
-  {
-    title: 'CSS 3',
-    logo: CSS
-  },
-  {
-    title: 'Figma',
-    logo: Figma
-  },
-  {
-    title: 'GCP',
-    logo: GCP
+    title: 'TypeScript',
+    logo: TS
   },
   {
     title: 'HTML 5',
     logo: HTML
   },
   {
-    title: 'Java',
-    logo: Java
+    title: 'Next.js',
+    logo: Next
   },
   {
     title: 'JavaScript',
@@ -68,6 +56,34 @@ export const frameworks = [
     logo: MUI
   },
   {
+    title: 'GCP',
+    logo: GCP
+  },
+  {
+    title: 'Node.js',
+    logo: FullStack,
+  },
+  {
+    title: 'AWS',
+    logo: AWS
+  },
+  {
+    title: 'Bootstrap 5',
+    logo: Bootstrap,
+  },
+  {
+    title: 'Java',
+    logo: Java
+  },
+  {
+    title: 'CSS 3',
+    logo: CSS
+  },
+  {
+    title: 'Figma',
+    logo: Figma
+  },
+  {
     title: 'MySQL',
     logo: SQL
   },
@@ -76,21 +92,10 @@ export const frameworks = [
     logo: NativeBase
   },
   {
-    title: 'Next.js',
-    logo: Next
-  },
-  {
-    title: 'Node.js',
-    logo: FullStack,
-  },
-  {
     title: 'Python',
     logo: Python
   },
-  {
-    title: 'React',
-    logo: React
-  },
+
   {
     title: 'SASS',
     logo: SASS
@@ -103,10 +108,6 @@ export const frameworks = [
     title: 'Tailwind CSS',
     logo: Tailwind,
     isUpcoming: true
-  },
-  {
-    title: 'TypeScript',
-    logo: TS
   }
 ];
 

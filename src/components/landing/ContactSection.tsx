@@ -84,7 +84,7 @@ const ContactSection = () => {
             </Box>
             <Slider {...settings}>
               <Typography color="text.hint" variant="h2">
-                Easy Customizability
+                LinkedIn
               </Typography>
               <Typography color="text.hint" variant="h2">
                 Highly Responsive
