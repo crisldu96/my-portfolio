@@ -28,34 +28,76 @@
   },
   "experienceSection": {
     "title": "Mi experiencia",
-    "subtitle1": "Software specialist",
-    "description1": "Desarrollador con experiencia en el desarrollo de software y las bases de datos.",
-    "items1": ["Tarea 1", "Tarea 2", "Tarea 3", "Tarea 4", "Tarea 5"],
+    "subtitle1": "Software Developer Specialist",
+    "description1": "Llevo más de 3 años sumergido en el mundo del desarrollo web, creando experiencias digitales únicas. Me encanta encontrar soluciones innovadoras y transformar ideas en realidad",
+    "items1": [
+      "Impulsé la transformación digital de la empresa, implementando metodologías ágiles (SCRUM) y automatizando procesos en Google Cloud Platform (GCP).",
+      "Desarrollé varios proyectos web utilizando tecnologías modernas como React, JavaScript y Material-UI.",
+      "Lideré la adopción de Google Console como SaaS, reduciendo tiempos de desarrollo y despliegue en un 35%.",
+      "Construí el portal web de empresa utilizando React para mostrar el portafolio de productos y generar el 80% de los ingresos anuales."
+    ],
     "subtitle2": "Full Stack Developer",
-    "description2": "Desarrollador con experiencia en el desarrollo de software y las bases de datos.",
-    "items2": ["Tarea 1", "Tarea 2", "Tarea 3", "Tarea 4", "Tarea 5"]
+    "description2": "Adquirí más de 1 año de conocimiento construyendo sistemas web completos, desde la parte visible para el usuario (front-end) hasta la lógica de negocio (back-end) para clientes particulares.",
+    "items2": [
+      "Aumenté la eficiencia de los procesos de análisis de datos en un [porcentaje] gracias al desarrollo de una plataforma personalizada.",
+      "Mejoré la visibilidad en línea de la empresa con la que trabajaba con un nuevo sitio web, incrementando el tráfico en un 20%.",
+      "Automatizé la creación de documentos legales por medio de una aplicación web, reduciendo costos y mejorando la precisión."
+    ]
   },
   "skillsSection": {
     "title": "Habilidades",
     "subtitle": "Algunas de las herramientas con las que he trabajado",
     "items": [
-      { "src": "", "label": "React" },
-      { "src": "", "label": "Next js" },
-      { "src": "", "label": "Html" },
-      { "src": "", "label": "Node" },
-      { "src": "", "label": "Material UI" },
-      { "src": "", "label": "Python" }
+      {
+        "src": "",
+        "label": "React"
+      },
+      {
+        "src": "",
+        "label": "Next js"
+      },
+      {
+        "src": "",
+        "label": "Html"
+      },
+      {
+        "src": "",
+        "label": "Node"
+      },
+      {
+        "src": "",
+        "label": "Material UI"
+      },
+      {
+        "src": "",
+        "label": "Python"
+      }
     ]
   },
   "projectSection": {
     "title": "Mis proyectos",
     "description": "Conoce algunnos de los proyectos en los que he estado involucrado",
     "items": [
-      { "src": "", "label": "Landing" },
-      { "src": "", "label": "Pluggin" },
-      { "src": "", "label": "Portal App" },
-      { "src": "", "label": "Sistema contable" },
-      { "src": "", "label": "Python" }
+      {
+        "src": "",
+        "label": "Landing"
+      },
+      {
+        "src": "",
+        "label": "Pluggin"
+      },
+      {
+        "src": "",
+        "label": "Portal App"
+      },
+      {
+        "src": "",
+        "label": "Sistema contable"
+      },
+      {
+        "src": "",
+        "label": "Python"
+      }
     ]
   },
   "contactSection": {

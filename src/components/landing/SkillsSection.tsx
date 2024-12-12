@@ -163,11 +163,11 @@ const SkillsSection = () => {
   return (
     <>
       <Container sx={{ mb: 6 }}>
-        <Stack spacing={0.25} alignItems="center">
+        <Stack spacing={1.5} alignItems="center">
           <Typography variant="h2" align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
             {dataContentEsp.skillsSection.title}
           </Typography>
-          <Typography variant="body2" align="center" sx={{ pt: 1 }}>
+          <Typography variant="h4" sx={{ fontWeight: 400 }} align="center">
             {dataContentEsp.skillsSection.subtitle}
           </Typography>
         </Stack>
