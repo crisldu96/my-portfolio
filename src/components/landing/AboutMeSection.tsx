@@ -30,7 +30,7 @@ const HeaderImage = styled('img')(() => ({
   maxWidth: '100%',
   filter: 'drop-shadow(0px 0px 50px rgb(33 150 243 / 30%))',
   opacity: 0.9,
-  borderRadius: 20
+  borderRadius: 25
 }));
 
 const OfferCard = ({ title, caption, image }: OfferCardProps) => {
