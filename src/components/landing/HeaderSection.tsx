@@ -20,7 +20,7 @@ import ImageBackground from '../ImageBackground';
 
 // styles
 const HeaderImage = styled('img')({
-  borderRadius: 20,
+  borderRadius: 300,
   marginLeft: '25%',
   maxWidth: '100%',
   opacity: 0.8,
