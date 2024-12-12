@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
 import { Box, Button, CardMedia, Container, Grid, Link, Stack, Typography } from '@mui/material';
@@ -12,15 +10,13 @@ import { TypeAnimation } from 'react-type-animation';
 
 // project imports
 import AnimateButton from '../AnimateButton';
-import useConfig from '@/hooks/useConfig';
 import dataContentEsp from '@/data/text-content-es.json';
 
 // assets
 import TechLight from '../../assets/images/landing/tech-light.svg';
 import TechDark from '../../assets/images/landing/tech-dark.svg';
 import developer from '../../assets/images/landing/header-1.png';
-import BgDark from '../../assets/images/landing/bg-hero-block-dark.png';
-import BgLight from '../../assets/images/landing/bg-hero-block-light.png';
+import ImageBackground from '../ImageBackground';
 
 // styles
 const HeaderImage = styled('img')({
@@ -32,37 +28,11 @@ const HeaderImage = styled('img')({
   transform: 'rotateY(180deg)'
 });
 
-const HeaderAnimationImage = styled('img')({
-  maxWidth: '100%',
-  filter: 'drop-shadow(0px 0px 50px rgb(33 150 243 / 30%))'
-});
-
 // ==============================|| LANDING - HEADER PAGE ||============================== //
 
 const HeaderSection = () => {
   const theme = useTheme();
-  const { rtlLayout } = useConfig();
   const headerSX = { fontSize: { xs: '2rem', sm: '3rem', md: '3.5rem', lg: '3.5rem' } };
-
-  const HeaderAnimationImagememo = useMemo(
-    () => (
-      <HeaderAnimationImage
-        src={theme.palette.mode === 'dark' ? BgDark.src : BgLight.src}
-        alt="Cristopher Palacios"
-        sx={{
-          display: { xs: 'none', md: 'flex' },
-          position: 'absolute',
-          filter: 'none',
-          bottom: { md: 0 },
-          right: 0,
-          width: '50%',
-          transformOrigin: '50% 50%',
-          transform: rtlLayout ? 'rotateY(180deg)' : 'rotateY(0deg)'
-        }}
-      />
-    ),
-    [rtlLayout, theme]
-  );
 
   return (
     <Container sx={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -189,7 +159,12 @@ const HeaderSection = () => {
               <HeaderImage src={developer.src} alt="Cristopher Palacios" />
             </motion.div>
           </Box>
-          {HeaderAnimationImagememo}
+          <ImageBackground
+            sx={{
+              bottom: { md: 0 },
+              right: 0
+            }}
+          />
         </Grid>
       </Grid>
     </Container >
