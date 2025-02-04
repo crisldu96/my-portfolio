@@ -5,16 +5,10 @@ import { SvgIconTypeMap, ChipProps, TableCellProps } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 // project imports
-import { TablerIcon } from '@tabler/icons';
-import { CartStateProps } from './cart';
 import { KanbanStateProps } from './kanban';
 import { CustomerStateProps } from './customer';
-import { ContactStateProps } from './contact';
 import { ProductStateProps } from './e-commerce';
-import { ChatStateProps } from './chat';
-import { CalendarStateProps } from './calendar';
 import { MailStateProps } from './mail';
-import { UserStateProps } from './user';
 import { SnackbarProps } from './snackbar';
 
 export type ArrangementOrder = 'asc' | 'desc' | undefined;
@@ -48,8 +42,7 @@ export type OverrideIcon =
     muiName: string;
   })
   | React.ComponentClass<any>
-  | FunctionComponent<any>
-  | TablerIcon;
+  | FunctionComponent<any>;
 
 export interface EnhancedTableHeadProps extends TableCellProps {
   onSelectAllClick: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -107,15 +100,10 @@ export interface ColorPaletteProps {
 
 export interface DefaultRootStateProps {
   snackbar: SnackbarProps;
-  cart: CartStateProps;
   kanban: KanbanStateProps;
   customer: CustomerStateProps;
-  contact: ContactStateProps;
   product: ProductStateProps;
-  chat: ChatStateProps;
-  calendar: CalendarStateProps;
   mail: MailStateProps;
-  user: UserStateProps;
 }
 
 export interface ColorProps {

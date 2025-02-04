@@ -16,7 +16,8 @@ import dataContentEsp from '@/data/text-content-es.json';
 // assets
 import Offer1 from '../../assets/images/landing/offer/offer-1.png';
 import Offer2 from '../../assets/images/landing/offer/offer-2.png';
-import dashboard from '../../assets/images/landing/hero-dashboard.png';
+import ImageBackground from '../ImageBackground';
+import { Box } from '@mui/material';
 
 
 interface OfferCardProps {
@@ -25,8 +26,11 @@ interface OfferCardProps {
   image: string;
 }
 
-const HeaderImage = styled('img')(({ theme }) => ({
+const HeaderImage = styled('img')(() => ({
   maxWidth: '100%',
+  filter: 'drop-shadow(0px 0px 50px rgb(33 150 243 / 30%))',
+  opacity: 0.9,
+  borderRadius: 25
 }));
 
 const OfferCard = ({ title, caption, image }: OfferCardProps) => {
@@ -79,7 +83,15 @@ const AboutMeSection = () => (
         </Grid>
       </Grid>
       <Grid item md={6} xs={12} sx={{ display: 'flex' }}>
-        <HeaderImage src={dashboard.src} alt="Cristopher Palacios" />
+        <Box sx={{ position: 'relative', mt: 1.75, zIndex: 9 }}>
+          <HeaderImage src="/assets/images/paisaje.jpg" alt="Cristopher Palacios" />
+        </Box>
+        <ImageBackground
+          sx={{
+            left: 0,
+            transform: 'rotateY(180deg)',
+          }}
+        />
       </Grid>
       <Grid item md={6} xs={12}>
         <Grid container direction="column" justifyContent="center" spacing={5} sx={{ '&> .MuiGrid-root > div': { height: '100%' } }}>
