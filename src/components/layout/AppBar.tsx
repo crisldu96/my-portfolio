@@ -28,6 +28,8 @@ import dataContentEsp from '@/data/text-content-es.json';
 import { IconBook, IconCreditCard, IconDashboard, IconHome2 } from '@tabler/icons-react';
 import MenuIcon from '@mui/icons-material/Menu';
 import LanguageSwitch from '../LanguageSwitch';
+import useConfig from '@/hooks/useConfig';
+import useLanguage from '@/hooks/useLanguage';
 
 // elevation scroll
 interface ElevationScrollProps {
@@ -55,6 +57,8 @@ function ElevationScroll({ children, window }: ElevationScrollProps) {
 // ==============================|| MINIMAL LAYOUT APP BAR ||============================== //
 
 const AppBar = ({ ...others }) => {
+  const { locale, onChangeLocale } = useConfig();
+  const { handleTraslation } = useLanguage();
   const [drawerToggle, setDrawerToggle] = useState<boolean>(false);
 
   const drawerToggler = (open: boolean) => (event: any) => {
@@ -62,6 +66,10 @@ const AppBar = ({ ...others }) => {
       return;
     }
     setDrawerToggle(open);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeLocale(event.target.checked ? 'en' : 'es');
   };
 
   return (
@@ -73,9 +81,10 @@ const AppBar = ({ ...others }) => {
               <Logo />
             </Typography>
             <Stack direction="row" sx={{ display: { xs: 'none', sm: 'block' } }} spacing={{ xs: 1.5, md: 2.5 }}>
-              <LanguageSwitch size="small" />
+              <LanguageSwitch checked={locale === 'en'} onChange={handleChange} size="small" />
               <Button color="inherit" component={Link} href="/#home">
-                {dataContentEsp.appBar.item1}
+                {handleTraslation('appBar.item1')}
+                ojo
               </Button>
               <Button color="inherit" component={Link} href="/#about">
                 {dataContentEsp.appBar.item2}
