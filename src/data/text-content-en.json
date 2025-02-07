@@ -1,0 +1,106 @@
+{
+  "appBar": {
+    "item1": "Home",
+    "item2": "About Me",
+    "item3": "Experience",
+    "item4": "Skills",
+    "item5": "My Projects",
+    "item6": "Contact Me"
+  },
+  "headerSection": {
+    "title": "Hello, I'm Cristopher",
+    "title2": "Welcome to my space!",
+    "subtitle": "I am a developer passionate about creating innovative solutions",
+    "description": "I love learning, collaborating and facing technological challenges.",
+    "description2": "This site was developed with the following technologies:",
+    "button": "Visit my linkedin",
+    "button2": "Download my CV",
+    "typingStart": "const myPortfolio = getInstance( coding, cretivity, passion )",
+    "typingEnd": "This space was developed with the following technologies:"
+  },
+  "aboutMeSection": {
+    "title": "Something about me...",
+    "description": "Curiosity is my engine. I love learning new things, from the mysteries of the universe to the latest technological advances. I am passionate about nature, cars and sports. I enjoy exploring new places, meeting people and acquiring new skills.",
+    "card1Subtitle": "Soft Skills",
+    "card1Description": "In addition to my technical skills, I am an adaptable person with a strong sense of collaboration. I enjoy working in a team and contributing creative solutions to problems. My experience in various projects has allowed me to develop critical thinking that helps me make informed decisions. Work ethic and leadership are fundamental values for me, and I believe that these qualities, combined with my passion for sports, allow me to maintain a healthy balance between my professional and personal life.",
+    "card2Subtitle": "Hard Skills",
+    "card2Description": "With a solid background in programming and a wide range of technical skills, I consider myself a versatile developer. I have proficiency in various programming languages, frameworks and tools for web and mobile application development. I firmly believe in the importance of designing scalable and maintainable systems, so I implement practices such as TDD, version control and agile methodologies. My experience with cloud platforms enables me to create robust and scalable solutions."
+  },
+  "experienceSection": {
+    "title": "My Experience",
+    "subtitle1": "Software Developer Specialist",
+    "description1": "I have been immersed in the world of web development for more than 3 years, creating unique digital experiences. I love finding innovative solutions and transforming ideas into reality.",
+    "items1": [
+      "I drove the company's digital transformation, implementing agile methodologies (SCRUM) and automating processes on Google Cloud Platform (GCP).",
+      "I developed several web projects using modern technologies such as React, JavaScript and Material-UI.",
+      "I led the adoption of Google Console as SaaS, reducing development and deployment times by 35%.",
+      "I built the company web portal using React to display the product portfolio and generate 80% of annual revenue."
+    ],
+    "subtitle2": "Full Stack Developer",
+    "description2": "I acquired more than 1 year of knowledge building complete web systems, from the visible part for the user (front-end) to the business logic (back-end) for private clients.",
+    "items2": [
+      "I increased the efficiency of data analysis processes by [percentage] thanks to the development of a custom platform.",
+      "I improved the online visibility of the company I worked with with a new website, increasing traffic by 20%.",
+      "I automated the creation of legal documents through a web application, reducing costs and improving accuracy."
+    ]
+  },
+  "skillsSection": {
+    "title": "Skills",
+    "subtitle": "Some of the tools I have worked with",
+    "items": [
+      {
+        "src": "",
+        "label": "React"
+      },
+      {
+        "src": "",
+        "label": "Next js"
+      },
+      {
+        "src": "",
+        "label": "Html"
+      },
+      {
+        "src": "",
+        "label": "Node"
+      },
+      {
+        "src": "",
+        "label": "Material UI"
+      },
+      {
+        "src": "",
+        "label": "Python"
+      }
+    ]
+  },
+  "projectSection": {
+    "title": "My Projects",
+    "description": "Get to know some of the projects I have been involved in",
+    "items": [
+      {
+        "src": "",
+        "label": "Landing"
+      },
+      {
+        "src": "",
+        "label": "Pluggin"
+      },
+      {
+        "src": "",
+        "label": "Portal App"
+      },
+      {
+        "src": "",
+        "label": "Accounting System"
+      },
+      {
+        "src": "",
+        "label": "Python"
+      }
+    ]
+  },
+  "contactSection": {
+    "title": "Contact me at:"
+  }
+}

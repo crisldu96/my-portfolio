@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Badge, CardMedia, Container, Link, Stack, Typography } from '@mui/material';
+import { Box, Badge, CardMedia, Container, Stack, Typography } from '@mui/material';
 
 // third-party
 import Slider from 'react-slick';

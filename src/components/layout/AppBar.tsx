@@ -68,7 +68,7 @@ const AppBar = ({ ...others }) => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChangeLocale(event.target.checked ? 'en' : 'es');
+    onChangeLocale(event.target.checked ? 'es' : 'en');
   };
 
   return (
@@ -80,7 +80,7 @@ const AppBar = ({ ...others }) => {
               <Logo />
             </Typography>
             <Stack direction="row" sx={{ display: { xs: 'none', sm: 'block' } }} spacing={{ xs: 1.5, md: 2.5 }}>
-              <LanguageSwitch checked={locale === 'en'} onChange={handleChange} size="small" />
+              <LanguageSwitch checked={locale === 'es'} onChange={handleChange} size="small" />
               <Button color="inherit" component={Link} href="/#home">
                 {handleTraslation('appBar.item1')}
               </Button>
