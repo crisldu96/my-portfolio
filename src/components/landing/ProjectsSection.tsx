@@ -10,7 +10,6 @@ import { Carousel } from 'react-responsive-carousel';
 import { IconChevronRight, IconChevronLeft, IconLink } from '@tabler/icons-react';
 
 // project imports
-import dataContentEsp from '@/data/text-content-es.json';
 import SliderLight1 from '../../assets/images/landing/pre-apps/slider-light-1.png';
 import SliderDark1 from '../../assets/images/landing/pre-apps/slider-dark-1.png';
 import SliderLight2 from '../../assets/images/landing/pre-apps/slider-light-2.png';
@@ -23,6 +22,7 @@ import SliderLight5 from '../../assets/images/landing/pre-apps/slider-light-5.pn
 import SliderDark5 from '../../assets/images/landing/pre-apps/slider-dark-5.png';
 import SliderLight6 from '../../assets/images/landing/pre-apps/slider-light-6.png';
 import SliderDark6 from '../../assets/images/landing/pre-apps/slider-dark-6.png';
+import useLanguage from '@/hooks/useLanguage';
 
 // styles
 const Images = styled('img')({
@@ -154,6 +154,7 @@ const Items = ({ title, caption, image, link }: ItemProps) => {
 
 const ProjectsSection = () => {
   const theme = useTheme();
+  const { handleTraslation } = useLanguage();
   const matchUpSM = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
@@ -163,12 +164,12 @@ const ProjectsSection = () => {
           <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-                {dataContentEsp.projectSection.title}
+                {handleTraslation('projectSection.title')}
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h4" sx={{ fontWeight: 400 }} align="center">
-                {dataContentEsp.projectSection.description}
+                {handleTraslation('projectSection.description')}
               </Typography>
             </Grid>
           </Grid>

@@ -1,5 +1,7 @@
-import useConfig from '@/hooks/useConfig';
+'use client';
 import { createContext, ReactNode } from 'react';
+import _ from 'lodash';
+import useConfig from '@/hooks/useConfig';
 import dataContentEsp from '@/data/text-content-es.json';
 
 const initialState: any = {
@@ -15,9 +17,10 @@ type LanguageProviderProps = {
 const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const { locale } = useConfig();
 
-  const handleTraslation = (key: string): string => {
+  const handleTraslation = (key: string): any => {
     const currentDictionary: any = locale === 'es' ? dataContentEsp : dataContentEsp;
-    return currentDictionary[key];
+    const value = _.get(currentDictionary, key);
+    return value;
   };
 
   return (

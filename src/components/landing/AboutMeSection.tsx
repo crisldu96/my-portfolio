@@ -11,13 +11,13 @@ import { useTheme, styled } from '@mui/material/styles';
 import FadeInWhenVisible from '../Animation';
 import SubCard from '../SubCard';
 import Avatar from '../Avatar';
-import dataContentEsp from '@/data/text-content-es.json';
 
 // assets
 import Offer1 from '../../assets/images/landing/offer/offer-1.png';
 import Offer2 from '../../assets/images/landing/offer/offer-2.png';
 import ImageBackground from '../ImageBackground';
 import { Box } from '@mui/material';
+import useLanguage from '@/hooks/useLanguage';
 
 
 interface OfferCardProps {
@@ -65,54 +65,57 @@ const OfferCard = ({ title, caption, image }: OfferCardProps) => {
   );
 };
 
-const AboutMeSection = () => (
-  <Container>
-    <Grid container spacing={7.5} justifyContent="center">
-      <Grid item xs={12} sx={{ textAlign: 'center' }}>
-        <Grid container spacing={1.5}>
-          <Grid item xs={12}>
-            <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-              {dataContentEsp.aboutMeSection.title}
-            </Typography>
+const AboutMeSection = () => {
+  const { handleTraslation } = useLanguage();
+  return (
+    <Container>
+      <Grid container spacing={7.5} justifyContent="center">
+        <Grid item xs={12} sx={{ textAlign: 'center' }}>
+          <Grid container spacing={1.5}>
+            <Grid item xs={12}>
+              <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
+                {handleTraslation('aboutMeSection.title')}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" sx={{ fontSize: '1rem' }}>
+                {handleTraslation('aboutMeSection.description')}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="body2" sx={{ fontSize: '1rem' }}>
-              {dataContentEsp.aboutMeSection.description}
-            </Typography>
+        </Grid>
+        <Grid item md={6} xs={12} sx={{ display: 'flex' }}>
+          <Box sx={{ position: 'relative', mt: 1.75, zIndex: 9 }}>
+            <HeaderImage src="/assets/images/paisaje.jpg" alt="Cristopher Palacios" />
+          </Box>
+          <ImageBackground
+            sx={{
+              left: 0,
+              transform: 'rotateY(180deg)',
+            }}
+          />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <Grid container direction="column" justifyContent="center" spacing={5} sx={{ '&> .MuiGrid-root > div': { height: '100%' } }}>
+            <Grid item md={6} sm={12}>
+              <OfferCard
+                title={handleTraslation('aboutMeSection.card1Subtitle')}
+                caption={handleTraslation('aboutMeSection.card1Description')}
+                image={Offer1.src}
+              />
+            </Grid>
+            <Grid item md={4} sm={6}>
+              <OfferCard
+                title={handleTraslation('aboutMeSection.card2Subtitle')}
+                caption={handleTraslation('aboutMeSection.card2Description')}
+                image={Offer2.src}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item md={6} xs={12} sx={{ display: 'flex' }}>
-        <Box sx={{ position: 'relative', mt: 1.75, zIndex: 9 }}>
-          <HeaderImage src="/assets/images/paisaje.jpg" alt="Cristopher Palacios" />
-        </Box>
-        <ImageBackground
-          sx={{
-            left: 0,
-            transform: 'rotateY(180deg)',
-          }}
-        />
-      </Grid>
-      <Grid item md={6} xs={12}>
-        <Grid container direction="column" justifyContent="center" spacing={5} sx={{ '&> .MuiGrid-root > div': { height: '100%' } }}>
-          <Grid item md={6} sm={12}>
-            <OfferCard
-              title={dataContentEsp.aboutMeSection.card1Subtitle}
-              caption={dataContentEsp.aboutMeSection.card1Description}
-              image={Offer1.src}
-            />
-          </Grid>
-          <Grid item md={4} sm={6}>
-            <OfferCard
-              title={dataContentEsp.aboutMeSection.card2Subtitle}
-              caption={dataContentEsp.aboutMeSection.card2Description}
-              image={Offer2.src}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
-  </Container>
-);
+    </Container>
+  );
+};
 
 export default AboutMeSection;

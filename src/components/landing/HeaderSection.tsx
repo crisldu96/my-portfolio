@@ -10,13 +10,13 @@ import { TypeAnimation } from 'react-type-animation';
 
 // project imports
 import AnimateButton from '../AnimateButton';
-import dataContentEsp from '@/data/text-content-es.json';
 
 // assets
 import TechLight from '../../assets/images/landing/tech-light.svg';
 import TechDark from '../../assets/images/landing/tech-dark.svg';
 import developer from '../../assets/images/landing/header-1.png';
 import ImageBackground from '../ImageBackground';
+import useLanguage from '@/hooks/useLanguage';
 
 // styles
 const HeaderImage = styled('img')({
@@ -32,6 +32,7 @@ const HeaderImage = styled('img')({
 
 const HeaderSection = () => {
   const theme = useTheme();
+  const { handleTraslation } = useLanguage();
   const headerSX = { fontSize: { xs: '2rem', sm: '3rem', md: '3.5rem', lg: '3.5rem' } };
 
   return (
@@ -47,10 +48,10 @@ const HeaderSection = () => {
               >
                 <Stack spacing={1}>
                   <Typography textAlign={{ xs: 'center', md: 'left' }} variant="h1" sx={headerSX}>
-                    {dataContentEsp.headerSection.title}
+                    {handleTraslation('headerSection.title')}
                   </Typography>
                   <Typography textAlign={{ xs: 'center', md: 'left' }} variant="h1" color="primary" sx={headerSX}>
-                    {dataContentEsp.headerSection.title2}
+                    {handleTraslation('headerSection.title2')}
                   </Typography>
                 </Stack>
               </motion.div>
@@ -66,7 +67,7 @@ const HeaderSection = () => {
                   variant="subtitle2"
                   sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
                 >
-                  {dataContentEsp.headerSection.subtitle}
+                  {handleTraslation('headerSection.subtitle')}
                 </Typography>
                 <Typography
                   textAlign={{ xs: 'center', md: 'left' }}
@@ -74,7 +75,7 @@ const HeaderSection = () => {
                   variant="body1"
                   sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
                 >
-                  {dataContentEsp.headerSection.description}
+                  {handleTraslation('headerSection.description')}
                 </Typography>
               </motion.div>
             </Grid>
@@ -96,7 +97,7 @@ const HeaderSection = () => {
                         color="secondary"
                         startIcon={<LinkedInIcon />}
                       >
-                        {dataContentEsp.headerSection.button}
+                        {handleTraslation('headerSection.button')}
                       </Button>
                     </AnimateButton>
                   </Grid>
@@ -110,7 +111,7 @@ const HeaderSection = () => {
                       color="primary"
                       startIcon={<FileDownloadIcon />}
                     >
-                      {dataContentEsp.headerSection.button2}
+                      {handleTraslation('headerSection.button2')}
                     </Button>
                   </Grid>
                 </Grid>
@@ -128,9 +129,9 @@ const HeaderSection = () => {
                     cursor={false}
                     sequence={[
                       1000,
-                      dataContentEsp.headerSection.typingStart,
+                      handleTraslation('headerSection.typingStart'),
                       3000,
-                      dataContentEsp.headerSection.typingEnd,
+                      handleTraslation('headerSection.typingEnd'),
                       12000,
                     ]}
                     speed={60}

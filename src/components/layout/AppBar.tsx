@@ -22,7 +22,6 @@ import {
 
 // project imports
 import Logo from '../Logo';
-import dataContentEsp from '@/data/text-content-es.json';
 
 // assets
 import { IconBook, IconCreditCard, IconDashboard, IconHome2 } from '@tabler/icons-react';
@@ -84,22 +83,23 @@ const AppBar = ({ ...others }) => {
               <LanguageSwitch checked={locale === 'en'} onChange={handleChange} size="small" />
               <Button color="inherit" component={Link} href="/#home">
                 {handleTraslation('appBar.item1')}
-                ojo
               </Button>
               <Button color="inherit" component={Link} href="/#about">
-                {dataContentEsp.appBar.item2}
+                {handleTraslation('appBar.item2')}
               </Button>
               <Button color="inherit" component={Link} href="/#experience">
-                {dataContentEsp.appBar.item3}
+                {handleTraslation('appBar.item3')}
               </Button>
               <Button color="inherit" component={Link} href="/#skills">
-                {dataContentEsp.appBar.item4}
+                {handleTraslation('appBar.item4')}
+
               </Button>
               <Button color="inherit" component={Link} href="/#projects">
-                {dataContentEsp.appBar.item5}
+                {handleTraslation('appBar.item5')}
+
               </Button>
               <Button component={Link} href="/#contact" disableElevation variant="contained" color="secondary">
-                {dataContentEsp.appBar.item6}
+                {handleTraslation('appBar.item6')}
               </Button>
             </Stack>
             <Box sx={{ display: { xs: 'block', sm: 'none' } }}>

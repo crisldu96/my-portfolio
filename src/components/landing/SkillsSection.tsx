@@ -7,7 +7,6 @@ import Slider from 'react-slick';
 
 // project imports
 import SubCard from '../SubCard';
-import dataContentEsp from '@/data/text-content-es.json';
 
 // assets
 import Bootstrap from '../../assets/images/landing/frameworks/bootstrap.svg';
@@ -29,6 +28,7 @@ import SASS from '../../assets/images/landing/logos/sass.svg';
 import Spring from '../../assets/images/landing/logos/springboot.svg';
 import Tailwind from '../../assets/images/landing/logos/tailwind.svg';
 import TS from '../../assets/images/landing/logos/typescript.svg';
+import useLanguage from '@/hooks/useLanguage';
 
 export const frameworks = [
   {
@@ -115,7 +115,7 @@ export const frameworks = [
 
 const SkillsSection = () => {
   const theme = useTheme();
-
+  const { handleTraslation } = useLanguage();
   const settings = {
     dots: true,
     className: 'center',
@@ -165,10 +165,10 @@ const SkillsSection = () => {
       <Container sx={{ mb: 6 }}>
         <Stack spacing={1.5} alignItems="center">
           <Typography variant="h2" align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-            {dataContentEsp.skillsSection.title}
+            {handleTraslation('skillsSection.title')}
           </Typography>
           <Typography variant="h4" sx={{ fontWeight: 400 }} align="center">
-            {dataContentEsp.skillsSection.subtitle}
+            {handleTraslation('skillsSection.subtitle')}
           </Typography>
         </Stack>
       </Container>

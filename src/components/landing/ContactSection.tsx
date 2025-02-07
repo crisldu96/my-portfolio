@@ -13,7 +13,7 @@ import Slider, { Settings } from 'react-slick';
 import BackgroundImag from '@/assets/images/landing/bg-heand.png';
 
 // project imports
-import dataContentEsp from '@/data/text-content-es.json';
+import useLanguage from '@/hooks/useLanguage';
 
 // =============================|| LANDING - STARTUP PROJECT ||============================= //
 
@@ -46,6 +46,7 @@ const mediaContact = [
 ];
 
 const ContactSection = () => {
+  const { handleTraslation } = useLanguage();
   const settings: Settings = {
     className: 'center',
     dots: false,
@@ -108,7 +109,7 @@ const ContactSection = () => {
                   mt: { xs: 2, sm: 3.75, md: 5.5, xl: 7 }
                 }}
               >
-                {dataContentEsp.contactSection.title}
+                {handleTraslation('contactSection.title')}
               </Typography>
             </Box>
             <Slider {...settings}>
