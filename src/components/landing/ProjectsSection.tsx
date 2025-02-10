@@ -10,18 +10,11 @@ import { Carousel } from 'react-responsive-carousel';
 import { IconChevronRight, IconChevronLeft, IconLink } from '@tabler/icons-react';
 
 // project imports
-import SliderLight1 from '../../assets/images/landing/pre-apps/slider-light-1.png';
-import SliderDark1 from '../../assets/images/landing/pre-apps/slider-dark-1.png';
-import SliderLight2 from '../../assets/images/landing/pre-apps/slider-light-2.png';
-import SliderDark2 from '../../assets/images/landing/pre-apps/slider-dark-2.png';
-import SliderLight3 from '../../assets/images/landing/pre-apps/slider-light-3.png';
-import SliderDark3 from '../../assets/images/landing/pre-apps/slider-dark-3.png';
-import SliderLight4 from '../../assets/images/landing/pre-apps/slider-light-4.png';
-import SliderDark4 from '../../assets/images/landing/pre-apps/slider-dark-4.png';
-import SliderLight5 from '../../assets/images/landing/pre-apps/slider-light-5.png';
-import SliderDark5 from '../../assets/images/landing/pre-apps/slider-dark-5.png';
-import SliderLight6 from '../../assets/images/landing/pre-apps/slider-light-6.png';
-import SliderDark6 from '../../assets/images/landing/pre-apps/slider-dark-6.png';
+import App1 from '../../assets/images/landing/projects/app-1-portal.png';
+import App2 from '../../assets/images/landing/projects/app-2-kin.png';
+import App3 from '../../assets/images/landing/projects/app-3-arupo.png';
+import App4 from '../../assets/images/landing/projects/app-4-af.png';
+import App5 from '../../assets/images/landing/projects/app-5-provisiones.png';
 import useLanguage from '@/hooks/useLanguage';
 
 // styles
@@ -201,16 +194,11 @@ const ProjectsSection = () => {
                 hasNext && <SampleNextArrow onClickHandler={onClickHandler} hasNext={hasNext} label={label} />
               }
             >
-              <Items title="Mail/Message App" image={theme.palette.mode === 'dark' ? SliderDark5.src : SliderLight5.src} link="/app/mail" />
-              <Items title="Chat App" image={theme.palette.mode === 'dark' ? SliderDark3.src : SliderLight3.src} link="/app/chat" />
-              <Items title="Kanban App" image={theme.palette.mode === 'dark' ? SliderDark4.src : SliderLight4.src} link="/app/kanban/board" />
-              <Items title="Calendar App" image={theme.palette.mode === 'dark' ? SliderDark2.src : SliderLight2.src} link="/app/calendar" />
-              <Items title="Ecommerce App" image={theme.palette.mode === 'dark' ? SliderDark1.src : SliderLight1.src} link="/e-commerce/products" />
-              <Items
-                title="Social Profile"
-                image={theme.palette.mode === 'dark' ? SliderDark6.src : SliderLight6.src}
-                link="/user/social-profile/posts"
-              />
+              <Items title="Data collection App" image={App1.src} link="https://portal.actuaria.com/authentication/login" />
+              <Items title="Web Page" image={App2.src} link="https://www.kinanalytics.com/" />
+              <Items title="Legaltech automation App" image={App3.src} link="https://www.arupo.io" />
+              <Items title="Actuarial Platform App" image={App4.src} link="https://actuaria.com" />
+              <Items title="Data management App" image={App5.src} link="https://sistema-provisiones.actuaria.com.ec" />
             </Carousel>
           </Box>
         </Grid>
