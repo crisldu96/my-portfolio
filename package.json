@@ -33,6 +33,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.16",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
