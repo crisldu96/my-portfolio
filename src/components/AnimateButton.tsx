@@ -17,7 +17,13 @@ interface AnimateButtonProps {
 
 // ==============================|| ANIMATION BUTTON ||============================== //
 
-const AnimateButton = React.forwardRef(({ children, type, direction, offset, scale }: AnimateButtonProps, ref: Ref<HTMLDivElement>) => {
+const AnimateButton = React.forwardRef(({
+  children,
+  type = 'scale',
+  direction = 'right',
+  offset = 10,
+  scale = { hover: 1, tap: 0.9 }
+}: AnimateButtonProps, ref: Ref<HTMLDivElement>) => {
   let offset1;
   let offset2;
   switch (direction) {
@@ -82,15 +88,5 @@ const AnimateButton = React.forwardRef(({ children, type, direction, offset, sca
       );
   }
 });
-
-AnimateButton.defaultProps = {
-  type: 'scale',
-  offset: 10,
-  direction: 'right',
-  scale: {
-    hover: 1,
-    tap: 0.9
-  }
-};
 
 export default AnimateButton;

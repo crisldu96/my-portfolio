@@ -66,7 +66,7 @@ const OfferCard = ({ title, caption, image }: OfferCardProps) => {
 };
 
 const AboutMeSection = () => {
-  const { handleTraslation } = useLanguage();
+  const { handleTranslation } = useLanguage();
   return (
     <Container>
       <Grid container spacing={7.5} justifyContent="center">
@@ -74,12 +74,12 @@ const AboutMeSection = () => {
           <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-                {handleTraslation('aboutMeSection.title')}
+                {handleTranslation('aboutMeSection.title')}
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body2" sx={{ fontSize: '1rem' }}>
-                {handleTraslation('aboutMeSection.description')}
+                {handleTranslation('aboutMeSection.description')}
               </Typography>
             </Grid>
           </Grid>
@@ -99,15 +99,15 @@ const AboutMeSection = () => {
           <Grid container direction="column" justifyContent="center" spacing={5} sx={{ '&> .MuiGrid-root > div': { height: '100%' } }}>
             <Grid item md={6} sm={12}>
               <OfferCard
-                title={handleTraslation('aboutMeSection.card1Subtitle')}
-                caption={handleTraslation('aboutMeSection.card1Description')}
+                title={handleTranslation('aboutMeSection.card1Subtitle')}
+                caption={handleTranslation('aboutMeSection.card1Description')}
                 image={Offer1.src}
               />
             </Grid>
             <Grid item md={4} sm={6}>
               <OfferCard
-                title={handleTraslation('aboutMeSection.card2Subtitle')}
-                caption={handleTraslation('aboutMeSection.card2Description')}
+                title={handleTranslation('aboutMeSection.card2Subtitle')}
+                caption={handleTranslation('aboutMeSection.card2Description')}
                 image={Offer2.src}
               />
             </Grid>

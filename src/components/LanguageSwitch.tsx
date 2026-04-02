@@ -60,7 +60,7 @@ const LanguageSwitch = styled(Switch)(({ theme }) => ({
       fontWeight: 'bold',
       textAlign: 'center',
       lineHeight: '32px',
-      backgroundColor: '#00000',
+      backgroundColor: '#000000',
       borderRadius: '50%',
     },
     ...theme.applyStyles('dark', {

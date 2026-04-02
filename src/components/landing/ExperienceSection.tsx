@@ -15,7 +15,7 @@ import LayerRight from '../../assets/images/landing/customization-right.png';
 
 const ExperienceSection = () => {
   const theme = useTheme();
-  const { handleTraslation } = useLanguage();
+  const { handleTranslation } = useLanguage();
   const listSX = {
     display: 'flex',
     alignItems: 'left',
@@ -38,14 +38,14 @@ const ExperienceSection = () => {
       <Grid container justifyContent="space-between" alignItems="center" spacing={{ xs: 1.5, sm: 2.5, md: 3, lg: 5 }}>
         <Grid item xs={12} sx={{ textAlign: 'center' }}>
           <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' }, mb: 3 }}>
-            {handleTraslation('experienceSection.title')}
+            {handleTranslation('experienceSection.title')}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Typography variant="subtitle1" sx={{ fontSize: { xs: '1.5rem' }, mb: 2 }}>
-                {handleTraslation('experienceSection.subtitle1')}
+                {handleTranslation('experienceSection.subtitle1')}
               </Typography>
               <Typography
                 align="justify"
@@ -54,14 +54,14 @@ const ExperienceSection = () => {
                 sx={{
                   fontSize: '1rem',
                   zIndex: '99',
-                  width: { xs: '100%', sm: '100%', md: '100%' }
+                  width: '100%'
                 }}
               >
-                {handleTraslation('experienceSection.description1')}
+                {handleTranslation('experienceSection.description1')}
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              {handleTraslation('experienceSection.items1').map((item: any, index: number) => (
+              {handleTranslation<string[]>('experienceSection.items1').map((item: string, index: number) => (
                 <Typography key={index} sx={listSX} variant="body1">
                   <IconCircleCheck />
                   {item}
@@ -84,7 +84,7 @@ const ExperienceSection = () => {
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Typography variant="subtitle1" sx={{ fontSize: { xs: '1.5rem' }, mb: 2 }}>
-                {handleTraslation('experienceSection.subtitle2')}
+                {handleTranslation('experienceSection.subtitle2')}
               </Typography>
               <Typography
                 align="justify"
@@ -93,14 +93,14 @@ const ExperienceSection = () => {
                 sx={{
                   fontSize: '1rem',
                   zIndex: '99',
-                  width: { xs: '100%', md: '100%' }
+                  width: '100%'
                 }}
               >
-                {handleTraslation('experienceSection.description2')}
+                {handleTranslation('experienceSection.description2')}
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              {handleTraslation('experienceSection.items2').map((item: any, index: number) => (
+              {handleTranslation<string[]>('experienceSection.items2').map((item: string, index: number) => (
                 <Typography key={index} sx={listSX} variant="body1">
                   <IconCircleCheck />
                   {item}

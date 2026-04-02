@@ -2,11 +2,12 @@ import React from 'react';
 
 // material-ui
 import { styled } from '@mui/material/styles';
+import { SxProps, Theme } from '@mui/material';
 
 interface SectionWrapperProps {
   id?: string;
   children: React.ReactNode;
-  sx?: { bgcolor: string; };
+  sx?: SxProps<Theme>;
 }
 
 const SectionWrapperComponent = styled('div')({

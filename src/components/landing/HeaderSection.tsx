@@ -32,7 +32,7 @@ const HeaderImage = styled('img')({
 
 const HeaderSection = () => {
   const theme = useTheme();
-  const { handleTraslation } = useLanguage();
+  const { handleTranslation } = useLanguage();
   const headerSX = { fontSize: { xs: '2rem', sm: '3rem', md: '3.5rem', lg: '3.5rem' } };
 
   return (
@@ -48,10 +48,10 @@ const HeaderSection = () => {
               >
                 <Stack spacing={1}>
                   <Typography textAlign={{ xs: 'center', md: 'left' }} variant="h1" sx={headerSX}>
-                    {handleTraslation('headerSection.title')}
+                    {handleTranslation('headerSection.title')}
                   </Typography>
                   <Typography textAlign={{ xs: 'center', md: 'left' }} variant="h1" color="primary" sx={headerSX}>
-                    {handleTraslation('headerSection.title2')}
+                    {handleTranslation('headerSection.title2')}
                   </Typography>
                 </Stack>
               </motion.div>
@@ -67,7 +67,7 @@ const HeaderSection = () => {
                   variant="subtitle2"
                   sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
                 >
-                  {handleTraslation('headerSection.subtitle')}
+                  {handleTranslation('headerSection.subtitle')}
                 </Typography>
                 <Typography
                   textAlign={{ xs: 'center', md: 'left' }}
@@ -75,7 +75,7 @@ const HeaderSection = () => {
                   variant="body1"
                   sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
                 >
-                  {handleTraslation('headerSection.description')}
+                  {handleTranslation('headerSection.description')}
                 </Typography>
               </motion.div>
             </Grid>
@@ -97,7 +97,7 @@ const HeaderSection = () => {
                         color="secondary"
                         startIcon={<LinkedInIcon />}
                       >
-                        {handleTraslation('headerSection.button')}
+                        {handleTranslation('headerSection.button')}
                       </Button>
                     </AnimateButton>
                   </Grid>
@@ -111,7 +111,7 @@ const HeaderSection = () => {
                       color="primary"
                       startIcon={<FileDownloadIcon />}
                     >
-                      {handleTraslation('headerSection.button2')}
+                      {handleTranslation('headerSection.button2')}
                     </Button>
                   </Grid>
                 </Grid>
@@ -129,9 +129,9 @@ const HeaderSection = () => {
                     cursor={false}
                     sequence={[
                       1000,
-                      handleTraslation('headerSection.typingStart'),
+                      handleTranslation('headerSection.typingStart'),
                       3000,
-                      handleTraslation('headerSection.typingEnd'),
+                      handleTranslation('headerSection.typingEnd'),
                       12000,
                     ]}
                     speed={60}

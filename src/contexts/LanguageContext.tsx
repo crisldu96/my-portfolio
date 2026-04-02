@@ -5,8 +5,14 @@ import useConfig from '@/hooks/useConfig';
 import dataContentEsp from '@/data/text-content-es.json';
 import dataContentEng from '@/data/text-content-en.json';
 
-const initialState: any = {
-  handleTraslation: () => { }
+type TextContent = typeof dataContentEng;
+
+interface LanguageContextType {
+  handleTranslation: <T = string>(key: string) => T;
+}
+
+const initialState: LanguageContextType = {
+  handleTranslation: () => '' as never
 };
 
 const LanguageContext = createContext(initialState);
@@ -18,18 +24,13 @@ type LanguageProviderProps = {
 const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const { locale } = useConfig();
 
-  const handleTraslation = (key: string): any => {
-    const currentDictionary: any = locale === 'es' ? dataContentEsp : dataContentEng;
-    const value = _.get(currentDictionary, key);
-    return value;
+  const handleTranslation = <T = string>(key: string): T => {
+    const currentDictionary: TextContent = locale === 'es' ? dataContentEsp : dataContentEng;
+    return _.get(currentDictionary, key) as T;
   };
 
   return (
-    <LanguageContext.Provider
-      value={{
-        handleTraslation
-      }}
-    >
+    <LanguageContext.Provider value={{ handleTranslation }}>
       {children}
     </LanguageContext.Provider>
   );

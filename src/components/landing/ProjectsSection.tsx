@@ -26,9 +26,15 @@ const Images = styled('img')({
   objectFit: 'cover'
 });
 
-function SampleNextArrow(props: any) {
+interface ArrowProps {
+  onClickHandler: () => void;
+  hasPrev?: boolean;
+  hasNext?: boolean;
+  label?: string;
+}
+
+function SampleNextArrow({ onClickHandler }: ArrowProps) {
   const theme = useTheme();
-  const { onClickHandler } = props;
 
   return (
     <IconButton
@@ -63,8 +69,7 @@ function SampleNextArrow(props: any) {
   );
 }
 
-function SamplePrevArrow(props: any) {
-  const { onClickHandler } = props;
+function SamplePrevArrow({ onClickHandler }: ArrowProps) {
   const theme = useTheme();
   return (
     <IconButton
@@ -147,7 +152,7 @@ const Items = ({ title, caption, image, link }: ItemProps) => {
 
 const ProjectsSection = () => {
   const theme = useTheme();
-  const { handleTraslation } = useLanguage();
+  const { handleTranslation } = useLanguage();
   const matchUpSM = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
@@ -157,12 +162,12 @@ const ProjectsSection = () => {
           <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-                {handleTraslation('projectSection.title')}
+                {handleTranslation('projectSection.title')}
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h4" sx={{ fontWeight: 400 }} align="center">
-                {handleTraslation('projectSection.description')}
+                {handleTranslation('projectSection.description')}
               </Typography>
             </Grid>
           </Grid>

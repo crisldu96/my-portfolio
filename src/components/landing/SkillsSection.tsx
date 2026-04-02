@@ -115,7 +115,7 @@ export const frameworks = [
 
 const SkillsSection = () => {
   const theme = useTheme();
-  const { handleTraslation } = useLanguage();
+  const { handleTranslation } = useLanguage();
   const settings = {
     dots: true,
     className: 'center',
@@ -165,10 +165,10 @@ const SkillsSection = () => {
       <Container sx={{ mb: 6 }}>
         <Stack spacing={1.5} alignItems="center">
           <Typography variant="h2" align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-            {handleTraslation('skillsSection.title')}
+            {handleTranslation('skillsSection.title')}
           </Typography>
           <Typography variant="h4" sx={{ fontWeight: 400 }} align="center">
-            {handleTraslation('skillsSection.subtitle')}
+            {handleTranslation('skillsSection.subtitle')}
           </Typography>
         </Stack>
       </Container>

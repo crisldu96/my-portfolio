@@ -46,7 +46,7 @@ const mediaContact = [
 ];
 
 const ContactSection = () => {
-  const { handleTraslation } = useLanguage();
+  const { handleTranslation } = useLanguage();
   const settings: Settings = {
     className: 'center',
     dots: false,
@@ -109,7 +109,7 @@ const ContactSection = () => {
                   mt: { xs: 2, sm: 3.75, md: 5.5, xl: 7 }
                 }}
               >
-                {handleTraslation('contactSection.title')}
+                {handleTranslation('contactSection.title')}
               </Typography>
             </Box>
             <Slider {...settings}>

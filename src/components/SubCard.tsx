@@ -3,6 +3,7 @@ import React, { ReactNode, Ref } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
+import { SxProps, Theme } from '@mui/material';
 
 interface SubCardProps {
   children: ReactNode | string | null;
@@ -11,8 +12,8 @@ interface SubCardProps {
   contentClass?: string;
   darkTitle?: boolean;
   secondary?: ReactNode | string;
-  sx?: {};
-  contentSX?: {};
+  sx?: SxProps<Theme>;
+  contentSX?: SxProps<Theme>;
   title?: ReactNode | string;
 }
 
@@ -20,7 +21,7 @@ interface SubCardProps {
 
 const SubCard = React.forwardRef(
   (
-    { children, className, content, contentClass, darkTitle, secondary, sx = {}, contentSX = {}, title, ...others }: SubCardProps,
+    { children, className, content = true, contentClass, darkTitle, secondary, sx = {}, contentSX = {}, title, ...others }: SubCardProps,
     ref: Ref<HTMLDivElement>
   ) => {
     const theme = useTheme();
@@ -63,9 +64,5 @@ const SubCard = React.forwardRef(
     );
   }
 );
-
-SubCard.defaultProps = {
-  content: true
-};
 
 export default SubCard;
