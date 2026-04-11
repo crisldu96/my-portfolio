@@ -191,7 +191,7 @@ const ProjectsSection = () => {
               emulateTouch={true}
               swipeable={true}
               autoPlay={true}
-              interval={2000}
+              interval={5000}
               renderArrowPrev={(onClickHandler, hasPrev, label) =>
                 hasPrev && <SamplePrevArrow onClickHandler={onClickHandler} hasPrev={hasPrev} label={label} />
               }

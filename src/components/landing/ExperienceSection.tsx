@@ -53,7 +53,7 @@ const ExperienceSection = () => {
                 color="text.primary"
                 sx={{
                   fontSize: '1rem',
-                  zIndex: '99',
+                  zIndex: 99,
                   width: '100%'
                 }}
               >
@@ -92,7 +92,7 @@ const ExperienceSection = () => {
                 color="text.primary"
                 sx={{
                   fontSize: '1rem',
-                  zIndex: '99',
+                  zIndex: 99,
                   width: '100%'
                 }}
               >

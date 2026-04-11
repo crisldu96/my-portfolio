@@ -2,7 +2,7 @@ import { Theme } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 const Typography = (theme: Theme, borderRadius: number, fontFamily: string): TypographyOptions => ({
-  fontFamily,
+  fontFamily: 'var(--font-space-grotesk), var(--font-archivo), sans-serif',
   h6: {
     fontWeight: 500,
     color: theme.palette.grey[600],

@@ -10,10 +10,18 @@ interface SectionWrapperProps {
   sx?: SxProps<Theme>;
 }
 
-const SectionWrapperComponent = styled('div')({
-  paddingTop: 100,
-  paddingBottom: 100
-});
+const SectionWrapperComponent = styled('div')(({ theme }) => ({
+  paddingTop: theme.spacing(6),
+  paddingBottom: theme.spacing(6),
+  [theme.breakpoints.up('sm')]: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  [theme.breakpoints.up('md')]: {
+    paddingTop: theme.spacing(12),
+    paddingBottom: theme.spacing(12),
+  },
+}));
 
 const SectionWrapper = (props: SectionWrapperProps) => {
   return (

@@ -45,7 +45,7 @@ export const HORIZONTAL_MAX_ITEM = 6;
 const config: ConfigProps = {
   layout: LAYOUT_CONST.VERTICAL_LAYOUT, // vertical, horizontal
   drawerType: LAYOUT_CONST.DEFAULT_DRAWER, // default, mini-drawer
-  fontFamily: `'Poppins', sans-serif`,
+  fontFamily: `'Space Grotesk', 'Archivo', sans-serif`,
   borderRadius: 8,
   outlinedFilled: true,
   navType: 'dark', // light, dark
