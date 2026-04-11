@@ -23,9 +23,11 @@ export default function About() {
           Material UI - Next.js example in TypeScript
         </Typography>
         <Box sx={{ maxWidth: 'sm' }}>
-          <Button variant="contained" component={NextLink} href="/">
-            Go to the home page
-          </Button>
+          <NextLink href="/" passHref legacyBehavior>
+            <Button variant="contained" component="a">
+              Go to the home page
+            </Button>
+          </NextLink>
         </Box>
         <ProTip />
         <Copyright />

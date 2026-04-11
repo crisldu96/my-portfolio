@@ -42,72 +42,86 @@ const Palette = (navType: PaletteMode, presetColor: string) => {
       colors = defaultColor;
   }
 
+  const c = colors ?? {};
+
+  const primaryLight = navType === 'dark' ? (c.darkPrimaryLight ?? '#e3f2fd') : (c.primaryLight ?? '#e3f2fd');
+  const primaryMain = navType === 'dark' ? (c.darkPrimaryMain ?? '#2196f3') : (c.primaryMain ?? '#2196f3');
+  const primaryDark = navType === 'dark' ? (c.darkPrimaryDark ?? '#1565c0') : (c.primaryDark ?? '#1565c0');
+  const primary200 = navType === 'dark' ? (c.darkPrimary200 ?? '#90caf9') : (c.primary200 ?? '#90caf9');
+  const primary800 = navType === 'dark' ? (c.darkPrimary800 ?? '#1565c0') : (c.primary800 ?? '#1565c0');
+
+  const secondaryLight = navType === 'dark' ? (c.darkSecondaryLight ?? '#ede7f6') : (c.secondaryLight ?? '#ede7f6');
+  const secondaryMain = navType === 'dark' ? (c.darkSecondaryMain ?? '#9c27b0') : (c.secondaryMain ?? '#9c27b0');
+  const secondaryDark = navType === 'dark' ? (c.darkSecondaryDark ?? '#6a0080') : (c.secondaryDark ?? '#6a0080');
+  const secondary200 = navType === 'dark' ? (c.darkSecondary200 ?? '#ce93d8') : (c.secondary200 ?? '#ce93d8');
+  const secondary800 = navType === 'dark' ? (c.darkSecondary800 ?? '#6a0080') : (c.secondary800 ?? '#6a0080');
+
   return createTheme({
     palette: {
       mode: navType,
       common: {
-        black: colors.darkPaper
+        black: c.darkPaper ?? '#212121'
       },
       primary: {
-        light: navType === 'dark' ? colors.darkPrimaryLight : colors.primaryLight,
-        main: navType === 'dark' ? colors.darkPrimaryMain : colors.primaryMain,
-        dark: navType === 'dark' ? colors.darkPrimaryDark : colors.primaryDark,
-        200: navType === 'dark' ? colors.darkPrimary200 : colors.primary200,
-        800: navType === 'dark' ? colors.darkPrimary800 : colors.primary800
+        light: primaryLight,
+        main: primaryMain,
+        dark: primaryDark,
+        200: primary200,
+        800: primary800
       },
       secondary: {
-        light: navType === 'dark' ? colors.darkSecondaryLight : colors.secondaryLight,
-        main: navType === 'dark' ? colors.darkSecondaryMain : colors.secondaryMain,
-        dark: navType === 'dark' ? colors.darkSecondaryDark : colors.secondaryDark,
-        200: navType === 'dark' ? colors.darkSecondary200 : colors.secondary200,
-        800: navType === 'dark' ? colors.darkSecondary800 : colors.secondary800
+        light: secondaryLight,
+        main: secondaryMain,
+        dark: secondaryDark,
+        200: secondary200,
+        800: secondary800
       },
       error: {
-        light: colors.errorLight,
-        main: colors.errorMain,
-        dark: colors.errorDark
+        light: c.errorLight ?? '#ef9a9a',
+        main: c.errorMain ?? '#f44336',
+        dark: c.errorDark ?? '#c62828'
       },
       orange: {
-        light: colors.orangeLight,
-        main: colors.orangeMain,
-        dark: colors.orangeDark
+        light: c.orangeLight ?? '#fbe9e7',
+        main: c.orangeMain ?? '#ffab91',
+        dark: c.orangeDark ?? '#d84315'
       },
       warning: {
-        light: colors.warningLight,
-        main: colors.warningMain,
-        dark: colors.warningDark
+        light: c.warningLight ?? '#fff8e1',
+        main: c.warningMain ?? '#ffe57f',
+        dark: c.warningDark ?? '#ffc107'
       },
       success: {
-        light: colors.successLight,
-        200: colors.success200,
-        main: colors.successMain,
-        dark: colors.successDark
+        light: c.successLight ?? '#b9f6ca',
+        200: c.success200 ?? '#69f0ae',
+        main: c.successMain ?? '#00e676',
+        dark: c.successDark ?? '#00c853'
       },
       grey: {
-        50: colors.grey50,
-        100: colors.grey100,
-        500: navType === 'dark' ? colors.darkTextSecondary : colors.grey500,
-        600: navType === 'dark' ? colors.darkTextTitle : colors.grey900,
-        700: navType === 'dark' ? colors.darkTextPrimary : colors.grey700,
-        900: navType === 'dark' ? colors.darkTextPrimary : colors.grey900
+        50: c.grey50 ?? '#fafafa',
+        100: c.grey100 ?? '#f5f5f5',
+        500: navType === 'dark' ? (c.darkTextSecondary ?? '#8492c4') : (c.grey500 ?? '#9e9e9e'),
+        600: navType === 'dark' ? (c.darkTextTitle ?? '#bdc8f0') : (c.grey900 ?? '#212121'),
+        700: navType === 'dark' ? (c.darkTextPrimary ?? '#bdc8f0') : (c.grey700 ?? '#616161'),
+        900: navType === 'dark' ? (c.darkTextPrimary ?? '#bdc8f0') : (c.grey900 ?? '#212121')
       },
       dark: {
-        light: colors.darkTextPrimary,
-        main: colors.darkLevel1,
-        dark: colors.darkLevel2,
-        800: colors.darkBackground,
-        900: colors.darkPaper
+        light: c.darkTextPrimary ?? '#bdc8f0',
+        main: c.darkLevel1 ?? '#29314f',
+        dark: c.darkLevel2 ?? '#212946',
+        800: c.darkBackground ?? '#1a223f',
+        900: c.darkPaper ?? '#111936'
       },
       text: {
-        primary: navType === 'dark' ? colors.darkTextPrimary : colors.grey700,
-        secondary: navType === 'dark' ? colors.darkTextSecondary : colors.grey500,
-        dark: navType === 'dark' ? colors.darkTextPrimary : colors.grey900,
-        hint: colors.grey100
+        primary: navType === 'dark' ? (c.darkTextPrimary ?? '#bdc8f0') : (c.grey700 ?? '#616161'),
+        secondary: navType === 'dark' ? (c.darkTextSecondary ?? '#8492c4') : (c.grey500 ?? '#9e9e9e'),
+        dark: navType === 'dark' ? (c.darkTextPrimary ?? '#bdc8f0') : (c.grey900 ?? '#212121'),
+        hint: c.grey100 ?? '#f5f5f5'
       },
-      divider: navType === 'dark' ? colors.darkTextPrimary : colors.grey200,
+      divider: navType === 'dark' ? (c.darkTextPrimary ?? '#bdc8f0') : (c.grey200 ?? '#eeeeee'),
       background: {
-        paper: navType === 'dark' ? colors.darkLevel2 : colors.paper,
-        default: navType === 'dark' ? colors.darkPaper : colors.paper
+        paper: navType === 'dark' ? (c.darkLevel2 ?? '#212946') : (c.paper ?? '#ffffff'),
+        default: navType === 'dark' ? (c.darkPaper ?? '#111936') : (c.paper ?? '#ffffff')
       }
     }
   });

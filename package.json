@@ -22,7 +22,7 @@
     "@tabler/icons-react": "^3.5.0",
     "framer-motion": "^11.2.9",
     "lodash": "^4.17.21",
-    "next": "latest",
+    "next": "^16.2.3",
     "react": "latest",
     "react-dom": "latest",
     "react-perfect-scrollbar": "^1.5.8",
@@ -39,7 +39,7 @@
     "@types/react-dom": "latest",
     "@types/react-slick": "^0.23.13",
     "eslint": "latest",
-    "eslint-config-next": "latest",
+    "eslint-config-next": "^16.2.3",
     "typescript": "latest"
   }
 }
