@@ -14,6 +14,7 @@ import BackgroundImag from '@/assets/images/landing/bg-heand.png';
 
 // project imports
 import useLanguage from '@/hooks/useLanguage';
+import FadeInWhenVisible from '@/components/Animation';
 
 // =============================|| LANDING - STARTUP PROJECT ||============================= //
 
@@ -100,17 +101,19 @@ const ContactSection = () => {
                 paddingLeft: { xs: 2, md: 0, xl: 0 }
               }}
             >
-              <Typography
-                variant="h2"
-                sx={{
-                  color: '#fff',
-                  width: { xs: '150px', sm: 'max-content', xl: 'max-content' },
-                  fontSize: { xs: '1rem', sm: '1.563rem', md: '2.5rem', xl: '3.125rem' },
-                  mt: { xs: 2, sm: 3.75, md: 5.5, xl: 7 }
-                }}
-              >
-                {handleTranslation('contactSection.title')}
-              </Typography>
+              <FadeInWhenVisible direction="right" delay={0.1}>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    color: '#fff',
+                    width: { xs: '150px', sm: 'max-content', xl: 'max-content' },
+                    fontSize: { xs: '1rem', sm: '1.563rem', md: '2.5rem', xl: '3.125rem' },
+                    mt: { xs: 2, sm: 3.75, md: 5.5, xl: 7 }
+                  }}
+                >
+                  {handleTranslation('contactSection.title')}
+                </Typography>
+              </FadeInWhenVisible>
             </Box>
             <Slider {...settings}>
               {mediaContact.map((item) => (

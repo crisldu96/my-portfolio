@@ -7,6 +7,7 @@ import Slider from 'react-slick';
 
 // project imports
 import SubCard from '../SubCard';
+import FadeInWhenVisible from '@/components/Animation';
 
 // assets
 import Bootstrap from '../../assets/images/landing/frameworks/bootstrap.svg';
@@ -163,14 +164,16 @@ const SkillsSection = () => {
   return (
     <>
       <Container sx={{ mb: 6 }}>
-        <Stack spacing={1.5} alignItems="center">
-          <Typography variant="h2" align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-            {handleTranslation('skillsSection.title')}
-          </Typography>
-          <Typography variant="h4" sx={{ fontWeight: 400 }} align="center">
-            {handleTranslation('skillsSection.subtitle')}
-          </Typography>
-        </Stack>
+        <FadeInWhenVisible direction="up">
+          <Stack spacing={1.5} alignItems="center">
+            <Typography variant="h2" align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
+              {handleTranslation('skillsSection.title')}
+            </Typography>
+            <Typography variant="h4" sx={{ fontWeight: 400 }} align="center">
+              {handleTranslation('skillsSection.subtitle')}
+            </Typography>
+          </Stack>
+        </FadeInWhenVisible>
       </Container>
       <Box
         className="slider-container"
@@ -233,8 +236,11 @@ const SkillsSection = () => {
                   borderRadius: 2,
                   cursor: 'pointer',
                   bgcolor: theme.palette.mode === 'dark' ? 'dark.800' : 'grey.100',
+                  transition: 'transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease',
                   '&:hover': {
-                    bgcolor: theme.palette.mode === 'dark' ? 'primary.main' : 'primary.light'
+                    bgcolor: theme.palette.mode === 'dark' ? 'primary.main' : 'primary.light',
+                    transform: 'translateY(-6px) scale(1.03)',
+                    boxShadow: '0px 16px 32px rgba(59, 130, 246, 0.28)',
                   }
                 }}
               >
