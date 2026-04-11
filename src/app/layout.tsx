@@ -8,6 +8,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import ThemeCustomization from '@/themes';
 import { ConfigProvider } from '@/contexts/ConfigContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import LoadingRemover from '@/components/LoadingRemover';
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -57,7 +58,7 @@ export default function RootLayout(props: { children: React.ReactNode; }) {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #6366F1;
+            background: #3B82F6;
             animation: app-loading-bounce 1.2s ease-in-out infinite;
           }
           .app-loading-dot:nth-child(2) { animation-delay: 0.2s; }
@@ -74,25 +75,11 @@ export default function RootLayout(props: { children: React.ReactNode; }) {
           <div className="app-loading-dot" />
           <div className="app-loading-dot" />
         </div>
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function() {
-            function remove() {
-              var el = document.getElementById('app-loading');
-              if (!el) return;
-              el.classList.add('fade-out');
-              setTimeout(function() { el && el.parentNode && el.parentNode.removeChild(el); }, 450);
-            }
-            if (document.readyState === 'complete') {
-              remove();
-            } else {
-              window.addEventListener('load', remove);
-            }
-          })();
-        `}} />
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ConfigProvider>
             <LanguageProvider>
               <ThemeCustomization>
+                <LoadingRemover />
                 {props.children}
               </ThemeCustomization>
             </LanguageProvider>
