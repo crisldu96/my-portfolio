@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 // third-party
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 // project imports
 import HeaderWrapper from './layout/HeaderWrapper';
