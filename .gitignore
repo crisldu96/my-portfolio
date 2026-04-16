@@ -36,3 +36,16 @@ yarn-error.log*
 # next-env.d.ts
 next-env.d.ts
 .qodo
+
+# Test reports (generated artifacts)
+coverage/
+playwright-report/
+allure-report/
+allure-history/
+test-results/
+.allure/
+
+# Keep allure-results structure but not content
+allure-results/*
+!allure-results/.gitkeep
+!allure-results/environment.properties

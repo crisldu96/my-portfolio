@@ -9,6 +9,7 @@ import ThemeCustomization from '@/themes';
 import { ConfigProvider } from '@/contexts/ConfigContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import LoadingRemover from '@/components/LoadingRemover';
+import Schema from './schema';
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -23,14 +24,88 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Cristopher Palacios | Full Stack Developer',
-  description: 'Full Stack Developer specializing in React, Node.js, and cloud solutions. Building modern web applications.',
-  keywords: ['Full Stack Developer', 'React', 'Node.js', 'TypeScript', 'Next.js'],
-  authors: [{ name: 'Cristopher Palacios' }],
+  metadataBase: new URL('https://cristopherpalacios.dev'),
+  title: {
+    default: 'Cristopher Palacios | Full Stack & AI Developer',
+    template: '%s | Cristopher Palacios',
+  },
+  description:
+    'Cristopher Palacios is a Full Stack and AI Developer from Ecuador specializing in React, Next.js, Node.js, and AI-powered applications. Available for freelance and full-time opportunities.',
+  keywords: [
+    'Cristopher Palacios',
+    'Cristopher Palacios developer',
+    'Cristopher Palacios web developer',
+    'Cristopher Palacios AI developer',
+    'Cristopher Palacios full stack developer',
+    'Cristopher Palacios front end developer',
+    'Cristopher Palacios Ecuador',
+    'full stack developer Ecuador',
+    'React developer Ecuador',
+    'Next.js developer',
+    'Node.js developer',
+    'AI developer portfolio',
+    'TypeScript developer',
+    'freelance developer Ecuador',
+    'hire full stack developer',
+    'hire React developer',
+    'hire AI developer',
+    'web developer portfolio',
+    'software engineer Ecuador',
+    'JavaScript developer portfolio',
+  ],
+  authors: [
+    {
+      name: 'Cristopher Palacios',
+      url: 'https://ec.linkedin.com/in/cristopher-palacios-791704160',
+    },
+  ],
+  creator: 'Cristopher Palacios',
+  publisher: 'Cristopher Palacios',
   openGraph: {
-    title: 'Cristopher Palacios | Full Stack Developer',
-    description: 'Full Stack Developer specializing in React, Node.js, and cloud solutions.',
     type: 'website',
+    locale: 'en_US',
+    alternateLocale: 'es_EC',
+    url: 'https://cristopherpalacios.dev',
+    siteName: 'Cristopher Palacios Portfolio',
+    title: 'Cristopher Palacios | Full Stack & AI Developer',
+    description:
+      'Full Stack and AI Developer from Ecuador. Expert in React, Next.js, Node.js, TypeScript, and AI integrations. Building scalable web applications since 2018.',
+    images: [
+      {
+        url: '/assets/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Cristopher Palacios - Full Stack & AI Developer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cristopher Palacios | Full Stack & AI Developer',
+    description:
+      'Full Stack and AI Developer from Ecuador. Expert in React, Next.js, Node.js, and AI integrations.',
+    images: ['/assets/images/og-image.png'],
+    creator: '@cristopherpdev',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://cristopherpalacios.dev',
+  },
+  verification: {
+    google: 'mNj4jfVE8P-OKKx9NxV7VpIqedtbaxvAPbTvjzgPiwk',
+    other: {
+      'msvalidate.01': 'CB538F1B1708E86416170069669EA56C',
+    },
   },
 };
 
@@ -70,6 +145,7 @@ export default function RootLayout(props: { children: React.ReactNode; }) {
         `}} />
       </head>
       <body>
+        <Schema />
         <div id="app-loading" aria-hidden="true">
           <div className="app-loading-dot" />
           <div className="app-loading-dot" />
