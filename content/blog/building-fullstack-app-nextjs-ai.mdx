@@ -1,0 +1,138 @@
+---
+title: "How I Built a Full Stack App with Next.js and AI Integration"
+description: "A deep dive into building a production-ready full stack application using Next.js App Router, TypeScript, and OpenAI API integration. Lessons learned from architecture decisions to deployment."
+date: "2025-04-10"
+tags: ["Next.js", "AI", "TypeScript", "Full Stack", "OpenAI"]
+slug: "building-fullstack-app-nextjs-ai"
+author: "Cristopher Palacios"
+image: "/assets/images/og-image.png"
+---
+
+## The Vision
+
+Building modern web applications has evolved dramatically. With the rise of AI-powered features, developers need to think beyond traditional CRUD operations. In this post, I share my experience building a full stack application that combines the power of Next.js with AI capabilities through the OpenAI API.
+
+## Architecture Decisions
+
+### Why Next.js App Router?
+
+The App Router introduced in Next.js 13+ fundamentally changed how we think about React applications. Here's why I chose it:
+
+- **Server Components by default** reduce the JavaScript bundle sent to the client
+- **Nested layouts** enable persistent UI across route changes
+- **Built-in data fetching** with async/await in server components eliminates the need for useEffect patterns
+- **Static and dynamic rendering** can coexist in the same application
+
+### TypeScript: Non-Negotiable
+
+Every production application benefits from type safety. TypeScript catches entire categories of bugs at compile time that would otherwise surface in production. For AI integrations specifically, having typed API responses ensures you handle every possible response shape correctly.
+
+```typescript
+type AIResponse = {
+  id: string;
+  content: string;
+  model: string;
+  usage: {
+    prompt_tokens: number;
+    completion_tokens: number;
+    total_tokens: number;
+  };
+};
+```
+
+## Integrating OpenAI
+
+### API Route Design
+
+Next.js API routes provide the perfect boundary between client and server. The AI integration lives entirely server-side, keeping API keys secure and enabling server-side rate limiting.
+
+```typescript
+// app/api/generate/route.ts
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  const { prompt } = await request.json();
+
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: 'gpt-4',
+      messages: [{ role: 'user', content: prompt }],
+    }),
+  });
+
+  const data = await response.json();
+  return NextResponse.json(data);
+}
+```
+
+### Streaming Responses
+
+One of the most impactful UX decisions was implementing streaming responses. Instead of waiting for the full AI response, users see tokens appear in real-time:
+
+```typescript
+const encoder = new TextEncoder();
+
+const stream = new ReadableStream({
+  async start(controller) {
+    for await (const chunk of aiStream) {
+      controller.enqueue(
+        encoder.encode(chunk.choices[0]?.delta?.content || '')
+      );
+    }
+    controller.close();
+  },
+});
+```
+
+This reduces perceived latency dramatically, especially for longer AI-generated content.
+
+## Database Layer
+
+For the persistence layer, I chose PostgreSQL with Prisma ORM. The combination provides:
+
+- **Type-safe database queries** generated from the schema
+- **Migration management** built into the development workflow
+- **Connection pooling** for production environments
+
+The schema models conversations, messages, and user preferences, enabling features like conversation history and personalized AI behavior.
+
+## Deployment and Performance
+
+### Vercel for Hosting
+
+Deploying on Vercel provides automatic optimizations for Next.js applications:
+
+- Edge functions for API routes reduce latency globally
+- Automatic image optimization via `next/image`
+- Preview deployments for every pull request
+
+### Performance Monitoring
+
+I implemented Core Web Vitals tracking from day one. Key metrics to watch:
+
+- **LCP (Largest Contentful Paint)**: Target under 2.5 seconds
+- **INP (Interaction to Next Paint)**: Target under 200ms
+- **CLS (Cumulative Layout Shift)**: Target under 0.1
+
+## Key Takeaways
+
+1. **Start with the API design.** Define your AI interaction contract before building the UI. This prevents scope creep and ensures a clean separation of concerns.
+
+2. **Implement streaming early.** Retrofitting streaming into an existing chat interface is painful. Design for it from the start.
+
+3. **Cache aggressively.** AI API calls are expensive. Use Next.js caching mechanisms and implement application-level caching for common queries.
+
+4. **Error handling is critical.** AI APIs have rate limits, timeout issues, and content filters. Build robust error handling with user-friendly fallbacks.
+
+5. **Monitor costs.** Token usage adds up quickly. Implement usage tracking and set budget alerts from day one.
+
+## What's Next
+
+I'm currently exploring function calling capabilities and building agents that can interact with external tools. The combination of Next.js server actions with AI function calling opens up possibilities for truly autonomous web applications.
+
+If you're interested in building similar applications or want to discuss architecture decisions, feel free to reach out through my [contact page](/#contact) or connect on [LinkedIn](https://www.linkedin.com/in/cristopher-palacios-791704160).

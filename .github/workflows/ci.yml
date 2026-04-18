@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main, develop]
+    branches: [master, develop]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -114,7 +114,7 @@ jobs:
 
       - name: Get Allure history
         uses: actions/checkout@v4
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         continue-on-error: true
         with:
           ref: gh-pages
@@ -128,7 +128,7 @@ jobs:
           keep_reports: 20
 
       - name: Publish Allure report to GitHub Pages
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

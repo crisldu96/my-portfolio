@@ -1,3 +1,5 @@
+'use client';
+
 import { cloneElement, useState, ReactElement } from 'react';
 
 // material-ui
@@ -24,7 +26,7 @@ import {
 import Logo from '../Logo';
 
 // assets
-import { IconHome2, IconUser, IconBriefcase, IconCode, IconDeviceLaptop, IconMail } from '@tabler/icons-react';
+import { IconHome2, IconUser, IconBriefcase, IconCode, IconDeviceLaptop, IconMail, IconArticle } from '@tabler/icons-react';
 import MenuIcon from '@mui/icons-material/Menu';
 import LanguageSwitch from '../LanguageSwitch';
 import useConfig from '@/hooks/useConfig';
@@ -78,6 +80,7 @@ const AppBar = ({ ...others }) => {
     { href: '/#skills', labelKey: 'appBar.item4', icon: <IconCode /> },
     { href: '/#projects', labelKey: 'appBar.item5', icon: <IconDeviceLaptop /> },
     { href: '/#contact', labelKey: 'appBar.item6', icon: <IconMail /> },
+    { href: '/blog', labelKey: 'appBar.item7', icon: <IconArticle /> },
   ];
 
   return (
@@ -90,7 +93,7 @@ const AppBar = ({ ...others }) => {
             </Typography>
             <Stack direction="row" sx={{ display: { xs: 'none', sm: 'block' } }} spacing={{ xs: 1.5, md: 2.5 }}>
               <LanguageSwitch checked={locale === 'es'} onChange={handleChange} size="small" />
-              {navItems.slice(0, 5).map(({ href, labelKey }) => (
+              {navItems.filter((_, i) => i !== 5).map(({ href, labelKey }) => (
                 <Button key={href} color="inherit" component={Link} href={href}>
                   {handleTranslation(labelKey)}
                 </Button>
