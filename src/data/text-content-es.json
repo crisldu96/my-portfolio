@@ -8,6 +8,15 @@
     "item6": "Contactame",
     "item7": "Blog"
   },
+  "heroSection": {
+    "greeting": "Hola, soy",
+    "name": "Cristopher",
+    "surname": "Palacios",
+    "role": "Desarrollador Full Stack & AI",
+    "description": "Construyo experiencias web escalables y soluciones inteligentes. Apasionado por transformar ideas complejas en productos limpios e impactantes.",
+    "letsTalk": "HABLEMOS",
+    "scrollDown": "DESLIZA PARA EXPLORAR"
+  },
   "headerSection": {
     "title": "Hola soy Cristopher",
     "title2": "¡Bienvenido a mi espacio!",

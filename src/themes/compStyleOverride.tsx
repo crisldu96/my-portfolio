@@ -12,8 +12,23 @@ export default function componentStyleOverrides(theme: Theme, borderRadius: numb
       styleOverrides: {
         root: {
           fontWeight: 500,
-          borderRadius: '4px'
-        }
+          borderRadius: '999px',
+          transition: 'all 0.2s ease',
+        },
+        containedPrimary: {
+          boxShadow: '0 0 24px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)',
+          '&:hover': {
+            boxShadow: '0 0 40px rgba(59, 130, 246, 0.6), inset 0 1px 0 rgba(255,255,255,0.2)',
+            transform: 'translateY(-1px)',
+          },
+        },
+        outlinedPrimary: mode === 'dark' ? {
+          borderColor: 'rgba(59, 130, 246, 0.3)',
+          '&:hover': {
+            borderColor: '#3B82F6',
+            background: 'rgba(59, 130, 246, 0.08)',
+          },
+        } : {},
       }
     },
     MuiPaper: {
@@ -213,6 +228,15 @@ export default function componentStyleOverrides(theme: Theme, borderRadius: numb
     MuiChip: {
       styleOverrides: {
         root: {
+          borderRadius: '999px',
+          fontFamily: 'var(--font-jetbrains-mono), monospace',
+          fontSize: '0.75rem',
+          letterSpacing: '0.02em',
+          ...(mode === 'dark' ? {
+            background: 'rgba(22, 32, 64, 0.8)',
+            border: '1px solid rgba(59, 130, 246, 0.25)',
+            color: '#F0F4FF',
+          } : {}),
           '&.MuiChip-deletable .MuiChip-deleteIcon': {
             color: 'inherit'
           }

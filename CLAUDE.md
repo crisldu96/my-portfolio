@@ -45,3 +45,31 @@ Only two routes: `/` (home, single-page) and `/about`. The app is effectively a 
 ### Key hooks
 - `useConfig()` — access/mutate theme config from `ConfigContext`
 - `useLanguage()` — access `handleTraslation` from `LanguageContext`
+
+## E2E Testing Rules (Playwright)
+
+### Organization
+- Tests are separated by **view/page**: `e2e/home/`, `e2e/blog/`, `e2e/cross-cutting/`
+- Each file covers a specific concern within that view (navigation, SEO, contact, etc.)
+
+### Naming & Readability
+- Test names must be **descriptive sentences** that explain the expected behavior from the user's perspective
+- Use `test.describe` blocks to group related scenarios with clear context
+- Avoid technical jargon in test names; write them as if explaining to a non-developer
+
+### User Flow Order
+- Tests within each file follow **chronological user interaction order**: what a user would see/do first comes first
+- Example: page loads -> sees heading -> scrolls -> clicks link -> sees result
+- Group by user journey stages: arrival, exploration, interaction, result
+
+### Selectors & Assertions
+- Prefer semantic selectors: `getByRole`, `getByText`, `getByLabel` over CSS selectors
+- Use `data-testid` only when semantic selectors are insufficient
+- Assertions must verify **user-visible outcomes**, not implementation details
+
+### Coverage Requirements
+- Every page/view must have tests for: initial render, navigation, interactivity, responsiveness
+- i18n: verify both EN and ES for key user-facing text
+- SEO: meta tags, JSON-LD schemas, OG tags per page
+- Accessibility: keyboard navigation, landmarks, alt text
+- Mobile: hamburger menu, drawer, touch targets

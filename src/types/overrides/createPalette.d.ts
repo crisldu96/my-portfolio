@@ -19,14 +19,27 @@ declare module '@mui/material/styles/createPalette' {
     hint: string;
   }
 
+  interface CosmicPalette {
+    cyan: string;
+    violet: string;
+    blue: string;
+    line: string;
+    lineStrong: string;
+    bg0: string;
+    bg1: string;
+    bg2: string;
+  }
+
   interface PaletteOptions {
     orange?: PaletteColorOptions;
     dark?: PaletteColorOptions;
     icon?: IconPaletteColorOptions;
+    cosmic?: CosmicPalette;
   }
   interface Palette {
     orange: PaletteColor;
     dark: PaletteColor;
     icon: IconPaletteColor;
+    cosmic: CosmicPalette;
   }
 }

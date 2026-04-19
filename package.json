@@ -24,6 +24,7 @@
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/open-sans": "^5.0.28",
     "@fontsource/poppins": "^5.1.1",
     "@fontsource/roboto": "^5.0.13",
@@ -32,9 +33,12 @@
     "@mui/icons-material": "next",
     "@mui/material": "next",
     "@mui/material-nextjs": "next",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.0",
     "@tabler/icons-react": "^3.5.0",
     "framer-motion": "^11.2.9",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.15.0",
     "lodash": "^4.17.21",
     "next": "^16.2.3",
     "react": "latest",
@@ -46,7 +50,8 @@
     "reading-time": "^1.5.0",
     "remark-gfm": "^4.0.1",
     "sass": "^1.77.4",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",
@@ -60,6 +65,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-slick": "^0.23.13",
+    "@types/three": "^0.184.0",
     "@vitejs/plugin-react": "^4.3.0",
     "@vitest/coverage-v8": "^2.1.0",
     "@vitest/ui": "^2.1.0",

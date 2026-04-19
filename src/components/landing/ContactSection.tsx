@@ -1,149 +1,151 @@
-// material-ui
+'use client';
+
 import Box from '@mui/material/Box';
-import CardMedia from '@mui/material/CardMedia';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 
-// third-party
-import Slider, { Settings } from 'react-slick';
-
-// assets
-import BackgroundImag from '@/assets/images/landing/bg-heand.png';
-
-// project imports
+import { IconBrandLinkedin, IconBrandGithub, IconBrandDeno, IconMail } from '@tabler/icons-react';
+import SectionLabel from '../cosmic/SectionLabel';
+import GlowCard from '../cosmic/GlowCard';
+import { cosmic } from '@/themes/cosmicTokens';
 import useLanguage from '@/hooks/useLanguage';
-import FadeInWhenVisible from '@/components/Animation';
+import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 
-// =============================|| LANDING - STARTUP PROJECT ||============================= //
-
-const mediaContact = [
+const contactMethods = [
   {
     id: 'linkedin',
     title: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/cristopher-palacios-791704160'
-  },
-  {
-    id: 'dev',
-    title: 'Dev Community',
-    url: 'https://dev.to/cristopher_palacios_4a172'
+    url: 'https://www.linkedin.com/in/cristopher-palacios-791704160',
+    icon: <IconBrandLinkedin size={24} />,
+    handle: '@cristopher-palacios',
   },
   {
     id: 'github',
     title: 'GitHub',
-    url: 'https://github.com/CristopherPalacios'
+    url: 'https://github.com/CristopherPalacios',
+    icon: <IconBrandGithub size={24} />,
+    handle: '@CristopherPalacios',
   },
   {
-    id: 'instagram',
-    title: 'Instagram',
-    url: 'https://www.instagram.com/cris.ldu.12'
+    id: 'dev',
+    title: 'Dev Community',
+    url: 'https://dev.to/cristopher_palacios_4a172',
+    icon: <IconBrandDeno size={24} />,
+    handle: '@cristopher_palacios',
   },
   {
-    id: 'facebook',
-    title: 'Facebook',
-    url: 'https://www.facebook.com/cris.ldu.12/?locale=es_LA'
+    id: 'email',
+    title: 'Email',
+    url: 'mailto:cristopher.palacios@actuaria.com',
+    icon: <IconMail size={24} />,
+    handle: 'cristopher.palacios@actuaria.com',
   },
 ];
 
 const ContactSection = () => {
   const { handleTranslation } = useLanguage();
-  const settings: Settings = {
-    className: 'center',
-    dots: false,
-    arrows: false,
-    centerPadding: '0',
-    centerMode: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    vertical: true,
-    verticalSwiping: true,
-    focusOnSelect: true,
-    autoplay: true,
-    autoplaySpeed: 10000
-  };
+  const gridRef = useGsapScrollTrigger<HTMLDivElement>({
+    childSelector: '.contact-card',
+    from: { opacity: 0, y: 30 },
+    to: { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+    stagger: 0.1,
+  });
 
   return (
-    <Box
-      className="project-info"
-      sx={{
-        bgcolor: 'dark.dark',
-        height: { xs: 150, sm: 200, md: 340, lg: 450, xl: 520 },
-        overflow: 'hidden',
-        position: 'relative'
-      }}
-    >
-      <Container sx={{ position: 'relative', zIndex: 1 }}>
-        <Box sx={{ mt: { xs: 4, md: 6, lg: 12, xl: 15 }, zIndex: 2 }}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="flex-start"
-            spacing={2}
+    <Box className="project-info">
+      <Container maxWidth="md">
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <SectionLabel number="05" label="Contact" />
+          <Typography
             sx={{
-              '& .slick-slide.slick-current': {
-                opacity: 1,
-                '.MuiTypography-root': { color: 'primary.main' }
-              },
-              '& .slick-slider': {
-                textAlign: 'left',
-                '.MuiTypography-root': {
-                  fontSize: { xs: '1rem', sm: '1.563rem', md: '2.5rem', xl: '3.125rem' },
-                  cursor: 'pointer'
-                }
-              }
+              fontFamily: 'var(--font-space-grotesk), sans-serif',
+              fontSize: { xs: '2rem', md: '3rem' },
+              fontWeight: 700,
+              color: cosmic.textPrimary,
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
+              mb: 2,
             }}
           >
-            <Box
-              sx={{
-                marginTop: { sm: '5%', lg: '4%' },
-                width: { xs: '38%', md: '100%' },
-                paddingLeft: { xs: 2, md: 0, xl: 0 }
-              }}
-            >
-              <FadeInWhenVisible direction="right" delay={0.1}>
-                <Typography
-                  variant="h2"
+            {handleTranslation('contactSection.title')}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: '1rem',
+              color: cosmic.textSecondary,
+              maxWidth: 480,
+              mx: 'auto',
+            }}
+          >
+            Let&apos;s build something together. Reach out through any of the platforms below.
+          </Typography>
+        </Box>
+
+        <Grid ref={gridRef} container spacing={2}>
+          {contactMethods.map((method) => (
+            <Grid key={method.id} item xs={12} sm={6} className="contact-card">
+              <Link
+                href={method.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ textDecoration: 'none', display: 'block' }}
+              >
+                <GlowCard
                   sx={{
-                    color: '#fff',
-                    width: { xs: '150px', sm: 'max-content', xl: 'max-content' },
-                    fontSize: { xs: '1rem', sm: '1.563rem', md: '2.5rem', xl: '3.125rem' },
-                    mt: { xs: 2, sm: 3.75, md: 5.5, xl: 7 }
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                    p: 2.5,
                   }}
                 >
-                  {handleTranslation('contactSection.title')}
-                </Typography>
-              </FadeInWhenVisible>
-            </Box>
-            <Slider {...settings}>
-              {mediaContact.map((item) => (
-                <Typography
-                  key={item.id}
-                  component={Link}
-                  href={item.url}
-                  target="_blank"
-                  variant="h2"
-                >
-                  {item.title}
-                </Typography>
-              ))}
-            </Slider>
-          </Stack>
-        </Box>
+                  <Box
+                    sx={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: `${cosmic.blue}15`,
+                      border: `1px solid ${cosmic.line}`,
+                      color: cosmic.cyan,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {method.icon}
+                  </Box>
+                  <Stack spacing={0.25}>
+                    <Typography
+                      sx={{
+                        fontFamily: 'var(--font-space-grotesk), sans-serif',
+                        fontSize: '1rem',
+                        fontWeight: 600,
+                        color: cosmic.textPrimary,
+                      }}
+                    >
+                      {method.title}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: 'var(--font-jetbrains-mono), monospace',
+                        fontSize: '0.6875rem',
+                        color: cosmic.textSecondary,
+                        letterSpacing: '0.02em',
+                      }}
+                    >
+                      {method.handle}
+                    </Typography>
+                  </Stack>
+                </GlowCard>
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
-      <CardMedia
-        component="img"
-        image={BackgroundImag.src}
-        alt="Berry"
-        sx={{
-          position: 'absolute',
-          bottom: { sm: -40, md: -80 },
-          right: { sm: 30, md: 50, lg: 80 },
-          width: { xl: 240, lg: 220, md: 150, sm: 100, xs: 0 },
-          maxWidth: '100%',
-          filter: 'drop-shadow(0px 0px 50px rgb(33 150 243 / 30%))'
-        }}
-      />
     </Box>
   );
 };

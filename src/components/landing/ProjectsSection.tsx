@@ -1,11 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import { Box, Grid, IconButton, Link, Typography, Stack, Chip } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
-import { IconChevronRight, IconChevronLeft, IconExternalLink } from '@tabler/icons-react';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Chip from '@mui/material/Chip';
+import Link from '@mui/material/Link';
+import IconButton from '@mui/material/IconButton';
+
+import { IconExternalLink, IconBrandGithub } from '@tabler/icons-react';
+import SectionLabel from '../cosmic/SectionLabel';
+import { cosmic } from '@/themes/cosmicTokens';
 import useLanguage from '@/hooks/useLanguage';
+import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 
 import App1 from '../../assets/images/landing/projects/app-1-portal.png';
 import App2 from '../../assets/images/landing/projects/app-2-kin.png';
@@ -13,13 +21,23 @@ import App3 from '../../assets/images/landing/projects/app-3-arupo.png';
 import App4 from '../../assets/images/landing/projects/app-4-af.png';
 import App5 from '../../assets/images/landing/projects/app-5-provisiones.png';
 
-const projects = [
+interface Project {
+  title: string;
+  caption: string;
+  tags: string[];
+  image: string;
+  link: string;
+  featured?: boolean;
+}
+
+const projects: Project[] = [
   {
     title: 'Data Collection Portal',
     caption: 'Enterprise data collection platform with role-based access and real-time analytics.',
     tags: ['React', 'Node.js', 'AWS'],
     image: App1.src,
     link: 'https://portal.actuaria.com/authentication/login',
+    featured: true,
   },
   {
     title: 'Kin Analytics',
@@ -27,6 +45,7 @@ const projects = [
     tags: ['Next.js', 'TypeScript', 'D3.js'],
     image: App2.src,
     link: 'https://www.kinanalytics.com/',
+    featured: true,
   },
   {
     title: 'Arupo — Legaltech',
@@ -51,207 +70,199 @@ const projects = [
   },
 ];
 
-const variants = {
-  enter: (dir: number) => ({ x: dir > 0 ? 300 : -300, opacity: 0, scale: 0.95 }),
-  center: { x: 0, opacity: 1, scale: 1 },
-  exit: (dir: number) => ({ x: dir > 0 ? -300 : 300, opacity: 0, scale: 0.95 }),
-};
-
-const ProjectsSection = () => {
-  const theme = useTheme();
-  const { handleTranslation } = useLanguage();
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  const paginate = (dir: number) => {
-    setDirection(dir);
-    setIndex((prev) => (prev + dir + projects.length) % projects.length);
-  };
-
-  const project = projects[index];
+function ProjectCard({ project }: { project: Project }) {
+  const isFeatured = project.featured;
 
   return (
-    <Grid container spacing={5} justifyContent="center">
-      {/* Header */}
-      <Grid item xs={12} md={7} sx={{ textAlign: 'center' }}>
-        <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' }, mb: 1 }}>
-          {handleTranslation('projectSection.title')}
-        </Typography>
-        <Typography variant="h4" sx={{ fontWeight: 400, color: 'text.secondary' }} align="center">
-          {handleTranslation('projectSection.description')}
-        </Typography>
-      </Grid>
-
-      {/* Carousel */}
-      <Grid item xs={12}>
-        <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-          <AnimatePresence custom={direction} mode="wait">
-            <motion.div
-              key={index}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+    <Box
+      sx={{
+        position: 'relative',
+        borderRadius: '20px',
+        p: '1px',
+        background: cosmic.gradientBorder,
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          '& .project-image': { transform: 'scale(1.03)' },
+        },
+      }}
+    >
+      <Box
+        sx={{
+          borderRadius: '19px',
+          background: cosmic.bg1,
+          overflow: 'hidden',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {/* Image area */}
+        <Box
+          sx={{
+            position: 'relative',
+            overflow: 'hidden',
+            aspectRatio: isFeatured ? '16 / 8.5' : '16 / 10',
+          }}
+        >
+          <Box
+            className="project-image"
+            component="img"
+            src={project.image}
+            alt={project.title}
+            sx={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'transform 0.6s ease',
+            }}
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, rgba(8,12,26,0.7) 0%, transparent 50%)',
+            }}
+          />
+          {isFeatured && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                px: 1.5,
+                py: 0.5,
+                borderRadius: '6px',
+                background: `${cosmic.cyan}20`,
+                border: `1px solid ${cosmic.cyan}40`,
+              }}
             >
-              <Box
+              <Typography
                 sx={{
-                  position: 'relative',
-                  borderRadius: 3,
-                  overflow: 'hidden',
-                  height: { xs: 320, sm: 420, md: 520 },
-                  maxWidth: 900,
-                  mx: 'auto',
-                  boxShadow: theme.palette.mode === 'dark'
-                    ? '0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(129,140,248,0.15)'
-                    : '0 25px 60px rgba(0,0,0,0.15)',
-                  cursor: 'pointer',
-                  '&:hover img': { transform: 'scale(1.03)' },
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  fontSize: '0.625rem',
+                  color: cosmic.cyan,
+                  letterSpacing: '0.1em',
+                  fontWeight: 600,
                 }}
               >
-                {/* Image */}
-                <Box
-                  component="img"
-                  src={project.image}
-                  alt={project.title}
-                  sx={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.6s ease',
-                    display: 'block',
-                  }}
-                />
-
-                {/* Gradient overlay for text contrast */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(to top, rgba(8,12,26,0.97) 0%, rgba(8,12,26,0.6) 45%, transparent 100%)',
-                  }}
-                />
-
-                {/* Content overlay */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    p: { xs: 2.5, md: 4 },
-                  }}
-                >
-                  <Stack spacing={1.5}>
-                    <Stack direction="row" spacing={1} flexWrap="wrap">
-                      {project.tags.map((tag) => (
-                        <Chip
-                          key={tag}
-                          label={tag}
-                          size="small"
-                          sx={{
-                            bgcolor: 'rgba(129,140,248,0.2)',
-                            color: '#A5B4FC',
-                            border: '1px solid rgba(129,140,248,0.3)',
-                            fontSize: '0.7rem',
-                            height: 22,
-                            backdropFilter: 'blur(8px)',
-                          }}
-                        />
-                      ))}
-                    </Stack>
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                      <Typography
-                        variant="h3"
-                        sx={{ color: '#fff', fontWeight: 700, fontSize: { xs: '1.25rem', md: '1.75rem' } }}
-                      >
-                        {project.title}
-                      </Typography>
-                      <IconButton
-                        component={Link}
-                        href={project.link}
-                        target="_blank"
-                        size="small"
-                        sx={{ color: '#A5B4FC', '&:hover': { color: '#fff' } }}
-                      >
-                        <IconExternalLink size={18} />
-                      </IconButton>
-                    </Stack>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: 'rgba(255,255,255,0.75)', maxWidth: 520, lineHeight: 1.6 }}
-                    >
-                      {project.caption}
-                    </Typography>
-                  </Stack>
-                </Box>
-              </Box>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Arrow buttons */}
-          <IconButton
-            onClick={() => paginate(-1)}
-            sx={{
-              position: 'absolute',
-              left: { xs: 8, md: 'calc(50% - 480px)' },
-              top: '50%',
-              transform: 'translateY(-50%)',
-              bgcolor: theme.palette.mode === 'dark' ? 'rgba(13,18,41,0.85)' : 'rgba(255,255,255,0.85)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid',
-              borderColor: theme.palette.mode === 'dark' ? 'rgba(129,140,248,0.25)' : 'rgba(0,0,0,0.1)',
-              color: theme.palette.mode === 'dark' ? '#A5B4FC' : 'inherit',
-              zIndex: 10,
-              width: 44, height: 44,
-              '&:hover': { bgcolor: theme.palette.mode === 'dark' ? 'rgba(79,70,229,0.3)' : 'rgba(0,0,0,0.1)' },
-            }}
-          >
-            <IconChevronLeft size={20} />
-          </IconButton>
-          <IconButton
-            onClick={() => paginate(1)}
-            sx={{
-              position: 'absolute',
-              right: { xs: 8, md: 'calc(50% - 480px)' },
-              top: '50%',
-              transform: 'translateY(-50%)',
-              bgcolor: theme.palette.mode === 'dark' ? 'rgba(13,18,41,0.85)' : 'rgba(255,255,255,0.85)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid',
-              borderColor: theme.palette.mode === 'dark' ? 'rgba(129,140,248,0.25)' : 'rgba(0,0,0,0.1)',
-              color: theme.palette.mode === 'dark' ? '#A5B4FC' : 'inherit',
-              zIndex: 10,
-              width: 44, height: 44,
-              '&:hover': { bgcolor: theme.palette.mode === 'dark' ? 'rgba(79,70,229,0.3)' : 'rgba(0,0,0,0.1)' },
-            }}
-          >
-            <IconChevronRight size={20} />
-          </IconButton>
+                FEATURED
+              </Typography>
+            </Box>
+          )}
         </Box>
 
-        {/* Dot indicators */}
-        <Stack direction="row" spacing={1} justifyContent="center" sx={{ mt: 3 }}>
-          {projects.map((_, i) => (
-            <Box
-              key={i}
-              onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i); }}
+        {/* Meta */}
+        <Box sx={{ p: 3, flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
+            <Typography
               sx={{
-                width: i === index ? 24 : 8,
-                height: 8,
-                borderRadius: 4,
-                bgcolor: i === index
-                  ? (theme.palette.mode === 'dark' ? '#818CF8' : '#4F46E5')
-                  : (theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'),
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
+                fontFamily: 'var(--font-space-grotesk), sans-serif',
+                fontSize: isFeatured ? '1.25rem' : '1.0625rem',
+                fontWeight: 600,
+                color: cosmic.textPrimary,
               }}
-            />
-          ))}
-        </Stack>
+            >
+              {project.title}
+            </Typography>
+            <IconButton
+              component="a"
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              size="small"
+              sx={{
+                color: cosmic.textSecondary,
+                '&:hover': { color: cosmic.cyan },
+              }}
+            >
+              <IconExternalLink size={16} />
+            </IconButton>
+          </Stack>
+
+          <Typography
+            sx={{
+              fontSize: '0.8125rem',
+              lineHeight: 1.6,
+              color: cosmic.textSecondary,
+              mb: 2,
+              flex: 1,
+            }}
+          >
+            {project.caption}
+          </Typography>
+
+          <Stack direction="row" spacing={0.75} sx={{ flexWrap: 'wrap', gap: 0.5 }}>
+            {project.tags.map((tag) => (
+              <Chip
+                key={tag}
+                label={tag}
+                size="small"
+                sx={{
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  fontSize: '0.6875rem',
+                  height: 24,
+                  background: 'rgba(22, 32, 64, 0.6)',
+                  border: `1px solid ${cosmic.line}`,
+                  color: cosmic.textSecondary,
+                }}
+              />
+            ))}
+          </Stack>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+const ProjectsSection = () => {
+  const { handleTranslation } = useLanguage();
+  const featured = projects.filter((p) => p.featured);
+  const regular = projects.filter((p) => !p.featured);
+  const gridRef = useGsapScrollTrigger<HTMLDivElement>({
+    childSelector: '.project-card',
+    from: { opacity: 0, y: 50 },
+    to: { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+    stagger: 0.15,
+  });
+
+  return (
+    <Container maxWidth="lg">
+      <Box sx={{ textAlign: 'center', mb: 8 }}>
+        <SectionLabel number="04" label="Projects" />
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-space-grotesk), sans-serif',
+            fontSize: { xs: '2rem', md: '2.75rem' },
+            fontWeight: 700,
+            color: cosmic.textPrimary,
+            lineHeight: 1.15,
+            letterSpacing: '-0.02em',
+            mb: 1.5,
+          }}
+        >
+          {handleTranslation('projectSection.title')}
+        </Typography>
+        <Typography sx={{ fontSize: '1rem', color: cosmic.textSecondary }}>
+          {handleTranslation('projectSection.description')}
+        </Typography>
+      </Box>
+
+      <Grid ref={gridRef} container spacing={3}>
+        {/* Featured projects -- span 2 columns */}
+        {featured.map((p) => (
+          <Grid key={p.title} item xs={12} md={6} className="project-card">
+            <ProjectCard project={p} />
+          </Grid>
+        ))}
+        {/* Regular projects */}
+        {regular.map((p) => (
+          <Grid key={p.title} item xs={12} sm={6} md={4} className="project-card">
+            <ProjectCard project={p} />
+          </Grid>
+        ))}
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Metadata } from 'next';
-import { Archivo, Space_Grotesk } from 'next/font/google';
+import { Archivo, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 
@@ -10,6 +10,7 @@ import { ConfigProvider } from '@/contexts/ConfigContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import LoadingRemover from '@/components/LoadingRemover';
 import Schema from './schema';
+import '@/styles/cosmic.css';
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -20,6 +21,12 @@ const archivo = Archivo({
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
   display: 'swap',
 });
 
@@ -111,7 +118,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode; }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: `
           #app-loading {

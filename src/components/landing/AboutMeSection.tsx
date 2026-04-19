@@ -1,117 +1,231 @@
-// material-ui
+'use client';
+
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import CardMedia from '@mui/material/CardMedia';
-import { useTheme, styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 
-
-// project imports
-import FadeInWhenVisible from '../Animation';
-import SubCard from '../SubCard';
-import Avatar from '../Avatar';
-
-// assets
-import Offer1 from '../../assets/images/landing/offer/offer-1.png';
-import Offer2 from '../../assets/images/landing/offer/offer-2.png';
-import ImageBackground from '../ImageBackground';
-import { Box } from '@mui/material';
+import SectionLabel from '../cosmic/SectionLabel';
+import GlowCard from '../cosmic/GlowCard';
+import { cosmic } from '@/themes/cosmicTokens';
 import useLanguage from '@/hooks/useLanguage';
+import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 
-
-interface OfferCardProps {
-  title: string;
-  caption: string;
-  image: string;
-}
-
-const HeaderImage = styled('img')(() => ({
-  maxWidth: '100%',
-  filter: 'drop-shadow(0px 0px 50px rgb(33 150 243 / 30%))',
-  opacity: 0.9,
-  borderRadius: 25
-}));
-
-const OfferCard = ({ title, caption, image }: OfferCardProps) => {
-  const theme = useTheme();
-  const AvaterSx = { bgcolor: 'transparent', color: 'secondary.main', width: 56, height: 56 };
-
-  return (
-    <FadeInWhenVisible>
-      <SubCard
-        sx={{
-          bgcolor: theme.palette.mode === 'dark' ? 'dark.800' : 'grey.100',
-          borderColor: 'divider',
-          '&:hover': { boxShadow: 'none' },
-          height: '100%'
-        }}
-      >
-        <Stack spacing={4}>
-          <Avatar variant="rounded" sx={AvaterSx}>
-            <CardMedia component="img" src={image} alt="Beautiful User Interface" />
-          </Avatar>
-          <Stack spacing={2}>
-            <Typography variant="h3" sx={{ fontWeight: 500 }}>
-              {title}
-            </Typography>
-            <Typography variant="body2" sx={{ fontSize: '1rem' }}>
-              {caption}
-            </Typography>
-          </Stack>
-        </Stack>
-      </SubCard>
-    </FadeInWhenVisible>
-  );
-};
+const statPills = [
+  { value: '5+', label: 'Years' },
+  { value: '20+', label: 'Projects' },
+  { value: 'EN/ES', label: 'Bilingual' },
+];
 
 const AboutMeSection = () => {
   const { handleTranslation } = useLanguage();
+  const sectionRef = useGsapScrollTrigger<HTMLDivElement>({
+    childSelector: '.about-animate',
+    from: { opacity: 0, y: 50 },
+    to: { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+    stagger: 0.15,
+  });
+
   return (
-    <Container>
-      <Grid container spacing={7.5} justifyContent="center">
-        <Grid item xs={12} sx={{ textAlign: 'center' }}>
-          <Grid container spacing={1.5}>
-            <Grid item xs={12}>
-              <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
-                {handleTranslation('aboutMeSection.title')}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body2" sx={{ fontSize: '1rem' }}>
-                {handleTranslation('aboutMeSection.description')}
-              </Typography>
-            </Grid>
-          </Grid>
+    <Container maxWidth="lg">
+      <Grid ref={sectionRef} container spacing={6} alignItems="center">
+        {/* Left: Avatar card */}
+        <Grid item xs={12} md={5} className="about-animate">
+          <GlowCard gradient>
+            <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: '12px' }}>
+              <Box
+                component="img"
+                src="/assets/images/paisaje.jpg"
+                alt="Cristopher Palacios"
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  borderRadius: '12px',
+                  filter: 'brightness(0.9)',
+                }}
+              />
+              {/* Glow accent */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: -20,
+                  right: -20,
+                  width: 120,
+                  height: 120,
+                  borderRadius: '50%',
+                  background: `radial-gradient(circle, ${cosmic.blue}40, transparent 70%)`,
+                  pointerEvents: 'none',
+                }}
+              />
+              {/* Technical overlay */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: 16,
+                  left: 16,
+                  display: 'flex',
+                  gap: 1,
+                }}
+              >
+                <Box
+                  sx={{
+                    px: 1.5,
+                    py: 0.5,
+                    borderRadius: '6px',
+                    background: 'rgba(8, 12, 26, 0.7)',
+                    backdropFilter: 'blur(8px)',
+                    border: `1px solid ${cosmic.line}`,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      fontSize: '0.625rem',
+                      color: cosmic.cyan,
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    ID_0421 &middot; CP
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </GlowCard>
         </Grid>
-        <Grid item md={6} xs={12} sx={{ display: 'flex' }}>
-          <Box sx={{ position: 'relative', mt: 1.75, zIndex: 9 }}>
-            <HeaderImage src="/assets/images/paisaje.jpg" alt="Cristopher Palacios" />
-          </Box>
-          <ImageBackground
+
+        {/* Right: Content */}
+        <Grid item xs={12} md={7} className="about-animate">
+          <SectionLabel number="01" label="About" />
+          <Typography
             sx={{
-              left: 0,
-              transform: 'rotateY(180deg)',
+              fontFamily: 'var(--font-space-grotesk), sans-serif',
+              fontSize: { xs: '2rem', md: '2.75rem' },
+              fontWeight: 700,
+              color: cosmic.textPrimary,
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              mb: 3,
             }}
-          />
+          >
+            {handleTranslation('aboutMeSection.title')}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: '1rem',
+              lineHeight: 1.7,
+              color: cosmic.textSecondary,
+              mb: 4,
+              maxWidth: 540,
+            }}
+          >
+            {handleTranslation('aboutMeSection.description')}
+          </Typography>
+
+          {/* Stat pills */}
+          <Stack direction="row" spacing={2} sx={{ mb: 4, flexWrap: 'wrap', gap: 1.5 }}>
+            {statPills.map((stat) => (
+              <Box
+                key={stat.label}
+                sx={{
+                  px: 2.5,
+                  py: 1,
+                  borderRadius: '999px',
+                  border: `1px solid ${cosmic.line}`,
+                  background: 'rgba(22, 32, 64, 0.4)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: 'var(--font-jetbrains-mono), monospace',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    background: cosmic.gradientText,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {stat.value}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: '0.75rem',
+                    color: cosmic.textSecondary,
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  {stat.label}
+                </Typography>
+              </Box>
+            ))}
+          </Stack>
+
+          {/* Currently building indicator */}
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <Box
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                background: '#22c55e',
+                boxShadow: '0 0 8px rgba(34, 197, 94, 0.6)',
+                animation: 'cosmic-pulse 2s infinite',
+              }}
+            />
+            <Typography
+              sx={{
+                fontFamily: 'var(--font-jetbrains-mono), monospace',
+                fontSize: '0.6875rem',
+                color: cosmic.textSecondary,
+                letterSpacing: '0.08em',
+              }}
+            >
+              CURRENTLY BUILDING
+            </Typography>
+          </Stack>
         </Grid>
-        <Grid item md={6} xs={12}>
-          <Grid container direction="column" justifyContent="center" spacing={5} sx={{ '&> .MuiGrid-root > div': { height: '100%' } }}>
-            <Grid item md={6} sm={12}>
-              <OfferCard
-                title={handleTranslation('aboutMeSection.card1Subtitle')}
-                caption={handleTranslation('aboutMeSection.card1Description')}
-                image={Offer1.src}
-              />
-            </Grid>
-            <Grid item md={4} sm={6}>
-              <OfferCard
-                title={handleTranslation('aboutMeSection.card2Subtitle')}
-                caption={handleTranslation('aboutMeSection.card2Description')}
-                image={Offer2.src}
-              />
-            </Grid>
-          </Grid>
+
+        {/* Skill cards below */}
+        <Grid item xs={12} md={6} className="about-animate">
+          <GlowCard>
+            <Typography
+              sx={{
+                fontFamily: 'var(--font-space-grotesk), sans-serif',
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                color: cosmic.textPrimary,
+                mb: 2,
+              }}
+            >
+              {handleTranslation('aboutMeSection.card1Subtitle')}
+            </Typography>
+            <Typography sx={{ fontSize: '0.875rem', lineHeight: 1.7, color: cosmic.textSecondary }}>
+              {handleTranslation('aboutMeSection.card1Description')}
+            </Typography>
+          </GlowCard>
+        </Grid>
+        <Grid item xs={12} md={6} className="about-animate">
+          <GlowCard>
+            <Typography
+              sx={{
+                fontFamily: 'var(--font-space-grotesk), sans-serif',
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                color: cosmic.textPrimary,
+                mb: 2,
+              }}
+            >
+              {handleTranslation('aboutMeSection.card2Subtitle')}
+            </Typography>
+            <Typography sx={{ fontSize: '0.875rem', lineHeight: 1.7, color: cosmic.textSecondary }}>
+              {handleTranslation('aboutMeSection.card2Description')}
+            </Typography>
+          </GlowCard>
         </Grid>
       </Grid>
     </Container>

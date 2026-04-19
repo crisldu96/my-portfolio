@@ -125,7 +125,34 @@ const Typography = (theme: Theme, borderRadius: number, fontFamily: string): Typ
     width: '44px',
     height: '44px',
     fontSize: '1.5rem'
-  }
+  },
+  sectionLabel: {
+    fontFamily: 'var(--font-jetbrains-mono), monospace',
+    color: '#00D4FF',
+    fontSize: '0.8125rem',
+    letterSpacing: '0.15em',
+    textTransform: 'uppercase' as const,
+    fontWeight: 500,
+  },
+  heroHeading: {
+    fontFamily: 'var(--font-space-grotesk), sans-serif',
+    fontSize: '6rem',
+    fontWeight: 700,
+    lineHeight: 1.0,
+    letterSpacing: '-0.03em',
+    color: '#F0F4FF',
+  },
+  sectionHeading: {
+    fontFamily: 'var(--font-space-grotesk), sans-serif',
+    fontSize: '3.5rem',
+    fontWeight: 700,
+    lineHeight: 1.05,
+    letterSpacing: '-0.03em',
+  },
+  mono: {
+    fontFamily: 'var(--font-jetbrains-mono), monospace',
+    letterSpacing: '0.02em',
+  },
 });
 
 export default Typography;
