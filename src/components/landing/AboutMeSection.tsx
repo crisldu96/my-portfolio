@@ -97,18 +97,7 @@ const AboutMeSection = () => {
         {/* Right: Content */}
         <Grid item xs={12} md={7} className="about-animate">
           <SectionLabel number="01" label="About" />
-          <h2
-            style={{
-              fontFamily: 'var(--font-space-grotesk), sans-serif',
-              fontSize: '2.75rem',
-              fontWeight: 700,
-              color: cosmic.textPrimary,
-              lineHeight: 1.15,
-              letterSpacing: '-0.02em',
-              margin: 0,
-              marginBottom: 24,
-            }}
-          >
+          <h2 className="section-headline">
             {handleTranslation('aboutMeSection.title')}
           </h2>
           <p

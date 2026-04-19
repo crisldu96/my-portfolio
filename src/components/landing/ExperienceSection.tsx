@@ -49,17 +49,7 @@ const ExperienceSection = () => {
     <Container maxWidth="lg">
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel number="02" label="Experience" />
-        <h2
-          style={{
-            fontFamily: 'var(--font-space-grotesk), sans-serif',
-            fontSize: '2.75rem',
-            fontWeight: 700,
-            color: cosmic.textPrimary,
-            lineHeight: 1.15,
-            letterSpacing: '-0.02em',
-            margin: 0,
-          }}
-        >
+        <h2 className="section-headline" style={{ marginBottom: 0 }}>
           {handleTranslation('experienceSection.title')}
         </h2>
       </div>

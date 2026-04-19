@@ -15,31 +15,43 @@ const fadeUp = (delay: number) => ({
   },
 });
 
-const fadeScale = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { delay: 0.6, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
 export default function HeroOverlay() {
   const { handleTranslation } = useLanguage();
 
   return (
     <div className="hero-overlay">
-      {/* Top spacer */}
-      <div className="hero-overlay-top" />
+      {/* Top: minimal status pill (left) + availability (right) */}
+      <div className="hero-overlay-top">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp(0.1)}
+          className="hero-role-pill"
+        >
+          <span className="hero-role-dot" />
+          <span className="hero-role-text">
+            {handleTranslation<string>('heroSection.role') || 'Full Stack & AI Developer'}
+          </span>
+        </motion.div>
 
-      {/* Center: Split layout - Text left, Photo right */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp(0.15)}
+          className="hero-avail-badge"
+        >
+          <div className="hero-avail-dot" />
+          <span className="hero-avail-text">AVAILABLE FOR WORK</span>
+        </motion.div>
+      </div>
+
+      {/* Center: intentionally empty so the 3D canvas breathes */}
       <div className="hero-content" style={{ pointerEvents: 'auto' }}>
-        {/* Left: Personal intro */}
         <div className="hero-text">
           <motion.span
             initial="hidden"
             animate="visible"
-            variants={fadeUp(0.2)}
+            variants={fadeUp(0.25)}
             className="hero-greeting"
           >
             {handleTranslation<string>('heroSection.greeting') || "Hello, I'm"}
@@ -48,7 +60,7 @@ export default function HeroOverlay() {
           <motion.h1
             initial="hidden"
             animate="visible"
-            variants={fadeUp(0.35)}
+            variants={fadeUp(0.4)}
             className="hero-name"
           >
             <span className="hero-name__first">
@@ -59,22 +71,10 @@ export default function HeroOverlay() {
             </span>
           </motion.h1>
 
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp(0.5)}
-            className="hero-role-pill"
-          >
-            <span className="hero-role-dot" />
-            <span className="hero-role-text">
-              {handleTranslation<string>('heroSection.role') || 'Full Stack & AI Developer'}
-            </span>
-          </motion.div>
-
           <motion.p
             initial="hidden"
             animate="visible"
-            variants={fadeUp(0.65)}
+            variants={fadeUp(0.55)}
             className="hero-description"
           >
             {handleTranslation<string>('heroSection.description') ||
@@ -84,8 +84,8 @@ export default function HeroOverlay() {
           <motion.div
             initial="hidden"
             animate="visible"
-            variants={fadeUp(0.8)}
-            style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}
+            variants={fadeUp(0.7)}
+            style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginTop: 12 }}
           >
             <PillButton
               variant="contained"
@@ -121,27 +121,9 @@ export default function HeroOverlay() {
             </PillButton>
           </motion.div>
         </div>
-
-        {/* Right: Photo */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeScale}
-          className="hero-photo-wrapper"
-        >
-          <div className="hero-photo-glow" />
-          <img
-            src="/assets/images/header-1.png"
-            alt="Cristopher Palacios"
-            width={380}
-            height={380}
-            className="hero-photo"
-          />
-          <div className="hero-photo-ring" />
-        </motion.div>
       </div>
 
-      {/* Bottom row */}
+      {/* Bottom: scroll indicator */}
       <div
         className="hero-bottom"
         style={{
@@ -162,20 +144,6 @@ export default function HeroOverlay() {
           />
           <span className="hero-scroll-text">
             {handleTranslation<string>('heroSection.scrollDown') || 'SCROLL TO EXPLORE'}
-          </span>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div className="hero-avail-dot" />
-          <span
-            style={{
-              fontFamily: 'var(--font-jetbrains-mono), monospace',
-              fontSize: '0.6875rem',
-              color: cosmic.textSecondary,
-              letterSpacing: '0.08em',
-            }}
-          >
-            AVAILABLE FOR WORK
           </span>
         </div>
       </div>

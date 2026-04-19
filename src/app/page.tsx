@@ -33,7 +33,7 @@ export default function Home() {
 
       {/* About Section */}
       <SectionWrapper id="about" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
-        <div className="cosmic-ambient" />
+        <div className="cosmic-ambient" data-accent="cyan" />
         <div className="dotgrid" />
         <div className="section-content"><AboutMeSection /></div>
       </SectionWrapper>
@@ -42,7 +42,7 @@ export default function Home() {
 
       {/* Experience Section */}
       <SectionWrapper id="experience" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
-        <div className="cosmic-ambient" />
+        <div className="cosmic-ambient" data-accent="violet" />
         <div className="starfield" />
         <div className="section-content"><ExperienceSection /></div>
       </SectionWrapper>
@@ -51,7 +51,7 @@ export default function Home() {
 
       {/* Skills Section */}
       <SectionWrapper id="skills" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
-        <div className="cosmic-ambient" />
+        <div className="cosmic-ambient" data-accent="blue" />
         <div className="dotgrid" />
         <div className="section-content"><SkillsSection /></div>
       </SectionWrapper>
@@ -60,7 +60,7 @@ export default function Home() {
 
       {/* Projects Section */}
       <SectionWrapper id="projects" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
-        <div className="cosmic-ambient" />
+        <div className="cosmic-ambient" data-accent="rose" />
         <div className="starfield" />
         <div className="section-content"><ProjectsSection /></div>
       </SectionWrapper>
@@ -69,7 +69,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <SectionWrapper id="contact" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
-        <div className="cosmic-ambient" />
+        <div className="cosmic-ambient" data-accent="amber" />
         <div className="dotgrid" />
         <div className="section-content"><ContactSection /></div>
       </SectionWrapper>

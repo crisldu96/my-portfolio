@@ -55,18 +55,7 @@ const ContactSection = () => {
       <Container maxWidth="md">
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <SectionLabel number="05" label="Contact" />
-          <h2
-            style={{
-              fontFamily: 'var(--font-space-grotesk), sans-serif',
-              fontSize: '2rem',
-              fontWeight: 700,
-              color: cosmic.textPrimary,
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
-              margin: 0,
-              marginBottom: 16,
-            }}
-          >
+          <h2 className="section-headline" style={{ marginBottom: 16 }}>
             {handleTranslation('contactSection.title')}
           </h2>
           <p

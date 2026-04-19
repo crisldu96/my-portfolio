@@ -126,18 +126,7 @@ const SkillsSection = () => {
     <Container maxWidth="lg">
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel number="03" label="Skills" />
-        <h2
-          style={{
-            fontFamily: 'var(--font-space-grotesk), sans-serif',
-            fontSize: '2.75rem',
-            fontWeight: 700,
-            color: cosmic.textPrimary,
-            lineHeight: 1.15,
-            letterSpacing: '-0.02em',
-            margin: 0,
-            marginBottom: 12,
-          }}
-        >
+        <h2 className="section-headline" style={{ marginBottom: 12 }}>
           {handleTranslation('skillsSection.title')}
         </h2>
         <p style={{ fontSize: '1rem', color: cosmic.textSecondary, margin: 0 }}>
