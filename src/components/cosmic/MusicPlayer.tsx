@@ -355,30 +355,25 @@ const MusicPlayer = () => {
       </div>
 
       <div className="mp-controls">
+        {albumArt && (
+          <img src={albumArt} alt="" className="mp-album-art" />
+        )}
+
         <button
-          className={`mp-play-btn ${isPlaying ? 'mp-play-btn--active' : ''} ${albumArt ? 'mp-play-btn--has-art' : ''}`}
+          className={`mp-play-btn ${isPlaying ? 'mp-play-btn--active' : ''}`}
           onClick={togglePlay}
           aria-label={isPlaying ? 'Pause music' : 'Play music'}
         >
-          {albumArt && (
-            <img
-              src={albumArt}
-              alt=""
-              className="mp-album-art"
-            />
+          {isPlaying ? (
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="3" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
+              <rect x="11" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 2.5v13l11.5-6.5L4 2.5z" fill={cosmic.cyan} />
+            </svg>
           )}
-          <span className="mp-play-icon">
-            {isPlaying ? (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="3" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
-                <rect x="11" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M4 2.5v13l11.5-6.5L4 2.5z" fill={cosmic.cyan} />
-              </svg>
-            )}
-          </span>
         </button>
 
         <div className="mp-info">

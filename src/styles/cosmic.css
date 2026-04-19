@@ -483,42 +483,13 @@
   box-shadow: 0 0 16px rgba(0, 212, 255, 0.2);
 }
 
-.mp-play-btn--has-art {
-  overflow: hidden;
-  border-color: rgba(0, 212, 255, 0.2);
-  padding: 0;
-  position: relative;
-}
-
 .mp-album-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 44px;
+  height: 44px;
   object-fit: cover;
-  border-radius: 50%;
-  transition: opacity 0.2s ease;
-}
-
-.mp-play-icon {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mp-play-btn--has-art .mp-play-icon {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.mp-play-btn--has-art:hover .mp-play-icon {
-  opacity: 1;
-}
-
-.mp-play-btn--has-art:hover .mp-album-art {
-  opacity: 0.3;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .mp-info {
