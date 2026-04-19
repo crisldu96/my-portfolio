@@ -32,41 +32,46 @@ export default function Home() {
       <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={80} />
 
       {/* About Section */}
-      <SectionWrapper id="about" sx={{ bgcolor: cosmic.bg1, position: 'relative' }}>
+      <SectionWrapper id="about" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
+        <div className="cosmic-ambient" />
         <div className="dotgrid" />
-        <AboutMeSection />
+        <div className="section-content"><AboutMeSection /></div>
       </SectionWrapper>
 
       <SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={80} />
 
       {/* Experience Section */}
-      <SectionWrapper id="experience" sx={{ bgcolor: cosmic.bg0, position: 'relative' }}>
+      <SectionWrapper id="experience" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
+        <div className="cosmic-ambient" />
         <div className="starfield" />
-        <ExperienceSection />
+        <div className="section-content"><ExperienceSection /></div>
       </SectionWrapper>
 
       <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={80} />
 
       {/* Skills Section */}
-      <SectionWrapper id="skills" sx={{ bgcolor: cosmic.bg1, position: 'relative' }}>
+      <SectionWrapper id="skills" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
+        <div className="cosmic-ambient" />
         <div className="dotgrid" />
-        <SkillsSection />
+        <div className="section-content"><SkillsSection /></div>
       </SectionWrapper>
 
       <SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={80} />
 
       {/* Projects Section */}
-      <SectionWrapper id="projects" sx={{ bgcolor: cosmic.bg0, position: 'relative' }}>
+      <SectionWrapper id="projects" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
+        <div className="cosmic-ambient" />
         <div className="starfield" />
-        <ProjectsSection />
+        <div className="section-content"><ProjectsSection /></div>
       </SectionWrapper>
 
       <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={80} />
 
       {/* Contact Section */}
-      <SectionWrapper id="contact" sx={{ bgcolor: cosmic.bg1, position: 'relative' }}>
+      <SectionWrapper id="contact" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
+        <div className="cosmic-ambient" />
         <div className="dotgrid" />
-        <ContactSection />
+        <div className="section-content"><ContactSection /></div>
       </SectionWrapper>
     </GsapProvider>
   );
