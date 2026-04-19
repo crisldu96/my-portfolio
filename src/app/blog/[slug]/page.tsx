@@ -6,14 +6,12 @@ import { evaluate } from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 import {
-  Box,
   Button,
   Chip,
   Container,
   Divider,
   Link,
   Stack,
-  Typography,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -22,24 +20,19 @@ import { getAllSlugs, getPostBySlug } from '@/lib/blog';
 
 const mdxComponents = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Typography variant="h3" sx={{ fontWeight: 700, color: '#FAFAFA', mt: 4, mb: 2 }} {...props} />
+    <h1 style={{ fontWeight: 700, color: '#FAFAFA', marginTop: 32, marginBottom: 16 }} {...props} />
   ),
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Typography variant="h4" sx={{ fontWeight: 600, color: '#FAFAFA', mt: 4, mb: 2 }} {...props} />
+    <h2 style={{ fontWeight: 600, color: '#FAFAFA', marginTop: 32, marginBottom: 16 }} {...props} />
   ),
   h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Typography variant="h5" sx={{ fontWeight: 600, color: '#CBD5E1', mt: 3, mb: 1.5 }} {...props} />
+    <h3 style={{ fontWeight: 600, color: '#CBD5E1', marginTop: 24, marginBottom: 12 }} {...props} />
   ),
   h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Typography variant="h6" sx={{ fontWeight: 600, color: '#CBD5E1', mt: 2, mb: 1 }} {...props} />
+    <h4 style={{ fontWeight: 600, color: '#CBD5E1', marginTop: 16, marginBottom: 8 }} {...props} />
   ),
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <Typography
-      variant="body1"
-      component="p"
-      sx={{ color: '#CBD5E1', lineHeight: 1.8, mb: 2 }}
-      {...props}
-    />
+    <p style={{ color: '#CBD5E1', lineHeight: 1.8, marginBottom: 16 }} {...props} />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <Link
@@ -52,28 +45,21 @@ const mdxComponents = {
     </Link>
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <Box
-      component="ul"
-      sx={{ color: '#CBD5E1', pl: 3, mb: 2, '& li': { mb: 0.5, lineHeight: 1.8 } }}
-      {...props}
-    />
+    <ul style={{ color: '#CBD5E1', paddingLeft: 24, marginBottom: 16 }} {...props} />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
-    <Box
-      component="ol"
-      sx={{ color: '#CBD5E1', pl: 3, mb: 2, '& li': { mb: 0.5, lineHeight: 1.8 } }}
-      {...props}
-    />
+    <ol style={{ color: '#CBD5E1', paddingLeft: 24, marginBottom: 16 }} {...props} />
   ),
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-    <Box
-      component="blockquote"
-      sx={{
+    <blockquote
+      style={{
         borderLeft: '4px solid #3B82F6',
-        pl: 3,
-        py: 0.5,
-        my: 3,
-        bgcolor: 'rgba(59,130,246,0.06)',
+        paddingLeft: 24,
+        paddingTop: 4,
+        paddingBottom: 4,
+        marginTop: 24,
+        marginBottom: 24,
+        backgroundColor: 'rgba(59,130,246,0.06)',
         borderRadius: '0 8px 8px 0',
         color: '#94A3B8',
         fontStyle: 'italic',
@@ -82,14 +68,15 @@ const mdxComponents = {
     />
   ),
   code: (props: React.HTMLAttributes<HTMLElement>) => (
-    <Box
-      component="code"
-      sx={{
-        bgcolor: 'rgba(59,130,246,0.1)',
+    <code
+      style={{
+        backgroundColor: 'rgba(59,130,246,0.1)',
         color: '#60A5FA',
-        px: 0.75,
-        py: 0.25,
-        borderRadius: 1,
+        paddingLeft: 6,
+        paddingRight: 6,
+        paddingTop: 2,
+        paddingBottom: 2,
+        borderRadius: 4,
         fontFamily: 'monospace',
         fontSize: '0.875em',
       }}
@@ -97,27 +84,18 @@ const mdxComponents = {
     />
   ),
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-    <Box
-      component="pre"
-      sx={{
-        bgcolor: '#0D1229',
+    <pre
+      style={{
+        backgroundColor: '#0D1229',
         border: '1px solid rgba(59,130,246,0.2)',
-        borderRadius: 2,
-        p: 3,
+        borderRadius: 8,
+        padding: 24,
         overflowX: 'auto',
-        mb: 3,
+        marginBottom: 24,
         fontFamily: 'monospace',
         fontSize: '0.875rem',
         lineHeight: 1.7,
         color: '#CBD5E1',
-        '& code': {
-          bgcolor: 'transparent',
-          color: 'inherit',
-          px: 0,
-          py: 0,
-          borderRadius: 0,
-          fontSize: 'inherit',
-        },
       }}
       {...props}
     />
@@ -187,7 +165,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#0D1229' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#0D1229' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
@@ -210,38 +188,37 @@ export default async function BlogPostPage({ params }: PageProps) {
           alignItems="center"
           sx={{ color: '#94A3B8', mb: 2 }}
         >
-          <Typography variant="caption">
+          <span style={{ fontSize: '0.75rem' }}>
             {new Date(post.date).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
-          </Typography>
-          <Typography variant="caption">·</Typography>
-          <Typography variant="caption">{post.readingTime}</Typography>
-          <Typography variant="caption">·</Typography>
-          <Typography variant="caption">{post.author}</Typography>
+          </span>
+          <span style={{ fontSize: '0.75rem' }}>·</span>
+          <span style={{ fontSize: '0.75rem' }}>{post.readingTime}</span>
+          <span style={{ fontSize: '0.75rem' }}>·</span>
+          <span style={{ fontSize: '0.75rem' }}>{post.author}</span>
         </Stack>
 
-        <Typography
-          variant="h2"
-          sx={{
+        <h2
+          style={{
             fontWeight: 700,
             fontFamily: 'var(--font-archivo), sans-serif',
             color: '#FAFAFA',
-            mb: 2,
             lineHeight: 1.25,
+            margin: 0,
+            marginBottom: 16,
           }}
         >
           {post.title}
-        </Typography>
+        </h2>
 
-        <Typography
-          variant="body1"
-          sx={{ color: '#94A3B8', mb: 3, fontSize: '1.1rem', lineHeight: 1.7 }}
+        <p
+          style={{ color: '#94A3B8', marginBottom: 24, fontSize: '1.1rem', lineHeight: 1.7 }}
         >
           {post.description}
-        </Typography>
+        </p>
 
         {post.tags && post.tags.length > 0 && (
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 5 }}>
@@ -264,9 +241,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mb: 5 }} />
 
-        <Box sx={{ '& > *:first-of-type': { mt: 0 } }}>
+        <div>
           <MDXContent content={post.content} />
-        </Box>
+        </div>
 
         <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mt: 8, mb: 5 }} />
 
@@ -280,6 +257,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Button>
         </NextLink>
       </Container>
-    </Box>
+    </div>
   );
 }

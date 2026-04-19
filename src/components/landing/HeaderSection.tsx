@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { Box, Button, CardMedia, Container, Grid, Link, Stack, Typography } from '@mui/material';
+import { Button, Container, Grid, Link, Stack } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
@@ -33,7 +33,7 @@ const HeaderImage = styled('img')({
 const HeaderSection = () => {
   const theme = useTheme();
   const { handleTranslation } = useLanguage();
-  const headerSX = { fontSize: { xs: '2rem', sm: '3rem', md: '3.5rem', lg: '3.5rem' } };
+  const headerStyle: React.CSSProperties = { fontSize: 'clamp(2rem, 5vw, 3.5rem)' };
 
   return (
     <Container sx={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -47,12 +47,12 @@ const HeaderSection = () => {
                 transition={{ type: 'spring', stiffness: 150, damping: 30 }}
               >
                 <Stack spacing={1}>
-                  <Typography textAlign={{ xs: 'center', md: 'left' }} variant="h1" sx={headerSX}>
+                  <h1 style={{ ...headerStyle, margin: 0 }}>
                     {handleTranslation('headerSection.title')}
-                  </Typography>
-                  <Typography textAlign={{ xs: 'center', md: 'left' }} variant="h1" color="primary" sx={headerSX}>
+                  </h1>
+                  <h1 style={{ ...headerStyle, margin: 0, color: theme.palette.primary.main }}>
                     {handleTranslation('headerSection.title2')}
-                  </Typography>
+                  </h1>
                 </Stack>
               </motion.div>
             </Grid>
@@ -62,21 +62,12 @@ const HeaderSection = () => {
                 animate={{ opacity: 1, translateY: 0 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 30, delay: 0.2 }}
               >
-                <Typography textAlign={{ xs: 'center', md: 'left' }}
-                  color="text.secondary"
-                  variant="subtitle2"
-                  sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
-                >
+                <p style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', color: theme.palette.text.secondary, margin: 0 }}>
                   {handleTranslation('headerSection.subtitle')}
-                </Typography>
-                <Typography
-                  textAlign={{ xs: 'center', md: 'left' }}
-                  color="text.primary"
-                  variant="body1"
-                  sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
-                >
+                </p>
+                <p style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', color: theme.palette.text.primary, margin: 0 }}>
                   {handleTranslation('headerSection.description')}
-                </Typography>
+                </p>
               </motion.div>
             </Grid>
             <Grid item xs={12}>
@@ -139,11 +130,10 @@ const HeaderSection = () => {
                     wrapper="h2"
                     repeat={Infinity}
                   />
-                  <CardMedia
-                    component="img"
-                    image={theme.palette.mode === 'dark' ? TechDark.src : TechLight.src}
+                  <img
+                    src={theme.palette.mode === 'dark' ? TechDark.src : TechLight.src}
                     alt="Cristopher Palacios Tech"
-                    sx={{ width: { xs: '75%', sm: '50%', md: '75%' } }}
+                    style={{ width: '75%', maxWidth: '100%' }}
                   />
                 </Stack>
               </motion.div>
@@ -151,7 +141,7 @@ const HeaderSection = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Box sx={{ position: 'relative', mt: 1.75, zIndex: 9 }}>
+          <div style={{ position: 'relative', marginTop: 14, zIndex: 9 }}>
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -159,7 +149,7 @@ const HeaderSection = () => {
             >
               <HeaderImage src={developer.src} alt="Cristopher Palacios" />
             </motion.div>
-          </Box>
+          </div>
           <ImageBackground
             sx={{
               bottom: { md: 0 },

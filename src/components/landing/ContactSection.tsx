@@ -1,9 +1,7 @@
 'use client';
 
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 
@@ -55,34 +53,38 @@ const ContactSection = () => {
   });
 
   return (
-    <Box className="project-info">
+    <div className="project-info">
       <Container maxWidth="md">
-        <Box sx={{ textAlign: 'center', mb: 6 }}>
+        <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <SectionLabel number="05" label="Contact" />
-          <Typography
-            sx={{
+          <h2
+            style={{
               fontFamily: 'var(--font-space-grotesk), sans-serif',
-              fontSize: { xs: '2rem', md: '3rem' },
+              fontSize: '2rem',
               fontWeight: 700,
               color: cosmic.textPrimary,
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
-              mb: 2,
+              margin: 0,
+              marginBottom: 16,
             }}
           >
             {handleTranslation('contactSection.title')}
-          </Typography>
-          <Typography
-            sx={{
+          </h2>
+          <p
+            style={{
               fontSize: '1rem',
               color: cosmic.textSecondary,
               maxWidth: 480,
-              mx: 'auto',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginTop: 0,
+              marginBottom: 0,
             }}
           >
             Let&apos;s build something together. Reach out through any of the platforms below.
-          </Typography>
-        </Box>
+          </p>
+        </div>
 
         <Grid ref={gridRef} container spacing={2}>
           {contactMethods.map((method) => (
@@ -94,16 +96,16 @@ const ContactSection = () => {
                 sx={{ textDecoration: 'none', display: 'block' }}
               >
                 <GlowCard
-                  sx={{
+                  style={{
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 2,
-                    p: 2.5,
+                    gap: 16,
+                    padding: 20,
                   }}
                 >
-                  <Box
-                    sx={{
+                  <div
+                    style={{
                       width: 48,
                       height: 48,
                       borderRadius: '12px',
@@ -117,10 +119,10 @@ const ContactSection = () => {
                     }}
                   >
                     {method.icon}
-                  </Box>
+                  </div>
                   <Stack spacing={0.25}>
-                    <Typography
-                      sx={{
+                    <span
+                      style={{
                         fontFamily: 'var(--font-space-grotesk), sans-serif',
                         fontSize: '1rem',
                         fontWeight: 600,
@@ -128,9 +130,9 @@ const ContactSection = () => {
                       }}
                     >
                       {method.title}
-                    </Typography>
-                    <Typography
-                      sx={{
+                    </span>
+                    <span
+                      style={{
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.6875rem',
                         color: cosmic.textSecondary,
@@ -138,7 +140,7 @@ const ContactSection = () => {
                       }}
                     >
                       {method.handle}
-                    </Typography>
+                    </span>
                   </Stack>
                 </GlowCard>
               </Link>
@@ -146,7 +148,7 @@ const ContactSection = () => {
           ))}
         </Grid>
       </Container>
-    </Box>
+    </div>
   );
 };
 

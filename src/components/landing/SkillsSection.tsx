@@ -1,8 +1,7 @@
 'use client';
 
+import { useState } from 'react';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 
@@ -84,9 +83,34 @@ const categories: SkillCategory[] = [
 ];
 
 const sizeStyles = {
-  lg: { fontSize: '0.875rem', px: 2.25, py: 0.875 },
-  md: { fontSize: '0.8125rem', px: 1.75, py: 0.625 },
-  sm: { fontSize: '0.75rem', px: 1.5, py: 0.5 },
+  lg: { fontSize: '0.875rem', paddingLeft: 18, paddingRight: 18, paddingTop: 7, paddingBottom: 7 },
+  md: { fontSize: '0.8125rem', paddingLeft: 14, paddingRight: 14, paddingTop: 5, paddingBottom: 5 },
+  sm: { fontSize: '0.75rem', paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4 },
+};
+
+const SkillTagChip = ({ skill, tint }: { skill: SkillTag; tint: string }) => {
+  const [hovered, setHovered] = useState(false);
+  const s = sizeStyles[skill.size];
+
+  return (
+    <span
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        ...s,
+        borderRadius: 8,
+        border: `1px solid ${tint}${hovered ? '50' : '25'}`,
+        background: `${tint}${hovered ? '15' : '0A'}`,
+        color: hovered ? cosmic.textPrimary : cosmic.textSecondary,
+        fontFamily: 'var(--font-jetbrains-mono), monospace',
+        lineHeight: 1,
+        transition: 'all 0.2s ease',
+        cursor: 'default',
+      }}
+    >
+      {skill.name}
+    </span>
+  );
 };
 
 const SkillsSection = () => {
@@ -100,37 +124,38 @@ const SkillsSection = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box sx={{ textAlign: 'center', mb: 8 }}>
+      <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel number="03" label="Skills" />
-        <Typography
-          sx={{
+        <h2
+          style={{
             fontFamily: 'var(--font-space-grotesk), sans-serif',
-            fontSize: { xs: '2rem', md: '2.75rem' },
+            fontSize: '2.75rem',
             fontWeight: 700,
             color: cosmic.textPrimary,
             lineHeight: 1.15,
             letterSpacing: '-0.02em',
-            mb: 1.5,
+            margin: 0,
+            marginBottom: 12,
           }}
         >
           {handleTranslation('skillsSection.title')}
-        </Typography>
-        <Typography sx={{ fontSize: '1rem', color: cosmic.textSecondary }}>
+        </h2>
+        <p style={{ fontSize: '1rem', color: cosmic.textSecondary, margin: 0 }}>
           {handleTranslation('skillsSection.subtitle')}
-        </Typography>
-      </Box>
+        </p>
+      </div>
 
       <Grid ref={gridRef} container spacing={3}>
         {categories.map((cat) => (
           <Grid key={cat.title} item xs={12} sm={6} lg={3} className="skill-card">
-            <GlowCard sx={{ height: '100%' }}>
+            <GlowCard style={{ height: '100%' }}>
               {/* Category header */}
-              <Stack direction="row" alignItems="center" spacing={1.5} sx={{ mb: 3 }}>
-                <Box
-                  sx={{
+              <Stack direction="row" alignItems="center" spacing={1.5} style={{ marginBottom: 24 }}>
+                <div
+                  style={{
                     width: 40,
                     height: 40,
-                    borderRadius: '10px',
+                    borderRadius: 10,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -140,9 +165,9 @@ const SkillsSection = () => {
                   }}
                 >
                   {cat.icon}
-                </Box>
-                <Typography
-                  sx={{
+                </div>
+                <span
+                  style={{
                     fontFamily: 'var(--font-space-grotesk), sans-serif',
                     fontSize: '1.125rem',
                     fontWeight: 600,
@@ -150,38 +175,15 @@ const SkillsSection = () => {
                   }}
                 >
                   {cat.title}
-                </Typography>
+                </span>
               </Stack>
 
               {/* Skill tags */}
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                {cat.skills.map((skill) => {
-                  const s = sizeStyles[skill.size];
-                  return (
-                    <Box
-                      key={skill.name}
-                      sx={{
-                        ...s,
-                        borderRadius: '8px',
-                        border: `1px solid ${cat.tint}25`,
-                        background: `${cat.tint}0A`,
-                        color: cosmic.textSecondary,
-                        fontFamily: 'var(--font-jetbrains-mono), monospace',
-                        lineHeight: 1,
-                        transition: 'all 0.2s ease',
-                        cursor: 'default',
-                        '&:hover': {
-                          borderColor: `${cat.tint}50`,
-                          color: cosmic.textPrimary,
-                          background: `${cat.tint}15`,
-                        },
-                      }}
-                    >
-                      {skill.name}
-                    </Box>
-                  );
-                })}
-              </Box>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {cat.skills.map((skill) => (
+                  <SkillTagChip key={skill.name} skill={skill} tint={cat.tint} />
+                ))}
+              </div>
             </GlowCard>
           </Grid>
         ))}

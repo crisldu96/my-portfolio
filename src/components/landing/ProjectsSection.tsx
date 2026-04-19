@@ -1,12 +1,9 @@
 'use client';
 
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
-import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 
 import { IconExternalLink, IconBrandGithub } from '@tabler/icons-react';
@@ -74,21 +71,18 @@ function ProjectCard({ project }: { project: Project }) {
   const isFeatured = project.featured;
 
   return (
-    <Box
-      sx={{
+    <div
+      className="project-card-outer"
+      style={{
         position: 'relative',
         borderRadius: '20px',
-        p: '1px',
+        padding: '1px',
         background: cosmic.gradientBorder,
         transition: 'all 0.3s ease',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-          '& .project-image': { transform: 'scale(1.03)' },
-        },
       }}
     >
-      <Box
-        sx={{
+      <div
+        style={{
           borderRadius: '19px',
           background: cosmic.bg1,
           overflow: 'hidden',
@@ -98,47 +92,48 @@ function ProjectCard({ project }: { project: Project }) {
         }}
       >
         {/* Image area */}
-        <Box
-          sx={{
+        <div
+          style={{
             position: 'relative',
             overflow: 'hidden',
             aspectRatio: isFeatured ? '16 / 8.5' : '16 / 10',
           }}
         >
-          <Box
+          <img
             className="project-image"
-            component="img"
             src={project.image}
             alt={project.title}
-            sx={{
+            style={{
               width: '100%',
               height: '100%',
               objectFit: 'cover',
               transition: 'transform 0.6s ease',
             }}
           />
-          <Box
-            sx={{
+          <div
+            style={{
               position: 'absolute',
               inset: 0,
               background: 'linear-gradient(to top, rgba(8,12,26,0.7) 0%, transparent 50%)',
             }}
           />
           {isFeatured && (
-            <Box
-              sx={{
+            <div
+              style={{
                 position: 'absolute',
                 top: 16,
                 right: 16,
-                px: 1.5,
-                py: 0.5,
+                paddingLeft: 12,
+                paddingRight: 12,
+                paddingTop: 4,
+                paddingBottom: 4,
                 borderRadius: '6px',
                 background: `${cosmic.cyan}20`,
                 border: `1px solid ${cosmic.cyan}40`,
               }}
             >
-              <Typography
-                sx={{
+              <span
+                style={{
                   fontFamily: 'var(--font-jetbrains-mono), monospace',
                   fontSize: '0.625rem',
                   color: cosmic.cyan,
@@ -147,24 +142,25 @@ function ProjectCard({ project }: { project: Project }) {
                 }}
               >
                 FEATURED
-              </Typography>
-            </Box>
+              </span>
+            </div>
           )}
-        </Box>
+        </div>
 
         {/* Meta */}
-        <Box sx={{ p: 3, flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: 24, flex: 1, display: 'flex', flexDirection: 'column' }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
-            <Typography
-              sx={{
+            <h3
+              style={{
                 fontFamily: 'var(--font-space-grotesk), sans-serif',
                 fontSize: isFeatured ? '1.25rem' : '1.0625rem',
                 fontWeight: 600,
                 color: cosmic.textPrimary,
+                margin: 0,
               }}
             >
               {project.title}
-            </Typography>
+            </h3>
             <IconButton
               component="a"
               href={project.link}
@@ -180,17 +176,18 @@ function ProjectCard({ project }: { project: Project }) {
             </IconButton>
           </Stack>
 
-          <Typography
-            sx={{
+          <p
+            style={{
               fontSize: '0.8125rem',
               lineHeight: 1.6,
               color: cosmic.textSecondary,
-              mb: 2,
+              marginBottom: 16,
+              marginTop: 0,
               flex: 1,
             }}
           >
             {project.caption}
-          </Typography>
+          </p>
 
           <Stack direction="row" spacing={0.75} sx={{ flexWrap: 'wrap', gap: 0.5 }}>
             {project.tags.map((tag) => (
@@ -209,9 +206,9 @@ function ProjectCard({ project }: { project: Project }) {
               />
             ))}
           </Stack>
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -228,25 +225,34 @@ const ProjectsSection = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box sx={{ textAlign: 'center', mb: 8 }}>
+      <style>{`
+        .project-card-outer:hover {
+          transform: translateY(-4px);
+        }
+        .project-card-outer:hover .project-image {
+          transform: scale(1.03);
+        }
+      `}</style>
+      <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel number="04" label="Projects" />
-        <Typography
-          sx={{
+        <h2
+          style={{
             fontFamily: 'var(--font-space-grotesk), sans-serif',
-            fontSize: { xs: '2rem', md: '2.75rem' },
+            fontSize: '2.75rem',
             fontWeight: 700,
             color: cosmic.textPrimary,
             lineHeight: 1.15,
             letterSpacing: '-0.02em',
-            mb: 1.5,
+            marginBottom: 12,
+            marginTop: 0,
           }}
         >
           {handleTranslation('projectSection.title')}
-        </Typography>
-        <Typography sx={{ fontSize: '1rem', color: cosmic.textSecondary }}>
+        </h2>
+        <p style={{ fontSize: '1rem', color: cosmic.textSecondary, margin: 0 }}>
           {handleTranslation('projectSection.description')}
-        </Typography>
-      </Box>
+        </p>
+      </div>
 
       <Grid ref={gridRef} container spacing={3}>
         {/* Featured projects -- span 2 columns */}

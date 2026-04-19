@@ -39,38 +39,60 @@ function createAmbientSynth(): AmbientEngine {
   const master = ctx.createGain();
   master.gain.value = 0;
 
+  // Root pad (A3) — audible on laptop speakers
   const pad1 = ctx.createOscillator();
   pad1.type = 'sine';
-  pad1.frequency.value = 55;
+  pad1.frequency.value = 220;
   const pad1Gain = ctx.createGain();
-  pad1Gain.gain.value = 0.3;
+  pad1Gain.gain.value = 0.18;
   pad1.connect(pad1Gain).connect(master);
   pad1.start();
 
+  // Fifth (E4) slightly detuned for warmth
   const pad2 = ctx.createOscillator();
   pad2.type = 'sine';
-  pad2.frequency.value = 82.41;
+  pad2.frequency.value = 329.1;
   const pad2Gain = ctx.createGain();
-  pad2Gain.gain.value = 0.2;
+  pad2Gain.gain.value = 0.14;
   pad2.connect(pad2Gain).connect(master);
   pad2.start();
 
+  // Octave (A4) as body
+  const pad3 = ctx.createOscillator();
+  pad3.type = 'triangle';
+  pad3.frequency.value = 440;
+  const pad3Gain = ctx.createGain();
+  pad3Gain.gain.value = 0.08;
+  pad3.connect(pad3Gain).connect(master);
+  pad3.start();
+
+  // Shimmer (A5) with slow LFO for movement
   const shimmer = ctx.createOscillator();
   shimmer.type = 'sine';
-  shimmer.frequency.value = 440;
+  shimmer.frequency.value = 880;
   const shimmerGain = ctx.createGain();
-  shimmerGain.gain.value = 0.03;
+  shimmerGain.gain.value = 0.05;
   shimmer.connect(shimmerGain).connect(master);
   shimmer.start();
 
   const lfo = ctx.createOscillator();
   lfo.type = 'sine';
-  lfo.frequency.value = 0.08;
+  lfo.frequency.value = 0.1;
   const lfoGain = ctx.createGain();
-  lfoGain.gain.value = 30;
+  lfoGain.gain.value = 60;
   lfo.connect(lfoGain).connect(shimmer.frequency);
   lfo.start();
 
+  // Slow volume breathing on pad3 for organic feel
+  const breath = ctx.createOscillator();
+  breath.type = 'sine';
+  breath.frequency.value = 0.07;
+  const breathDepth = ctx.createGain();
+  breathDepth.gain.value = 0.04;
+  breath.connect(breathDepth).connect(pad3Gain.gain);
+  breath.start();
+
+  // Filtered noise for airy texture
   const noiseBuffer = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
   const data = noiseBuffer.getChannelData(0);
   for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
@@ -78,10 +100,11 @@ function createAmbientSynth(): AmbientEngine {
   noise.buffer = noiseBuffer;
   noise.loop = true;
   const noiseFilter = ctx.createBiquadFilter();
-  noiseFilter.type = 'lowpass';
-  noiseFilter.frequency.value = 200;
+  noiseFilter.type = 'bandpass';
+  noiseFilter.frequency.value = 1500;
+  noiseFilter.Q.value = 0.8;
   const noiseGain = ctx.createGain();
-  noiseGain.gain.value = 0.06;
+  noiseGain.gain.value = 0.04;
   noise.connect(noiseFilter).connect(noiseGain).connect(master);
   noise.start();
 
@@ -95,9 +118,11 @@ function createAmbientSynth(): AmbientEngine {
 
 function createPreviewEngine(previewUrl: string): PreviewEngine {
   const ctx = new AudioContext();
-  const audio = new Audio(previewUrl);
+  const audio = new Audio();
   audio.crossOrigin = 'anonymous';
   audio.loop = true;
+  audio.preload = 'auto';
+  audio.src = previewUrl;
 
   const source = ctx.createMediaElementSource(audio);
   const master = ctx.createGain();
@@ -171,7 +196,18 @@ const MusicPlayer = () => {
 
   const buildEngine = useCallback((): Engine => {
     const preview = trackRef.current?.previewUrl;
+    console.log('[MusicPlayer] building engine. previewUrl =', preview);
     return preview ? createPreviewEngine(preview) : createAmbientSynth();
+  }, []);
+
+  const swapToAmbient = useCallback((rampTo: number) => {
+    const old = engineRef.current;
+    if (old) disposeEngine(old);
+    const fresh = createAmbientSynth();
+    engineRef.current = fresh;
+    fresh.ctx.resume().then(() => {
+      fresh.gain.gain.linearRampToValueAtTime(rampTo, fresh.ctx.currentTime + 1);
+    });
   }, []);
 
   // Autoplay on first user interaction
@@ -185,7 +221,16 @@ const MusicPlayer = () => {
       const engine = buildEngine();
       engineRef.current = engine;
       engine.ctx.resume().then(() => {
-        if (engine.kind === 'preview') engine.audio.play().catch(() => null);
+        if (engine.kind === 'preview') {
+          engine.audio.play().catch((err) => {
+            console.warn('[MusicPlayer] preview play failed, falling back to ambient:', err);
+            swapToAmbient(0.4);
+          });
+          engine.audio.addEventListener('error', () => {
+            console.warn('[MusicPlayer] preview audio error, falling back to ambient');
+            swapToAmbient(0.4);
+          });
+        }
         engine.gain.gain.linearRampToValueAtTime(0.4, engine.ctx.currentTime + 2);
         setIsPlaying(true);
       });
@@ -284,6 +329,8 @@ const MusicPlayer = () => {
       ? 'NOW PLAYING'
       : 'LAST PLAYED';
   const title = hasTrack ? track!.title : 'Cosmic Drift';
+  const artist = hasTrack ? track!.artist : null;
+  const albumArt = hasTrack ? track!.albumArt : null;
   const titleHref = hasTrack ? track!.spotifyUrl : null;
   const titleTooltip = hasTrack ? `${track!.title} — ${track!.artist}` : undefined;
 
@@ -309,20 +356,29 @@ const MusicPlayer = () => {
 
       <div className="mp-controls">
         <button
-          className={`mp-play-btn ${isPlaying ? 'mp-play-btn--active' : ''}`}
+          className={`mp-play-btn ${isPlaying ? 'mp-play-btn--active' : ''} ${albumArt ? 'mp-play-btn--has-art' : ''}`}
           onClick={togglePlay}
           aria-label={isPlaying ? 'Pause music' : 'Play music'}
         >
-          {isPlaying ? (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <rect x="3" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
-              <rect x="11" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
-            </svg>
-          ) : (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4 2.5v13l11.5-6.5L4 2.5z" fill={cosmic.cyan} />
-            </svg>
+          {albumArt && (
+            <img
+              src={albumArt}
+              alt=""
+              className="mp-album-art"
+            />
           )}
+          <span className="mp-play-icon">
+            {isPlaying ? (
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="3" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
+                <rect x="11" y="2" width="4" height="14" rx="1.5" fill={cosmic.cyan} />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M4 2.5v13l11.5-6.5L4 2.5z" fill={cosmic.cyan} />
+              </svg>
+            )}
+          </span>
         </button>
 
         <div className="mp-info">
@@ -342,6 +398,7 @@ const MusicPlayer = () => {
               {title}
             </span>
           )}
+          {artist && <span className="mp-artist">{artist}</span>}
         </div>
 
         {/* Toggle visualizer button */}

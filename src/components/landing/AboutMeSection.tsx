@@ -2,9 +2,7 @@
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 
 import SectionLabel from '../cosmic/SectionLabel';
 import GlowCard from '../cosmic/GlowCard';
@@ -33,12 +31,11 @@ const AboutMeSection = () => {
         {/* Left: Avatar card */}
         <Grid item xs={12} md={5} className="about-animate">
           <GlowCard gradient>
-            <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: '12px' }}>
-              <Box
-                component="img"
+            <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '12px' }}>
+              <img
                 src="/assets/images/paisaje.jpg"
                 alt="Cristopher Palacios"
-                sx={{
+                style={{
                   width: '100%',
                   height: 'auto',
                   display: 'block',
@@ -47,8 +44,8 @@ const AboutMeSection = () => {
                 }}
               />
               {/* Glow accent */}
-              <Box
-                sx={{
+              <div
+                style={{
                   position: 'absolute',
                   top: -20,
                   right: -20,
@@ -60,27 +57,29 @@ const AboutMeSection = () => {
                 }}
               />
               {/* Technical overlay */}
-              <Box
-                sx={{
+              <div
+                style={{
                   position: 'absolute',
                   bottom: 16,
                   left: 16,
                   display: 'flex',
-                  gap: 1,
+                  gap: 8,
                 }}
               >
-                <Box
-                  sx={{
-                    px: 1.5,
-                    py: 0.5,
+                <div
+                  style={{
+                    paddingLeft: 12,
+                    paddingRight: 12,
+                    paddingTop: 4,
+                    paddingBottom: 4,
                     borderRadius: '6px',
                     background: 'rgba(8, 12, 26, 0.7)',
                     backdropFilter: 'blur(8px)',
                     border: `1px solid ${cosmic.line}`,
                   }}
                 >
-                  <Typography
-                    sx={{
+                  <span
+                    style={{
                       fontFamily: 'var(--font-jetbrains-mono), monospace',
                       fontSize: '0.625rem',
                       color: cosmic.cyan,
@@ -88,59 +87,63 @@ const AboutMeSection = () => {
                     }}
                   >
                     ID_0421 &middot; CP
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
+                  </span>
+                </div>
+              </div>
+            </div>
           </GlowCard>
         </Grid>
 
         {/* Right: Content */}
         <Grid item xs={12} md={7} className="about-animate">
           <SectionLabel number="01" label="About" />
-          <Typography
-            sx={{
+          <h2
+            style={{
               fontFamily: 'var(--font-space-grotesk), sans-serif',
-              fontSize: { xs: '2rem', md: '2.75rem' },
+              fontSize: '2.75rem',
               fontWeight: 700,
               color: cosmic.textPrimary,
               lineHeight: 1.15,
               letterSpacing: '-0.02em',
-              mb: 3,
+              margin: 0,
+              marginBottom: 24,
             }}
           >
             {handleTranslation('aboutMeSection.title')}
-          </Typography>
-          <Typography
-            sx={{
+          </h2>
+          <p
+            style={{
               fontSize: '1rem',
               lineHeight: 1.7,
               color: cosmic.textSecondary,
-              mb: 4,
+              marginTop: 0,
+              marginBottom: 32,
               maxWidth: 540,
             }}
           >
             {handleTranslation('aboutMeSection.description')}
-          </Typography>
+          </p>
 
           {/* Stat pills */}
-          <Stack direction="row" spacing={2} sx={{ mb: 4, flexWrap: 'wrap', gap: 1.5 }}>
+          <Stack direction="row" spacing={2} style={{ marginBottom: 32, flexWrap: 'wrap', gap: 12 }}>
             {statPills.map((stat) => (
-              <Box
+              <div
                 key={stat.label}
-                sx={{
-                  px: 2.5,
-                  py: 1,
+                style={{
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                  paddingTop: 8,
+                  paddingBottom: 8,
                   borderRadius: '999px',
                   border: `1px solid ${cosmic.line}`,
                   background: 'rgba(22, 32, 64, 0.4)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 1,
+                  gap: 8,
                 }}
               >
-                <Typography
-                  sx={{
+                <span
+                  style={{
                     fontFamily: 'var(--font-jetbrains-mono), monospace',
                     fontSize: '0.875rem',
                     fontWeight: 600,
@@ -151,24 +154,24 @@ const AboutMeSection = () => {
                   }}
                 >
                   {stat.value}
-                </Typography>
-                <Typography
-                  sx={{
+                </span>
+                <span
+                  style={{
                     fontSize: '0.75rem',
                     color: cosmic.textSecondary,
                     letterSpacing: '0.04em',
                   }}
                 >
                   {stat.label}
-                </Typography>
-              </Box>
+                </span>
+              </div>
             ))}
           </Stack>
 
           {/* Currently building indicator */}
           <Stack direction="row" alignItems="center" spacing={1}>
-            <Box
-              sx={{
+            <div
+              style={{
                 width: 8,
                 height: 8,
                 borderRadius: '50%',
@@ -177,8 +180,8 @@ const AboutMeSection = () => {
                 animation: 'cosmic-pulse 2s infinite',
               }}
             />
-            <Typography
-              sx={{
+            <span
+              style={{
                 fontFamily: 'var(--font-jetbrains-mono), monospace',
                 fontSize: '0.6875rem',
                 color: cosmic.textSecondary,
@@ -186,45 +189,47 @@ const AboutMeSection = () => {
               }}
             >
               CURRENTLY BUILDING
-            </Typography>
+            </span>
           </Stack>
         </Grid>
 
         {/* Skill cards below */}
         <Grid item xs={12} md={6} className="about-animate">
           <GlowCard>
-            <Typography
-              sx={{
+            <h3
+              style={{
                 fontFamily: 'var(--font-space-grotesk), sans-serif',
                 fontSize: '1.25rem',
                 fontWeight: 600,
                 color: cosmic.textPrimary,
-                mb: 2,
+                margin: 0,
+                marginBottom: 16,
               }}
             >
               {handleTranslation('aboutMeSection.card1Subtitle')}
-            </Typography>
-            <Typography sx={{ fontSize: '0.875rem', lineHeight: 1.7, color: cosmic.textSecondary }}>
+            </h3>
+            <p style={{ fontSize: '0.875rem', lineHeight: 1.7, color: cosmic.textSecondary, margin: 0 }}>
               {handleTranslation('aboutMeSection.card1Description')}
-            </Typography>
+            </p>
           </GlowCard>
         </Grid>
         <Grid item xs={12} md={6} className="about-animate">
           <GlowCard>
-            <Typography
-              sx={{
+            <h3
+              style={{
                 fontFamily: 'var(--font-space-grotesk), sans-serif',
                 fontSize: '1.25rem',
                 fontWeight: 600,
                 color: cosmic.textPrimary,
-                mb: 2,
+                margin: 0,
+                marginBottom: 16,
               }}
             >
               {handleTranslation('aboutMeSection.card2Subtitle')}
-            </Typography>
-            <Typography sx={{ fontSize: '0.875rem', lineHeight: 1.7, color: cosmic.textSecondary }}>
+            </h3>
+            <p style={{ fontSize: '0.875rem', lineHeight: 1.7, color: cosmic.textSecondary, margin: 0 }}>
               {handleTranslation('aboutMeSection.card2Description')}
-            </Typography>
+            </p>
           </GlowCard>
         </Grid>
       </Grid>
