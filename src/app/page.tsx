@@ -29,7 +29,7 @@ export default function Home() {
         <HeroSection />
       </HeaderWrapper>
 
-      <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={80} />
+      <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={24} />
 
       {/* About Section */}
       <SectionWrapper id="about" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
@@ -38,7 +38,7 @@ export default function Home() {
         <div className="section-content"><AboutMeSection /></div>
       </SectionWrapper>
 
-      <SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={80} />
+      <SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={24} />
 
       {/* Experience Section */}
       <SectionWrapper id="experience" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="section-content"><ExperienceSection /></div>
       </SectionWrapper>
 
-      <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={80} />
+      <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={24} />
 
       {/* Skills Section */}
       <SectionWrapper id="skills" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
@@ -56,7 +56,7 @@ export default function Home() {
         <div className="section-content"><SkillsSection /></div>
       </SectionWrapper>
 
-      <SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={80} />
+      <SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={24} />
 
       {/* Projects Section */}
       <SectionWrapper id="projects" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
@@ -65,7 +65,7 @@ export default function Home() {
         <div className="section-content"><ProjectsSection /></div>
       </SectionWrapper>
 
-      <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={80} />
+      <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={24} />
 
       {/* Contact Section */}
       <SectionWrapper id="contact" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>

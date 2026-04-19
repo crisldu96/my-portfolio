@@ -98,7 +98,7 @@ const AppBar = ({ ...others }) => {
     { href: '/blog', id: 'blog', labelKey: 'appBar.item7', icon: <IconArticle /> },
   ];
 
-  const desktopNavItems = navItems.filter((_, i) => i !== 0);
+  const desktopNavItems = navItems.filter(({ id }) => id !== 'home' && id !== 'contact');
 
   return (
     <ElevationScroll {...others}>
@@ -124,7 +124,7 @@ const AppBar = ({ ...others }) => {
 
           {/* Center: Nav links (desktop) */}
           <div className="appbar-nav-center">
-            {desktopNavItems.filter((_, i) => i !== 4).map(({ href, id, labelKey }) => (
+            {desktopNavItems.map(({ href, id, labelKey }) => (
               <a
                 key={href}
                 href={href}

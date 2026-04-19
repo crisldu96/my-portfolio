@@ -30,6 +30,7 @@
     radial-gradient(1px 1px at 85% 45%, rgba(0,212,255,0.3), transparent);
   background-size: 800px 800px;
   opacity: 0.6;
+  animation: starfield-twinkle 14s ease-in-out infinite alternate;
 }
 
 .dotgrid {
@@ -370,7 +371,7 @@
   gap: 8px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .desktop-right-group {
     display: flex;
   }
@@ -381,7 +382,7 @@
   margin-left: auto;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .mobile-menu-toggle {
     display: none;
   }
@@ -449,13 +450,13 @@
   margin-left: 8px;
   font-family: var(--font-space-grotesk), sans-serif;
   font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: #0B1226;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
   text-decoration: none;
   white-space: nowrap;
   border-radius: 999px;
-  background: linear-gradient(135deg, #3B82F6, #00D4FF);
+  background: linear-gradient(135deg, #1D4ED8, #0EA5E9);
   box-shadow: 0 0 18px rgba(59, 130, 246, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
@@ -533,14 +534,10 @@
   100% { transform: translate3d(-3%, 4%, 0) scale(0.96); }
 }
 
-.starfield {
-  animation: starfield-twinkle 14s ease-in-out infinite alternate;
-}
-
 @keyframes starfield-twinkle {
-  0%   { opacity: 0.45; background-position: 0 0; }
-  50%  { opacity: 0.7;  background-position: 20px 10px; }
-  100% { opacity: 0.5;  background-position: -10px 20px; }
+  0%   { opacity: 0.55; background-position: 0 0; }
+  50%  { opacity: 0.75; background-position: 20px 10px; }
+  100% { opacity: 0.6;  background-position: -10px 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
