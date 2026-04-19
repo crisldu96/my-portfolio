@@ -98,7 +98,9 @@ const AboutMeSection = () => {
         <Grid item xs={12} md={7} className="about-animate">
           <SectionLabel number="01" label="About" />
           <h2 className="section-headline">
-            {handleTranslation('aboutMeSection.title')}
+            <span className="reveal-on-scroll">
+              <span>{handleTranslation('aboutMeSection.title')}</span>
+            </span>
           </h2>
           <p
             style={{

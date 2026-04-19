@@ -1,3 +1,107 @@
+/* Mask reveal on scroll */
+.reveal-on-scroll {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.reveal-on-scroll > * {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+  will-change: transform, opacity;
+}
+
+.reveal-on-scroll.is-revealed > * {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll > * {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}
+
+/* Navbar collapse at hero top */
+.appbar-inner[data-collapsed="true"] .appbar-nav-link,
+.appbar-inner[data-collapsed="true"] .appbar-contact-btn {
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+}
+
+.appbar-nav-link,
+.appbar-contact-btn {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.appbar-inner[data-collapsed="true"] .desktop-right-group {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.desktop-right-group {
+  transition: opacity 0.35s ease;
+}
+
+/* Custom cursor */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  transition: opacity 0.2s ease, width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00D4FF;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+  mix-blend-mode: screen;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.55);
+  background: rgba(0, 212, 255, 0.04);
+}
+
+.cursor-dot--active {
+  width: 4px;
+  height: 4px;
+  background: #F0F4FF;
+}
+
+.cursor-ring--active {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(0, 212, 255, 0.9);
+  background: rgba(0, 212, 255, 0.08);
+}
+
+.cursor-dot--hidden,
+.cursor-ring--hidden {
+  opacity: 0;
+}
+
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
 :root {
   --cosmic-bg-0: #080C1A;
   --cosmic-bg-1: #0D1530;

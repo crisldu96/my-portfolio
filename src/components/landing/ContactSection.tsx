@@ -56,7 +56,9 @@ const ContactSection = () => {
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <SectionLabel number="05" label="Contact" />
           <h2 className="section-headline" style={{ marginBottom: 16 }}>
-            {handleTranslation('contactSection.title')}
+            <span className="reveal-on-scroll">
+              <span>{handleTranslation('contactSection.title')}</span>
+            </span>
           </h2>
           <p
             style={{

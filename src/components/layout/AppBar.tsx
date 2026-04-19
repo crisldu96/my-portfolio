@@ -59,6 +59,7 @@ const AppBar = ({ ...others }) => {
   const { handleTranslation } = useLanguage();
   const [drawerToggle, setDrawerToggle] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [collapsed, setCollapsed] = useState(true);
 
   const drawerToggler = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
@@ -82,6 +83,7 @@ const AppBar = ({ ...others }) => {
           break;
         }
       }
+      setCollapsed(window.scrollY < 120);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -102,8 +104,10 @@ const AppBar = ({ ...others }) => {
 
   return (
     <ElevationScroll {...others}>
-      <MuiAppBar style={{ boxShadow: 'none' }}>
+      <MuiAppBar style={{ boxShadow: 'none' }} data-collapsed={collapsed ? 'true' : 'false'}>
         <div
+          className="appbar-inner"
+          data-collapsed={collapsed ? 'true' : 'false'}
           style={{
             height: 64,
             minHeight: 64,

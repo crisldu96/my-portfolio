@@ -229,7 +229,9 @@ const ProjectsSection = () => {
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel number="04" label="Projects" />
         <h2 className="section-headline" style={{ marginBottom: 12 }}>
-          {handleTranslation('projectSection.title')}
+          <span className="reveal-on-scroll">
+            <span>{handleTranslation('projectSection.title')}</span>
+          </span>
         </h2>
         <p style={{ fontSize: '1rem', color: cosmic.textSecondary, margin: 0 }}>
           {handleTranslation('projectSection.description')}

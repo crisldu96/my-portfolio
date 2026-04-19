@@ -50,7 +50,9 @@ const ExperienceSection = () => {
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel number="02" label="Experience" />
         <h2 className="section-headline" style={{ marginBottom: 0 }}>
-          {handleTranslation('experienceSection.title')}
+          <span className="reveal-on-scroll">
+            <span>{handleTranslation('experienceSection.title')}</span>
+          </span>
         </h2>
       </div>
 

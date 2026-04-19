@@ -9,6 +9,8 @@ import ThemeCustomization from '@/themes';
 import { ConfigProvider } from '@/contexts/ConfigContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import LoadingRemover from '@/components/LoadingRemover';
+import CustomCursor from '@/components/cosmic/CustomCursor';
+import RevealController from '@/components/cosmic/RevealController';
 import Schema from './schema';
 import '@/styles/cosmic.css';
 
@@ -231,6 +233,8 @@ export default function RootLayout(props: { children: React.ReactNode; }) {
             <LanguageProvider>
               <ThemeCustomization>
                 <LoadingRemover />
+                <CustomCursor />
+                <RevealController />
                 {props.children}
               </ThemeCustomization>
             </LanguageProvider>
