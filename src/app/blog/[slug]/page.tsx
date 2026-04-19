@@ -10,7 +10,6 @@ import {
   Chip,
   Container,
   Divider,
-  Link,
   Stack,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -35,14 +34,14 @@ const mdxComponents = {
     <p style={{ color: '#CBD5E1', lineHeight: 1.8, marginBottom: 16 }} {...props} />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <Link
+    <a
       href={props.href}
       target={props.href?.startsWith('http') ? '_blank' : undefined}
       rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-      sx={{ color: '#3B82F6', '&:hover': { color: '#60A5FA' } }}
+      className="blog-mdx-link"
     >
       {props.children}
-    </Link>
+    </a>
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
     <ul style={{ color: '#CBD5E1', paddingLeft: 24, marginBottom: 16 }} {...props} />
@@ -100,7 +99,7 @@ const mdxComponents = {
       {...props}
     />
   ),
-  hr: () => <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', my: 4 }} />,
+  hr: () => <div style={{ marginTop: 32, marginBottom: 32 }}><Divider className="blog-divider" /></div>,
 };
 
 async function MDXContent({ content }: { content: string }) {
@@ -171,22 +170,24 @@ export default async function BlogPostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
       />
       <AppBar />
-      <Container maxWidth="md" sx={{ pt: 14, pb: 12 }}>
-        <NextLink href="/blog" passHref legacyBehavior>
-          <Button
-            component="a"
-            startIcon={<ArrowBackIcon />}
-            sx={{ mb: 5, color: '#94A3B8', textTransform: 'none', pl: 0 }}
-          >
-            Back to Blog
-          </Button>
-        </NextLink>
+      <Container maxWidth="md" style={{ paddingTop: 112, paddingBottom: 96 }}>
+        <div style={{ marginBottom: 40 }}>
+          <NextLink href="/blog" passHref legacyBehavior>
+            <Button
+              component="a"
+              startIcon={<ArrowBackIcon />}
+              className="blog-back-btn"
+            >
+              Back to Blog
+            </Button>
+          </NextLink>
+        </div>
 
         <Stack
           direction="row"
           spacing={2}
           alignItems="center"
-          sx={{ color: '#94A3B8', mb: 2 }}
+          style={{ color: '#94A3B8', marginBottom: 16 }}
         >
           <span style={{ fontSize: '0.75rem' }}>
             {new Date(post.date).toLocaleDateString('en-US', {
@@ -221,37 +222,35 @@ export default async function BlogPostPage({ params }: PageProps) {
         </p>
 
         {post.tags && post.tags.length > 0 && (
-          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 5 }}>
+          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap style={{ marginBottom: 40 }}>
             {post.tags.map((tag) => (
               <Chip
                 key={tag}
                 label={tag}
                 size="small"
-                sx={{
-                  bgcolor: 'rgba(59,130,246,0.1)',
-                  color: '#3B82F6',
-                  border: '1px solid rgba(59,130,246,0.3)',
-                  fontWeight: 500,
-                  fontSize: '0.7rem',
-                }}
+                className="blog-tag-chip"
               />
             ))}
           </Stack>
         )}
 
-        <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mb: 5 }} />
+        <div style={{ marginBottom: 40 }}>
+          <Divider className="blog-divider" />
+        </div>
 
         <div>
           <MDXContent content={post.content} />
         </div>
 
-        <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mt: 8, mb: 5 }} />
+        <div style={{ marginTop: 64, marginBottom: 40 }}>
+          <Divider className="blog-divider" />
+        </div>
 
         <NextLink href="/blog" passHref legacyBehavior>
           <Button
             component="a"
             startIcon={<ArrowBackIcon />}
-            sx={{ color: '#94A3B8', textTransform: 'none', pl: 0 }}
+            className="blog-back-btn"
           >
             Back to Blog
           </Button>

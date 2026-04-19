@@ -3,14 +3,12 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
-  Box,
   Button,
   Chip,
   Container,
   Grid,
   Link,
   Stack,
-  Typography,
 } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -46,11 +44,12 @@ export default function About() {
   const isDark = theme.palette.mode === 'dark';
 
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         minHeight: '100vh',
-        bgcolor: isDark ? 'background.default' : '#FAFAFA',
-        py: { xs: 8, md: 12 },
+        backgroundColor: isDark ? undefined : '#FAFAFA',
+        paddingTop: 96,
+        paddingBottom: 96,
       }}
     >
       <Container maxWidth="md">
@@ -59,7 +58,8 @@ export default function About() {
             <Button
               component="a"
               startIcon={<ArrowBackIcon />}
-              sx={{ mb: 4, color: 'text.secondary' }}
+              className="about-back-btn"
+              style={{ marginBottom: 32 }}
             >
               Back to Home
             </Button>
@@ -68,104 +68,100 @@ export default function About() {
 
         {/* Hero */}
         <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }}>
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: { xs: '2.5rem', md: '3.5rem' },
+          <h1
+            style={{
+              fontSize: '3.5rem',
               fontWeight: 700,
               fontFamily: 'var(--font-archivo), sans-serif',
               color: isDark ? '#FAFAFA' : '#18181B',
-              mb: 1,
+              margin: 0,
+              marginBottom: 8,
             }}
           >
             Cristopher Palacios
-          </Typography>
-          <Typography
-            variant="h4"
-            sx={{
+          </h1>
+          <h4
+            style={{
               fontWeight: 500,
               color: theme.palette.primary.main,
-              mb: 4,
+              margin: 0,
+              marginBottom: 32,
             }}
           >
             Full Stack Developer
-          </Typography>
+          </h4>
         </motion.div>
 
         {/* Bio */}
         <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }}>
-          <Stack spacing={2.5} sx={{ mb: 6 }}>
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: { xs: '1rem', md: '1.125rem' },
+          <Stack spacing={2.5} style={{ marginBottom: 48 }}>
+            <p
+              style={{
+                fontSize: '1.125rem',
                 lineHeight: 1.8,
                 color: isDark ? '#bdc8f0' : '#3F3F46',
                 textAlign: 'justify',
+                margin: 0,
               }}
             >
               I am a Full Stack Developer with a strong focus on building scalable,
               maintainable web applications. My experience spans the entire development
               lifecycle -- from designing intuitive user interfaces with React and Next.js
               to architecting robust backend services with Node.js and cloud infrastructure.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: { xs: '1rem', md: '1.125rem' },
+            </p>
+            <p
+              style={{
+                fontSize: '1.125rem',
                 lineHeight: 1.8,
                 color: isDark ? '#bdc8f0' : '#3F3F46',
                 textAlign: 'justify',
+                margin: 0,
               }}
             >
               I thrive in environments where clean code, thoughtful architecture, and
               continuous improvement are valued. Whether it is optimizing database queries,
               implementing CI/CD pipelines, or crafting pixel-perfect interfaces, I bring
               the same level of care and precision to every layer of the stack.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: { xs: '1rem', md: '1.125rem' },
+            </p>
+            <p
+              style={{
+                fontSize: '1.125rem',
                 lineHeight: 1.8,
                 color: isDark ? '#bdc8f0' : '#3F3F46',
                 textAlign: 'justify',
+                margin: 0,
               }}
             >
               Currently based in Ecuador, I work with teams and clients across the globe,
               turning complex business requirements into elegant, production-ready solutions.
-            </Typography>
+            </p>
           </Stack>
         </motion.div>
 
         {/* Tech Stack */}
         <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.3 }}>
-          <Typography
-            variant="h5"
-            sx={{
+          <h5
+            style={{
               fontWeight: 600,
               fontFamily: 'var(--font-archivo), sans-serif',
               color: isDark ? '#FAFAFA' : '#18181B',
-              mb: 2,
+              margin: 0,
+              marginBottom: 16,
             }}
           >
             Tech Stack
-          </Typography>
-          <Grid container spacing={1} sx={{ mb: 6 }}>
+          </h5>
+          <Grid container spacing={1} style={{ marginBottom: 48 }}>
             {techStack.map((tech) => (
               <Grid item key={tech}>
                 <Chip
                   label={tech}
                   variant="outlined"
-                  sx={{
+                  className="about-tech-chip"
+                  style={{
                     borderColor: isDark ? '#3F3F46' : '#E4E4E7',
                     color: isDark ? '#bdc8f0' : '#3F3F46',
                     fontWeight: 500,
-                    '&:hover': {
-                      bgcolor: theme.palette.primary.main,
-                      color: '#fff',
-                      borderColor: theme.palette.primary.main,
-                    },
                     transition: 'all 0.2s ease-in-out',
                   }}
                 />
@@ -184,12 +180,13 @@ export default function About() {
               variant="contained"
               size="large"
               startIcon={<LinkedInIcon />}
-              sx={{
-                bgcolor: '#2563EB',
-                '&:hover': { bgcolor: '#1d4ed8' },
+              className="about-linkedin-btn"
+              style={{
+                backgroundColor: '#2563EB',
                 textTransform: 'none',
                 fontWeight: 600,
-                px: 4,
+                paddingLeft: 32,
+                paddingRight: 32,
               }}
             >
               Connect on LinkedIn
@@ -199,16 +196,14 @@ export default function About() {
                 component="a"
                 variant="outlined"
                 size="large"
-                sx={{
+                className="about-contact-btn"
+                style={{
                   borderColor: isDark ? '#3F3F46' : '#E4E4E7',
                   color: isDark ? '#FAFAFA' : '#18181B',
                   textTransform: 'none',
                   fontWeight: 600,
-                  px: 4,
-                  '&:hover': {
-                    borderColor: '#2563EB',
-                    color: '#2563EB',
-                  },
+                  paddingLeft: 32,
+                  paddingRight: 32,
                 }}
               >
                 Get in Touch
@@ -217,6 +212,6 @@ export default function About() {
           </Stack>
         </motion.div>
       </Container>
-    </Box>
+    </div>
   );
 }

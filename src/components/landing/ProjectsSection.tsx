@@ -149,7 +149,7 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Meta */}
         <div style={{ padding: 24, flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" style={{ marginBottom: 8 }}>
             <h3
               style={{
                 fontFamily: 'var(--font-space-grotesk), sans-serif',
@@ -162,14 +162,14 @@ function ProjectCard({ project }: { project: Project }) {
               {project.title}
             </h3>
             <IconButton
+              className="project-link-btn"
               component="a"
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
               size="small"
-              sx={{
+              style={{
                 color: cosmic.textSecondary,
-                '&:hover': { color: cosmic.cyan },
               }}
             >
               <IconExternalLink size={16} />
@@ -189,20 +189,13 @@ function ProjectCard({ project }: { project: Project }) {
             {project.caption}
           </p>
 
-          <Stack direction="row" spacing={0.75} sx={{ flexWrap: 'wrap', gap: 0.5 }}>
+          <Stack direction="row" spacing={0.75} style={{ flexWrap: 'wrap', gap: 4 }}>
             {project.tags.map((tag) => (
               <Chip
                 key={tag}
                 label={tag}
                 size="small"
-                sx={{
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  fontSize: '0.6875rem',
-                  height: 24,
-                  background: 'rgba(22, 32, 64, 0.6)',
-                  border: `1px solid ${cosmic.line}`,
-                  color: cosmic.textSecondary,
-                }}
+                className="project-tag-chip"
               />
             ))}
           </Stack>

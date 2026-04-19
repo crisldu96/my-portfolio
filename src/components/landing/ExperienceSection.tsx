@@ -1,8 +1,6 @@
 'use client';
 
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
 
 import SectionLabel from '../cosmic/SectionLabel';
 import GlowCard from '../cosmic/GlowCard';
@@ -51,18 +49,19 @@ const ExperienceSection = () => {
     <Container maxWidth="lg">
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel number="02" label="Experience" />
-        <Typography
-          sx={{
+        <h2
+          style={{
             fontFamily: 'var(--font-space-grotesk), sans-serif',
-            fontSize: { xs: '2rem', md: '2.75rem' },
+            fontSize: '2.75rem',
             fontWeight: 700,
             color: cosmic.textPrimary,
             lineHeight: 1.15,
             letterSpacing: '-0.02em',
+            margin: 0,
           }}
         >
           {handleTranslation('experienceSection.title')}
-        </Typography>
+        </h2>
       </div>
 
       <div ref={timelineRef} style={{ position: 'relative', maxWidth: 800, margin: '0 auto' }}>
@@ -90,39 +89,42 @@ const ExperienceSection = () => {
               </div>
 
               <GlowCard>
-                <Typography
-                  sx={{
+                <h3
+                  style={{
                     fontFamily: 'var(--font-space-grotesk), sans-serif',
                     fontSize: '1.25rem',
                     fontWeight: 600,
                     color: cosmic.textPrimary,
-                    mb: 0.5,
+                    marginBottom: 4,
+                    marginTop: 0,
                   }}
                 >
                   {handleTranslation(entry.role)}
-                </Typography>
-                <Typography
-                  sx={{
+                </h3>
+                <p
+                  style={{
                     fontSize: '0.8125rem',
                     color: cosmic.cyan,
                     fontFamily: 'var(--font-jetbrains-mono), monospace',
                     letterSpacing: '0.04em',
-                    mb: 2,
+                    marginBottom: 16,
+                    marginTop: 0,
                   }}
                 >
                   @ {entry.company}
-                </Typography>
+                </p>
 
-                <Typography
-                  sx={{
+                <p
+                  style={{
                     fontSize: '0.875rem',
                     lineHeight: 1.7,
                     color: cosmic.textSecondary,
-                    mb: 2.5,
+                    marginBottom: 20,
+                    marginTop: 0,
                   }}
                 >
                   {handleTranslation(entry.descriptionKey)}
-                </Typography>
+                </p>
 
                 {/* Achievement bullets */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
@@ -148,19 +150,12 @@ const ExperienceSection = () => {
                 {/* Tech stack chips */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {entry.tech.map((t) => (
-                    <Chip
+                    <span
                       key={t}
-                      label={t}
-                      size="small"
-                      sx={{
-                        fontFamily: 'var(--font-jetbrains-mono), monospace',
-                        fontSize: '0.6875rem',
-                        height: 26,
-                        background: 'rgba(22, 32, 64, 0.6)',
-                        border: `1px solid ${cosmic.line}`,
-                        color: cosmic.textSecondary,
-                      }}
-                    />
+                      className="experience-tech-chip"
+                    >
+                      {t}
+                    </span>
                   ))}
                 </div>
               </GlowCard>

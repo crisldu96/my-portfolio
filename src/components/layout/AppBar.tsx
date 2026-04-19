@@ -102,89 +102,44 @@ const AppBar = ({ ...others }) => {
 
   return (
     <ElevationScroll {...others}>
-      <MuiAppBar sx={{ boxShadow: 'none' }}>
-        <Toolbar
-          sx={{
+      <MuiAppBar style={{ boxShadow: 'none' }}>
+        <div
+          style={{
             height: 64,
-            minHeight: '64px !important',
-            px: { xs: 2, md: 4 },
+            minHeight: 64,
+            paddingLeft: 32,
+            paddingRight: 32,
             maxWidth: 1280,
             width: '100%',
-            mx: 'auto',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
           {/* Left: CP Monogram */}
-          <Link href="/" sx={{ textDecoration: 'none', display: 'flex' }}>
+          <a href="/" style={{ textDecoration: 'none', display: 'flex' }}>
             <CpMonogram />
-          </Link>
+          </a>
 
           {/* Center: Nav links (desktop) */}
-          <Stack
-            direction="row"
-            spacing={0.5}
-            sx={{
-              display: { xs: 'none', sm: 'flex' },
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <div className="appbar-nav-center">
             {desktopNavItems.filter((_, i) => i !== 4).map(({ href, id, labelKey }) => (
-              <Button
+              <a
                 key={href}
-                component={Link}
                 href={href}
-                sx={{
-                  color: activeSection === id ? cosmic.textPrimary : cosmic.textSecondary,
-                  fontSize: '0.8125rem',
-                  fontWeight: 500,
-                  letterSpacing: '0.01em',
-                  textTransform: 'none',
-                  px: 1.5,
-                  py: 0.75,
-                  minWidth: 'auto',
-                  position: 'relative',
-                  borderRadius: '8px',
-                  transition: 'color 0.2s ease',
-                  '&:hover': {
-                    color: cosmic.textPrimary,
-                    background: 'rgba(59, 130, 246, 0.06)',
-                  },
-                  '&::after': activeSection === id ? {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: 2,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: 4,
-                    height: 4,
-                    borderRadius: '50%',
-                    background: cosmic.cyan,
-                    boxShadow: `0 0 6px ${cosmic.cyan}`,
-                  } : {},
-                }}
+                className={`appbar-nav-link${activeSection === id ? ' appbar-nav-link--active' : ''}`}
               >
                 {handleTranslation(labelKey)}
-              </Button>
+              </a>
             ))}
-            <Button
-              component={Link}
+            <a
               href="/#contact"
-              variant="contained"
-              color="primary"
-              disableElevation
-              sx={{
-                ml: 1,
-                fontSize: '0.8125rem',
-                fontWeight: 500,
-                textTransform: 'none',
-                px: 2.5,
-                py: 0.75,
-              }}
+              className="appbar-contact-btn"
             >
               {handleTranslation('appBar.item6')}
-            </Button>
-          </Stack>
+            </a>
+          </div>
 
           {/* Right: Language toggle + social icons (desktop) */}
           <div className="desktop-right-group">
@@ -195,29 +150,16 @@ const AppBar = ({ ...others }) => {
                 { icon: <IconBrandLinkedin size={16} />, href: 'https://www.linkedin.com/in/cristopher-palacios-791704160', label: 'LinkedIn' },
                 { icon: <IconBrandDeno size={16} />, href: 'https://dev.to/cristopherpalacios', label: 'Dev.to' },
               ].map(({ icon, href, label }) => (
-                <IconButton
+                <a
                   key={label}
-                  component="a"
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  size="small"
-                  sx={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: '8px',
-                    border: `1px solid ${cosmic.line}`,
-                    color: cosmic.textSecondary,
-                    background: 'rgba(22, 32, 64, 0.4)',
-                    '&:hover': {
-                      color: cosmic.cyan,
-                      borderColor: cosmic.cyan,
-                    },
-                  }}
+                  className="appbar-social-icon"
                 >
                   {icon}
-                </IconButton>
+                </a>
               ))}
             </div>
           </div>
@@ -241,24 +183,23 @@ const AppBar = ({ ...others }) => {
                 >
                   <List>
                     {navItems.map(({ href, labelKey, icon }) => (
-                      <Link key={href} style={{ textDecoration: 'none' }} href={href}>
-                        <ListItemButton component="a">
-                          <ListItemIcon sx={{ color: cosmic.textSecondary, minWidth: 36 }}>
+                      <a key={href} style={{ textDecoration: 'none' }} href={href}>
+                        <ListItemButton component="span">
+                          <div style={{ color: cosmic.textSecondary, minWidth: 36, display: 'flex' }}>
                             {icon}
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={handleTranslation(labelKey)}
-                            sx={{ '& .MuiTypography-root': { color: cosmic.textPrimary } }}
-                          />
+                          </div>
+                          <span style={{ color: cosmic.textPrimary }}>
+                            {handleTranslation(labelKey)}
+                          </span>
                         </ListItemButton>
-                      </Link>
+                      </a>
                     ))}
                   </List>
                 </div>
               )}
             </Drawer>
           </div>
-        </Toolbar>
+        </div>
       </MuiAppBar>
     </ElevationScroll>
   );

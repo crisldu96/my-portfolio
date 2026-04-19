@@ -1,8 +1,6 @@
 'use client';
 
 import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 
 import { IconBrandLinkedin, IconBrandGithub, IconBrandDeno, IconMail } from '@tabler/icons-react';
@@ -89,11 +87,11 @@ const ContactSection = () => {
         <Grid ref={gridRef} container spacing={2}>
           {contactMethods.map((method) => (
             <Grid key={method.id} item xs={12} sm={6} className="contact-card">
-              <Link
+              <a
                 href={method.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                sx={{ textDecoration: 'none', display: 'block' }}
+                style={{ textDecoration: 'none', display: 'block' }}
               >
                 <GlowCard
                   style={{
@@ -120,7 +118,7 @@ const ContactSection = () => {
                   >
                     {method.icon}
                   </div>
-                  <Stack spacing={0.25}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <span
                       style={{
                         fontFamily: 'var(--font-space-grotesk), sans-serif',
@@ -141,9 +139,9 @@ const ContactSection = () => {
                     >
                       {method.handle}
                     </span>
-                  </Stack>
+                  </div>
                 </GlowCard>
-              </Link>
+              </a>
             </Grid>
           ))}
         </Grid>

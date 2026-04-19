@@ -1,17 +1,10 @@
 import React from 'react';
 import { Metadata } from 'next';
 import NextLink from 'next/link';
-import {
-  Card,
-  CardContent,
-  Chip,
-  Container,
-  Divider,
-  Stack,
-} from '@mui/material';
 
 import AppBar from '@/components/layout/AppBar';
 import { getAllPosts } from '@/lib/blog';
+import '@/styles/cosmic.css';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -33,7 +26,7 @@ export default function BlogPage() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0D1229' }}>
       <AppBar />
-      <Container maxWidth="md" sx={{ pt: 14, pb: 10 }}>
+      <div style={{ maxWidth: 900, margin: '0 auto', paddingTop: 112, paddingBottom: 80, paddingLeft: 24, paddingRight: 24 }}>
         <h2
           style={{
             fontWeight: 700,
@@ -52,29 +45,21 @@ export default function BlogPage() {
         {posts.length === 0 ? (
           <p style={{ color: '#94A3B8' }}>No posts published yet.</p>
         ) : (
-          <Stack spacing={3}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             {posts.map((post, index) => (
               <React.Fragment key={post.slug}>
                 <NextLink href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
-                  <Card
-                    sx={{
-                      bgcolor: '#111936',
-                      border: '1px solid rgba(59,130,246,0.15)',
-                      borderRadius: 2,
-                      cursor: 'pointer',
-                      transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                      '&:hover': {
-                        borderColor: 'rgba(59,130,246,0.5)',
-                        boxShadow: '0 4px 24px rgba(59,130,246,0.08)',
-                      },
-                    }}
-                  >
-                    <CardContent sx={{ p: 3 }}>
-                      <Stack
-                        direction="row"
-                        spacing={2}
-                        sx={{ mb: 1, color: '#94A3B8' }}
-                        alignItems="center"
+                  <div className="blog-list-card">
+                    <div style={{ padding: 24 }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 16,
+                          marginBottom: 8,
+                          color: '#94A3B8',
+                          alignItems: 'center',
+                        }}
                       >
                         <span style={{ fontSize: '0.75rem' }}>
                           {new Date(post.date).toLocaleDateString('en-US', {
@@ -85,7 +70,7 @@ export default function BlogPage() {
                         </span>
                         <span style={{ fontSize: '0.75rem' }}>·</span>
                         <span style={{ fontSize: '0.75rem' }}>{post.readingTime}</span>
-                      </Stack>
+                      </div>
 
                       <h5
                         style={{
@@ -107,34 +92,35 @@ export default function BlogPage() {
                       </p>
 
                       {post.tags && post.tags.length > 0 && (
-                        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                        <div style={{ display: 'flex', flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
                           {post.tags.map((tag) => (
-                            <Chip
+                            <span
                               key={tag}
-                              label={tag}
-                              size="small"
-                              sx={{
-                                bgcolor: 'rgba(59,130,246,0.1)',
-                                color: '#3B82F6',
-                                border: '1px solid rgba(59,130,246,0.3)',
-                                fontWeight: 500,
-                                fontSize: '0.7rem',
+                              className="blog-list-chip"
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                height: 24,
+                                padding: '0 10px',
+                                borderRadius: 16,
                               }}
-                            />
+                            >
+                              {tag}
+                            </span>
                           ))}
-                        </Stack>
+                        </div>
                       )}
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 </NextLink>
                 {index < posts.length - 1 && (
-                  <Divider sx={{ borderColor: 'rgba(255,255,255,0.06)' }} />
+                  <hr className="blog-list-divider" style={{ border: 'none', borderTop: '1px solid', margin: 0 }} />
                 )}
               </React.Fragment>
             ))}
-          </Stack>
+          </div>
         )}
-      </Container>
+      </div>
     </div>
   );
 }
