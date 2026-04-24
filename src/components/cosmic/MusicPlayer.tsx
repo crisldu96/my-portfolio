@@ -227,13 +227,16 @@ const MusicPlayer = () => {
     }
   }, [canUseSpotify, trackId]);
 
-  // When a new track arrives with a different ID, reload the embed
+  // Eagerly mount Spotify controller as soon as we have a track,
+  // so the play button is responsive on first click.
   useEffect(() => {
-    if (!trackId) return;
-    if (embedCtrlRef.current?.loadUri) {
+    if (!canUseSpotify || !trackId) return;
+    if (!embedCtrlRef.current) {
+      ensureSpotifyEmbed();
+    } else if (embedCtrlRef.current.loadUri) {
       embedCtrlRef.current.loadUri(`spotify:track:${trackId}`);
     }
-  }, [trackId]);
+  }, [canUseSpotify, trackId, ensureSpotifyEmbed]);
 
   const updateBars = useCallback(() => {
     const e = ambientRef.current;
@@ -341,7 +344,6 @@ const MusicPlayer = () => {
           className={`mp-play-btn ${isPlaying ? 'mp-play-btn--active' : ''}`}
           onClick={togglePlay}
           aria-label={isPlaying ? 'Pause music' : 'Play music'}
-          disabled={canUseSpotify && !embedReady && !embedCtrlRef.current}
         >
           {isPlaying ? (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">

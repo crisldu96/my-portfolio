@@ -50,15 +50,15 @@ const fragmentShader = /* glsl */ `
     return v;
   }
 
-  // palette — cosmic violet / cyan / blue
+  // palette — tuned to cosmic tokens (bg0 #080C1A, bg1 #0D1530, blue #3B82F6, cyan #00D4FF)
   vec3 palette(float t) {
-    vec3 c0 = vec3(0.04, 0.06, 0.14);  // deep space
-    vec3 c1 = vec3(0.23, 0.12, 0.56);  // violet
-    vec3 c2 = vec3(0.00, 0.83, 1.00);  // cyan
-    vec3 c3 = vec3(0.48, 0.23, 0.91);  // magenta-violet
+    vec3 c0 = vec3(0.031, 0.047, 0.102); // bg0
+    vec3 c1 = vec3(0.051, 0.082, 0.188); // bg1 / navy
+    vec3 c2 = vec3(0.09, 0.15, 0.32);    // deep blue
+    vec3 c3 = vec3(0.18, 0.34, 0.58);    // muted cosmic blue
     vec3 col = mix(c0, c1, smoothstep(0.0, 0.35, t));
-    col = mix(col, c3, smoothstep(0.35, 0.7, t));
-    col = mix(col, c2, smoothstep(0.7, 1.0, t));
+    col = mix(col, c2, smoothstep(0.35, 0.7, t));
+    col = mix(col, c3, smoothstep(0.7, 1.0, t));
     return col;
   }
 
@@ -82,8 +82,8 @@ const fragmentShader = /* glsl */ `
 
     float n = fbm(p * 1.4 + uTime * 0.05);
 
-    // radial mouse glow
-    float glow = exp(-md * 2.3) * 0.55;
+    // radial mouse glow (subtle)
+    float glow = exp(-md * 2.6) * 0.28;
 
     // click ripples
     float ripple = 0.0;
@@ -100,19 +100,16 @@ const fragmentShader = /* glsl */ `
       ripple += ring * fade * 0.9;
     }
 
-    float v = n + glow + ripple * 0.7;
-
-    // subtle scanline shimmer
-    float scan = sin(vUv.y * uResolution.y * 0.9 + uTime * 2.0) * 0.015;
+    float v = n * 0.75 + glow + ripple * 0.5;
 
     vec3 col = palette(clamp(v, 0.0, 1.0));
-    col += ripple * vec3(0.2, 0.7, 1.0);
-    col += glow  * vec3(0.3, 0.5, 1.0);
-    col += scan;
+    // accents stay tied to the cosmic token family (cyan / blue)
+    col += ripple * vec3(0.06, 0.28, 0.48);
+    col += glow  * vec3(0.04, 0.18, 0.32);
 
-    // vignette
-    float vig = smoothstep(1.4, 0.2, length(uv));
-    col *= mix(0.35, 1.0, vig);
+    // vignette toward bg0 so section edges blend with neighbors
+    float vig = smoothstep(1.6, 0.15, length(uv));
+    col = mix(vec3(0.031, 0.047, 0.102), col, vig);
 
     gl_FragColor = vec4(col, 1.0);
   }
