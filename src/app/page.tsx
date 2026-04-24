@@ -18,6 +18,7 @@ import AboutMeSection from '@/components/landing/AboutMeSection';
 import dynamic from 'next/dynamic';
 
 const AboutBackground3D = dynamic(() => import('@/components/cosmic/AboutBackground3D'), { ssr: false });
+const ExperienceBackground3D = dynamic(() => import('@/components/cosmic/ExperienceBackground3D'), { ssr: false });
 import ContactSection from '@/components/landing/ContactSection';
 import { cosmic } from '@/themes/cosmicTokens';
 
@@ -46,8 +47,7 @@ export default function Home() {
 
       {/* Experience Section */}
       <SectionWrapper id="experience" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
-        <div className="cosmic-ambient" data-accent="violet" />
-        <div className="starfield" />
+        <ExperienceBackground3D />
         <div className="section-content"><ExperienceSection /></div>
       </SectionWrapper>
 
