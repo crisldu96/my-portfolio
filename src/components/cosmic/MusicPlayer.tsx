@@ -210,7 +210,7 @@ const MusicPlayer = () => {
         if (!embedHostRef.current) return resolve(null);
         api.createController(
           embedHostRef.current,
-          { uri: `spotify:track:${trackId}`, width: '100%', height: 80 },
+          { uri: `spotify:track:${trackId}`, width: '100%', height: 80},
           (ctrl) => {
             embedCtrlRef.current = ctrl;
             ctrl.addListener?.('playback_update', (e) => {
@@ -404,35 +404,37 @@ const MusicPlayer = () => {
           </button>
         )}
 
-        <div className="mp-volume-group">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="mp-volume-icon">
-            <path
-              d="M11 5L6 9H2v6h4l5 4V5z"
-              stroke={cosmic.textSecondary}
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {volume > 0 && (
+        {!canUseSpotify && (
+          <div className="mp-volume-group">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="mp-volume-icon">
               <path
-                d="M15.54 8.46a5 5 0 010 7.07"
+                d="M11 5L6 9H2v6h4l5 4V5z"
                 stroke={cosmic.textSecondary}
                 strokeWidth="2"
                 strokeLinecap="round"
+                strokeLinejoin="round"
               />
-            )}
-          </svg>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolume}
-            className="mp-volume"
-            aria-label="Volume"
-          />
-        </div>
+              {volume > 0 && (
+                <path
+                  d="M15.54 8.46a5 5 0 010 7.07"
+                  stroke={cosmic.textSecondary}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolume}
+              className="mp-volume"
+              aria-label="Volume"
+            />
+          </div>
+        )}
       </div>
 
       {canUseSpotify && (
