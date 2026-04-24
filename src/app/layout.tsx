@@ -11,6 +11,8 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import LoadingRemover from '@/components/LoadingRemover';
 import CustomCursor from '@/components/cosmic/CustomCursor';
 import RevealController from '@/components/cosmic/RevealController';
+import LenisProvider from '@/components/cosmic/LenisProvider';
+import PageFold from '@/components/cosmic/PageFold';
 import Schema from './schema';
 import '@/styles/cosmic.css';
 
@@ -235,6 +237,8 @@ export default function RootLayout(props: { children: React.ReactNode; }) {
                 <LoadingRemover />
                 <CustomCursor />
                 <RevealController />
+                <LenisProvider />
+                <PageFold />
                 {props.children}
               </ThemeCustomization>
             </LanguageProvider>
