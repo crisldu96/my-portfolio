@@ -25,6 +25,7 @@ interface SpotifyEmbedController {
   destroy?: () => void;
   addListener?: (type: string, cb: (e: { data?: { isPaused?: boolean } }) => void) => void;
   loadUri?: (uri: string) => void;
+  setVolume?: (percent: number) => void;
 }
 
 interface SpotifyIFrameAPI {
@@ -297,13 +298,24 @@ const MusicPlayer = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const val = parseFloat(e.target.value);
       setVolume(val);
+      if (canUseSpotify) {
+        embedCtrlRef.current?.setVolume?.(Math.round(val * 100));
+        return;
+      }
       const engine = ambientRef.current;
-      if (engine && isPlaying && !canUseSpotify) {
+      if (engine && isPlaying) {
         engine.gain.gain.linearRampToValueAtTime(val, engine.ctx.currentTime + 0.1);
       }
     },
     [isPlaying, canUseSpotify],
   );
+
+  // Apply stored volume to Spotify embed when it becomes ready
+  useEffect(() => {
+    if (canUseSpotify && embedReady) {
+      embedCtrlRef.current?.setVolume?.(Math.round(volume * 100));
+    }
+  }, [canUseSpotify, embedReady, volume]);
 
   const label = !hasRealTrack
     ? 'AMBIENT'
@@ -392,46 +404,43 @@ const MusicPlayer = () => {
           </button>
         )}
 
-        {!canUseSpotify && (
-          <div className="mp-volume-group">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="mp-volume-icon">
+        <div className="mp-volume-group">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="mp-volume-icon">
+            <path
+              d="M11 5L6 9H2v6h4l5 4V5z"
+              stroke={cosmic.textSecondary}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {volume > 0 && (
               <path
-                d="M11 5L6 9H2v6h4l5 4V5z"
+                d="M15.54 8.46a5 5 0 010 7.07"
                 stroke={cosmic.textSecondary}
                 strokeWidth="2"
                 strokeLinecap="round"
-                strokeLinejoin="round"
               />
-              {volume > 0 && (
-                <path
-                  d="M15.54 8.46a5 5 0 010 7.07"
-                  stroke={cosmic.textSecondary}
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              )}
-            </svg>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={handleVolume}
-              className="mp-volume"
-              aria-label="Volume"
-            />
-          </div>
-        )}
+            )}
+          </svg>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={handleVolume}
+            className="mp-volume"
+            aria-label="Volume"
+          />
+        </div>
       </div>
 
       {canUseSpotify && (
         <div
           ref={embedHostRef}
           className="mp-spotify-embed"
-          onMouseEnter={() => {
-            if (!embedCtrlRef.current) ensureSpotifyEmbed();
-          }}
+          aria-hidden="true"
+          style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none', overflow: 'hidden' }}
         />
       )}
     </div>

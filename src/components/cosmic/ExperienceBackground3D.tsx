@@ -50,15 +50,17 @@ const fragmentShader = /* glsl */ `
     return v;
   }
 
-  // palette — tuned to cosmic tokens (bg0 #080C1A, bg1 #0D1530, blue #3B82F6, cyan #00D4FF)
+  // palette — cosmic tokens family with clearer steps for visible contrast
   vec3 palette(float t) {
     vec3 c0 = vec3(0.031, 0.047, 0.102); // bg0
-    vec3 c1 = vec3(0.051, 0.082, 0.188); // bg1 / navy
-    vec3 c2 = vec3(0.09, 0.15, 0.32);    // deep blue
-    vec3 c3 = vec3(0.18, 0.34, 0.58);    // muted cosmic blue
-    vec3 col = mix(c0, c1, smoothstep(0.0, 0.35, t));
-    col = mix(col, c2, smoothstep(0.35, 0.7, t));
-    col = mix(col, c3, smoothstep(0.7, 1.0, t));
+    vec3 c1 = vec3(0.071, 0.118, 0.255); // deep navy
+    vec3 c2 = vec3(0.16, 0.30, 0.60);    // cosmic blue
+    vec3 c3 = vec3(0.28, 0.55, 0.95);    // bright cosmic blue (#3B82F6-ish)
+    vec3 c4 = vec3(0.35, 0.72, 1.00);    // cyan-lean highlight
+    vec3 col = mix(c0, c1, smoothstep(0.0, 0.3, t));
+    col = mix(col, c2, smoothstep(0.3, 0.6, t));
+    col = mix(col, c3, smoothstep(0.6, 0.85, t));
+    col = mix(col, c4, smoothstep(0.85, 1.0, t));
     return col;
   }
 
@@ -82,8 +84,8 @@ const fragmentShader = /* glsl */ `
 
     float n = fbm(p * 1.4 + uTime * 0.05);
 
-    // radial mouse glow (subtle)
-    float glow = exp(-md * 2.6) * 0.28;
+    // radial mouse glow
+    float glow = exp(-md * 2.0) * 0.45;
 
     // click ripples
     float ripple = 0.0;
@@ -100,12 +102,12 @@ const fragmentShader = /* glsl */ `
       ripple += ring * fade * 0.9;
     }
 
-    float v = n * 0.75 + glow + ripple * 0.5;
+    float v = n * 0.85 + glow + ripple * 0.7;
 
     vec3 col = palette(clamp(v, 0.0, 1.0));
-    // accents stay tied to the cosmic token family (cyan / blue)
-    col += ripple * vec3(0.06, 0.28, 0.48);
-    col += glow  * vec3(0.04, 0.18, 0.32);
+    // accents in-family: cosmic blue + cyan highlight on ripple crest
+    col += ripple * vec3(0.12, 0.45, 0.75);
+    col += glow  * vec3(0.08, 0.28, 0.48);
 
     // vignette toward bg0 so section edges blend with neighbors
     float vig = smoothstep(1.6, 0.15, length(uv));
