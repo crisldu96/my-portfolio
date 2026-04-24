@@ -132,16 +132,20 @@ const AppBar = ({ ...others }) => {
               <a
                 key={href}
                 href={href}
-                className={`appbar-nav-link${activeSection === id ? ' appbar-nav-link--active' : ''}`}
+                className={`appbar-nav-link${activeSection === id ? ' appbar-nav-link--active' : ''}${id === 'blog' ? ' appbar-nav-link--blog' : ''}`}
+                suppressHydrationWarning
               >
-                {handleTranslation(labelKey)}
+                {id === 'blog' && <span className="appbar-nav-link__pulse" aria-hidden="true" />}
+                <span suppressHydrationWarning>{handleTranslation(labelKey)}</span>
+                {id === 'blog' && <span className="appbar-nav-link__badge">NEW</span>}
               </a>
             ))}
             <a
               href="/#contact"
               className="appbar-contact-btn"
+              suppressHydrationWarning
             >
-              {handleTranslation('appBar.item6')}
+              <span suppressHydrationWarning>{handleTranslation('appBar.item6')}</span>
             </a>
           </div>
 
@@ -186,14 +190,15 @@ const AppBar = ({ ...others }) => {
                   onKeyDown={drawerToggler(false)}
                 >
                   <List>
-                    {navItems.map(({ href, labelKey, icon }) => (
-                      <a key={href} style={{ textDecoration: 'none' }} href={href}>
+                    {navItems.map(({ href, id, labelKey, icon }) => (
+                      <a key={href} style={{ textDecoration: 'none' }} href={href} suppressHydrationWarning>
                         <ListItemButton component="span">
-                          <div style={{ color: cosmic.textSecondary, minWidth: 36, display: 'flex' }}>
+                          <div style={{ color: id === 'blog' ? cosmic.cyan : cosmic.textSecondary, minWidth: 36, display: 'flex' }}>
                             {icon}
                           </div>
-                          <span style={{ color: cosmic.textPrimary }}>
+                          <span style={{ color: cosmic.textPrimary, display: 'inline-flex', alignItems: 'center', gap: 8 }} suppressHydrationWarning>
                             {handleTranslation(labelKey)}
+                            {id === 'blog' && <span className="appbar-nav-link__badge">NEW</span>}
                           </span>
                         </ListItemButton>
                       </a>

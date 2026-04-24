@@ -1,10 +1,13 @@
 'use client';
 
 import Link from '@mui/material/Link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import PillButton from '../PillButton';
 import { cosmic } from '@/themes/cosmicTokens';
 import useLanguage from '@/hooks/useLanguage';
+
+const HeroCoin = dynamic(() => import('./HeroCoin'), { ssr: false });
 
 const fadeUp = (delay: number) => ({
   hidden: { opacity: 0, y: 30 },
@@ -121,6 +124,15 @@ export default function HeroOverlay() {
             </PillButton>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          style={{ pointerEvents: 'auto' }}
+        >
+          <HeroCoin />
+        </motion.div>
       </div>
 
       {/* Bottom: scroll indicator */}

@@ -15,6 +15,9 @@ import ExperienceSection from '@/components/landing/ExperienceSection';
 import SkillsSection from '@/components/landing/SkillsSection';
 import ProjectsSection from '@/components/landing/ProjectsSection';
 import AboutMeSection from '@/components/landing/AboutMeSection';
+import dynamic from 'next/dynamic';
+
+const AboutBackground3D = dynamic(() => import('@/components/cosmic/AboutBackground3D'), { ssr: false });
 import ContactSection from '@/components/landing/ContactSection';
 import { cosmic } from '@/themes/cosmicTokens';
 
@@ -34,6 +37,7 @@ export default function Home() {
       {/* About Section */}
       <SectionWrapper id="about" sx={{ bgcolor: cosmic.bg1, position: 'relative', overflow: 'hidden' }}>
         <div className="cosmic-ambient" data-accent="cyan" />
+        <AboutBackground3D />
         <div className="dotgrid" />
         <div className="section-content"><AboutMeSection /></div>
       </SectionWrapper>

@@ -70,6 +70,62 @@
   }
 }
 
+/* Blog nav link highlight */
+.appbar-nav-link--blog {
+  position: relative;
+  color: #F0F4FF;
+  padding-left: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.appbar-nav-link--blog:hover {
+  color: #00D4FF;
+}
+
+.appbar-nav-link__pulse {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00D4FF;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
+}
+
+.appbar-nav-link__pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.8);
+  animation: blog-pulse 1.8s ease-out infinite;
+}
+
+@keyframes blog-pulse {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.appbar-nav-link__badge {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #00D4FF, #3B82F6);
+  color: #080C1A;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .appbar-nav-link__pulse::after { animation: none; }
+}
+
 /* Navbar collapse at hero top */
 .appbar-inner[data-collapsed="true"] .appbar-nav-link,
 .appbar-inner[data-collapsed="true"] .appbar-contact-btn {
@@ -352,6 +408,50 @@
 @media (max-width: 899px) {
   .hero-description {
     margin: 0 auto;
+  }
+}
+
+/* About section 3D backdrop */
+.about-bg-3d {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-bg-3d { display: none; }
+}
+
+/* Hero coin (3D) */
+.hero-coin {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(200px, 22vw, 340px);
+  height: clamp(200px, 22vw, 340px);
+  pointer-events: auto;
+  cursor: grab;
+  filter: drop-shadow(0 20px 60px rgba(0, 212, 255, 0.25));
+}
+
+.hero-coin:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 1024px) {
+  .hero-coin {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin: 16px auto 0;
+    width: clamp(180px, 48vw, 260px);
+    height: clamp(180px, 48vw, 260px);
   }
 }
 
