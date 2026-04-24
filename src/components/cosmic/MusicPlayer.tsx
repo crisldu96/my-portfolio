@@ -210,7 +210,7 @@ const MusicPlayer = () => {
         if (!embedHostRef.current) return resolve(null);
         api.createController(
           embedHostRef.current,
-          { uri: `spotify:track:${trackId}`, width: '100%', height: 80},
+          { uri: `spotify:track:${trackId}`, width: '100%', height: 0},
           (ctrl) => {
             embedCtrlRef.current = ctrl;
             ctrl.addListener?.('playback_update', (e) => {
