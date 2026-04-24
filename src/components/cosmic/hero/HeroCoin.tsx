@@ -2,7 +2,7 @@
 
 import { useRef, useState, Suspense } from 'react';
 import { Canvas, useFrame, useLoader, ThreeEvent } from '@react-three/fiber';
-import { TextureLoader, Mesh, Group, RepeatWrapping } from 'three';
+import { TextureLoader, Group, RepeatWrapping } from 'three';
 
 interface CoinProps {
   frontSrc: string;
@@ -102,7 +102,7 @@ export default function HeroCoin({ frontSrc = '/assets/images/header-1.png', bac
   return (
     <div className="hero-coin" aria-label="Cristopher Palacios — clic o arrastra para girar">
       <Canvas
-        camera={{ position: [0, 0, 3.2], fov: 35 }}
+        camera={{ position: [0, 0, 4.2], fov: 32 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
       >
