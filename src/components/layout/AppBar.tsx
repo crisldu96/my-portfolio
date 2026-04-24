@@ -29,6 +29,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LanguageSwitch from '../LanguageSwitch';
 import useConfig from '@/hooks/useConfig';
 import useLanguage from '@/hooks/useLanguage';
+import { social } from '@/config/social';
 
 interface ElevationScrollProps {
   children: ReactElement;
@@ -154,9 +155,9 @@ const AppBar = ({ ...others }) => {
             <LanguageSwitch checked={locale === 'es'} onChange={handleChange} size="small" />
             <div style={{ display: 'flex', gap: 4, marginLeft: 8 }}>
               {[
-                { icon: <IconBrandGithub size={16} />, href: 'https://github.com/CristopherPalacios', label: 'GitHub' },
-                { icon: <IconBrandLinkedin size={16} />, href: 'https://www.linkedin.com/in/cristopher-palacios-791704160', label: 'LinkedIn' },
-                { icon: <IconBrandDeno size={16} />, href: 'https://dev.to/cristopherpalacios', label: 'Dev.to' },
+                { icon: <IconBrandGithub size={16} />, href: social.github, label: 'GitHub' },
+                { icon: <IconBrandLinkedin size={16} />, href: social.linkedin, label: 'LinkedIn' },
+                { icon: <IconBrandDeno size={16} />, href: social.devto, label: 'Dev.to' },
               ].map(({ icon, href, label }) => (
                 <a
                   key={label}

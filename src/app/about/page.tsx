@@ -14,6 +14,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
+import { social } from '@/config/social';
 
 const techStack = [
   'React',
@@ -175,7 +176,7 @@ export default function About() {
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <Button
               component={Link}
-              href="https://ec.linkedin.com/in/cristopher-palacios-791704160"
+              href={social.linkedin}
               target="_blank"
               variant="contained"
               size="large"

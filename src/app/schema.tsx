@@ -1,3 +1,5 @@
+import { social } from '@/config/social';
+
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -7,10 +9,7 @@ const personSchema = {
   description:
     'Full Stack and AI Developer from Ecuador specializing in React, Next.js, Node.js, TypeScript, and AI-powered applications.',
   image: 'https://cristopherpalacios.dev/assets/images/og-image.png',
-  sameAs: [
-    'https://ec.linkedin.com/in/cristopher-palacios-791704160',
-    'https://github.com/CristopherPalacios',
-  ],
+  sameAs: [social.linkedin, social.github, social.devto],
   knowsAbout: [
     'React',
     'Next.js',

@@ -13,6 +13,7 @@ import CustomCursor from '@/components/cosmic/CustomCursor';
 import RevealController from '@/components/cosmic/RevealController';
 import LenisProvider from '@/components/cosmic/LenisProvider';
 import PageFold from '@/components/cosmic/PageFold';
+import { social } from '@/config/social';
 import Schema from './schema';
 import '@/styles/cosmic.css';
 
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: 'Cristopher Palacios',
-      url: 'https://ec.linkedin.com/in/cristopher-palacios-791704160',
+      url: social.linkedin,
     },
   ],
   creator: 'Cristopher Palacios',

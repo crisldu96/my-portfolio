@@ -17,6 +17,7 @@ import TechDark from '../../assets/images/landing/tech-dark.svg';
 import developer from '../../assets/images/landing/header-1.png';
 import ImageBackground from '../ImageBackground';
 import useLanguage from '@/hooks/useLanguage';
+import { social } from '@/config/social';
 
 // styles
 const HeaderImage = styled('img')({
@@ -81,7 +82,7 @@ const HeaderSection = () => {
                     <AnimateButton>
                       <Button
                         component={Link}
-                        href="https://ec.linkedin.com/in/cristopher-palacios-791704160"
+                        href={social.linkedin}
                         target="_blank"
                         size="large"
                         variant="contained"

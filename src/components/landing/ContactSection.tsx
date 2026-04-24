@@ -9,35 +9,36 @@ import GlowCard from '../cosmic/GlowCard';
 import { cosmic } from '@/themes/cosmicTokens';
 import useLanguage from '@/hooks/useLanguage';
 import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
+import { social, socialHandles, mailto } from '@/config/social';
 
 const contactMethods = [
   {
     id: 'linkedin',
     title: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/cristopher-palacios-791704160',
+    url: social.linkedin,
     icon: <IconBrandLinkedin size={24} />,
-    handle: '@cristopher-palacios',
+    handle: socialHandles.linkedin,
   },
   {
     id: 'github',
     title: 'GitHub',
-    url: 'https://github.com/CristopherPalacios',
+    url: social.github,
     icon: <IconBrandGithub size={24} />,
-    handle: '@CristopherPalacios',
+    handle: socialHandles.github,
   },
   {
     id: 'dev',
     title: 'Dev Community',
-    url: 'https://dev.to/cristopher_palacios_4a172',
+    url: social.devto,
     icon: <IconBrandDeno size={24} />,
-    handle: '@cristopher_palacios',
+    handle: socialHandles.devto,
   },
   {
     id: 'email',
     title: 'Email',
-    url: 'mailto:cristopher.palacios@actuaria.com',
+    url: mailto,
     icon: <IconMail size={24} />,
-    handle: 'cristopher.palacios@actuaria.com',
+    handle: social.email,
   },
 ];
 
