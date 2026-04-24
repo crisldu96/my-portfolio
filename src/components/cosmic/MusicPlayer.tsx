@@ -442,7 +442,6 @@ const MusicPlayer = () => {
           ref={embedHostRef}
           className="mp-spotify-embed"
           aria-hidden="true"
-          style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none', overflow: 'hidden' }}
         />
       )}
     </div>
