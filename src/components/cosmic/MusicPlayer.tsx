@@ -5,6 +5,7 @@ import { cosmic } from '@/themes/cosmicTokens';
 
 const BAR_COUNT = 16;
 const POLL_INTERVAL_MS = 60_000;
+const SPOTIFY_IFRAME_API_SRC = 'https://open.spotify.com/embed/iframe-api/v1';
 
 interface NowPlaying {
   isPlaying: boolean;
@@ -17,29 +18,70 @@ interface NowPlaying {
   isFallback: boolean;
 }
 
+interface SpotifyEmbedController {
+  play: () => void;
+  pause: () => void;
+  togglePlay: () => void;
+  destroy?: () => void;
+  addListener?: (type: string, cb: (e: { data?: { isPaused?: boolean } }) => void) => void;
+  loadUri?: (uri: string) => void;
+}
+
+interface SpotifyIFrameAPI {
+  createController: (
+    el: HTMLElement,
+    options: { uri?: string; width?: string | number; height?: string | number },
+    cb: (ctrl: SpotifyEmbedController) => void,
+  ) => void;
+}
+
+declare global {
+  interface Window {
+    onSpotifyIframeApiReady?: (api: SpotifyIFrameAPI) => void;
+    __spotifyIframeApi?: SpotifyIFrameAPI | Promise<SpotifyIFrameAPI>;
+  }
+}
+
+function loadSpotifyIframeApi(): Promise<SpotifyIFrameAPI> {
+  if (typeof window === 'undefined') return Promise.reject(new Error('no window'));
+  if (window.__spotifyIframeApi && 'createController' in window.__spotifyIframeApi) {
+    return Promise.resolve(window.__spotifyIframeApi as SpotifyIFrameAPI);
+  }
+  if (window.__spotifyIframeApi) return window.__spotifyIframeApi as Promise<SpotifyIFrameAPI>;
+
+  const p = new Promise<SpotifyIFrameAPI>((resolve) => {
+    window.onSpotifyIframeApiReady = (api) => {
+      window.__spotifyIframeApi = api;
+      resolve(api);
+    };
+    if (!document.querySelector(`script[src="${SPOTIFY_IFRAME_API_SRC}"]`)) {
+      const s = document.createElement('script');
+      s.src = SPOTIFY_IFRAME_API_SRC;
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  });
+  window.__spotifyIframeApi = p;
+  return p;
+}
+
+function extractTrackId(url: string | null): string | null {
+  if (!url) return null;
+  const m = url.match(/track\/([a-zA-Z0-9]+)/);
+  return m ? m[1] : null;
+}
+
 interface AmbientEngine {
-  kind: 'ambient';
   ctx: AudioContext;
   gain: GainNode;
   analyser: AnalyserNode;
 }
-
-interface PreviewEngine {
-  kind: 'preview';
-  ctx: AudioContext;
-  gain: GainNode;
-  analyser: AnalyserNode;
-  audio: HTMLAudioElement;
-}
-
-type Engine = AmbientEngine | PreviewEngine;
 
 function createAmbientSynth(): AmbientEngine {
   const ctx = new AudioContext();
   const master = ctx.createGain();
   master.gain.value = 0;
 
-  // Root pad (A3) — audible on laptop speakers
   const pad1 = ctx.createOscillator();
   pad1.type = 'sine';
   pad1.frequency.value = 220;
@@ -48,7 +90,6 @@ function createAmbientSynth(): AmbientEngine {
   pad1.connect(pad1Gain).connect(master);
   pad1.start();
 
-  // Fifth (E4) slightly detuned for warmth
   const pad2 = ctx.createOscillator();
   pad2.type = 'sine';
   pad2.frequency.value = 329.1;
@@ -57,7 +98,6 @@ function createAmbientSynth(): AmbientEngine {
   pad2.connect(pad2Gain).connect(master);
   pad2.start();
 
-  // Octave (A4) as body
   const pad3 = ctx.createOscillator();
   pad3.type = 'triangle';
   pad3.frequency.value = 440;
@@ -66,7 +106,6 @@ function createAmbientSynth(): AmbientEngine {
   pad3.connect(pad3Gain).connect(master);
   pad3.start();
 
-  // Shimmer (A5) with slow LFO for movement
   const shimmer = ctx.createOscillator();
   shimmer.type = 'sine';
   shimmer.frequency.value = 880;
@@ -83,16 +122,6 @@ function createAmbientSynth(): AmbientEngine {
   lfo.connect(lfoGain).connect(shimmer.frequency);
   lfo.start();
 
-  // Slow volume breathing on pad3 for organic feel
-  const breath = ctx.createOscillator();
-  breath.type = 'sine';
-  breath.frequency.value = 0.07;
-  const breathDepth = ctx.createGain();
-  breathDepth.gain.value = 0.04;
-  breath.connect(breathDepth).connect(pad3Gain.gain);
-  breath.start();
-
-  // Filtered noise for airy texture
   const noiseBuffer = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
   const data = noiseBuffer.getChannelData(0);
   for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
@@ -102,7 +131,6 @@ function createAmbientSynth(): AmbientEngine {
   const noiseFilter = ctx.createBiquadFilter();
   noiseFilter.type = 'bandpass';
   noiseFilter.frequency.value = 1500;
-  noiseFilter.Q.value = 0.8;
   const noiseGain = ctx.createGain();
   noiseGain.gain.value = 0.04;
   noise.connect(noiseFilter).connect(noiseGain).connect(master);
@@ -113,58 +141,33 @@ function createAmbientSynth(): AmbientEngine {
   master.connect(analyser);
   analyser.connect(ctx.destination);
 
-  return { kind: 'ambient', ctx, gain: master, analyser };
+  return { ctx, gain: master, analyser };
 }
 
-function createPreviewEngine(previewUrl: string): PreviewEngine {
-  const ctx = new AudioContext();
-  const audio = new Audio();
-  audio.crossOrigin = 'anonymous';
-  audio.loop = true;
-  audio.preload = 'auto';
-  audio.src = previewUrl;
-
-  const source = ctx.createMediaElementSource(audio);
-  const master = ctx.createGain();
-  master.gain.value = 0;
-  const analyser = ctx.createAnalyser();
-  analyser.fftSize = 64;
-
-  source.connect(master);
-  master.connect(analyser);
-  analyser.connect(ctx.destination);
-
-  return { kind: 'preview', ctx, gain: master, analyser, audio };
-}
-
-function disposeEngine(e: Engine) {
-  if (e.kind === 'preview') {
-    e.audio.pause();
-    e.audio.src = '';
-  }
+function disposeAmbient(e: AmbientEngine) {
   e.ctx.close().catch(() => null);
 }
 
 const MusicPlayer = () => {
-  const engineRef = useRef<Engine | null>(null);
+  const ambientRef = useRef<AmbientEngine | null>(null);
+  const embedHostRef = useRef<HTMLDivElement | null>(null);
+  const embedCtrlRef = useRef<SpotifyEmbedController | null>(null);
   const animFrameRef = useRef<number>(0);
-  const hasAutoPlayed = useRef(false);
-  const trackRef = useRef<NowPlaying | null>(null);
 
   const [track, setTrack] = useState<NowPlaying | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.4);
   const [bars, setBars] = useState<number[]>(new Array(BAR_COUNT).fill(0));
   const [showBars, setShowBars] = useState(true);
+  const [embedReady, setEmbedReady] = useState(false);
   const [sway, setSway] = useState(0);
 
-  useEffect(() => {
-    trackRef.current = track;
-  }, [track]);
+  const trackId = extractTrackId(track?.spotifyUrl ?? null);
+  const hasRealTrack = Boolean(track && !track.isFallback);
+  const canUseSpotify = hasRealTrack && Boolean(trackId);
 
   useEffect(() => {
     let cancelled = false;
-
     const load = async () => {
       try {
         const res = await fetch('/api/spotify/now-playing');
@@ -175,7 +178,6 @@ const MusicPlayer = () => {
         // keep previous state
       }
     };
-
     load();
     const id = setInterval(load, POLL_INTERVAL_MS);
     return () => {
@@ -187,76 +189,54 @@ const MusicPlayer = () => {
   useEffect(() => {
     return () => {
       cancelAnimationFrame(animFrameRef.current);
-      if (engineRef.current) {
-        disposeEngine(engineRef.current);
-        engineRef.current = null;
+      if (ambientRef.current) {
+        disposeAmbient(ambientRef.current);
+        ambientRef.current = null;
+      }
+      if (embedCtrlRef.current?.destroy) {
+        embedCtrlRef.current.destroy();
+        embedCtrlRef.current = null;
       }
     };
   }, []);
 
-  const buildEngine = useCallback((): Engine => {
-    const preview = trackRef.current?.previewUrl;
-    console.log('[MusicPlayer] building engine. previewUrl =', preview);
-    return preview ? createPreviewEngine(preview) : createAmbientSynth();
-  }, []);
-
-  const swapToAmbient = useCallback((rampTo: number) => {
-    const old = engineRef.current;
-    if (old) disposeEngine(old);
-    const fresh = createAmbientSynth();
-    engineRef.current = fresh;
-    fresh.ctx.resume().then(() => {
-      fresh.gain.gain.linearRampToValueAtTime(rampTo, fresh.ctx.currentTime + 1);
-    });
-  }, []);
-
-  // Autoplay on first user interaction
-  useEffect(() => {
-    if (hasAutoPlayed.current) return;
-
-    const startAudio = () => {
-      if (hasAutoPlayed.current) return;
-      hasAutoPlayed.current = true;
-
-      const engine = buildEngine();
-      engineRef.current = engine;
-      engine.ctx.resume().then(() => {
-        if (engine.kind === 'preview') {
-          engine.audio.play().catch((err) => {
-            console.warn('[MusicPlayer] preview play failed, falling back to ambient:', err);
-            swapToAmbient(0.4);
-          });
-          engine.audio.addEventListener('error', () => {
-            console.warn('[MusicPlayer] preview audio error, falling back to ambient');
-            swapToAmbient(0.4);
-          });
-        }
-        engine.gain.gain.linearRampToValueAtTime(0.4, engine.ctx.currentTime + 2);
-        setIsPlaying(true);
+  const ensureSpotifyEmbed = useCallback(async () => {
+    if (!canUseSpotify || !trackId || !embedHostRef.current) return null;
+    if (embedCtrlRef.current) return embedCtrlRef.current;
+    try {
+      const api = await loadSpotifyIframeApi();
+      return await new Promise<SpotifyEmbedController | null>((resolve) => {
+        if (!embedHostRef.current) return resolve(null);
+        api.createController(
+          embedHostRef.current,
+          { uri: `spotify:track:${trackId}`, width: '100%', height: 80 },
+          (ctrl) => {
+            embedCtrlRef.current = ctrl;
+            ctrl.addListener?.('playback_update', (e) => {
+              if (e?.data && typeof e.data.isPaused === 'boolean') {
+                setIsPlaying(!e.data.isPaused);
+              }
+            });
+            ctrl.addListener?.('ready', () => setEmbedReady(true));
+            resolve(ctrl);
+          },
+        );
       });
+    } catch {
+      return null;
+    }
+  }, [canUseSpotify, trackId]);
 
-      window.removeEventListener('click', startAudio);
-      window.removeEventListener('scroll', startAudio);
-      window.removeEventListener('keydown', startAudio);
-      window.removeEventListener('touchstart', startAudio);
-    };
+  // When a new track arrives with a different ID, reload the embed
+  useEffect(() => {
+    if (!trackId) return;
+    if (embedCtrlRef.current?.loadUri) {
+      embedCtrlRef.current.loadUri(`spotify:track:${trackId}`);
+    }
+  }, [trackId]);
 
-    window.addEventListener('click', startAudio, { once: true });
-    window.addEventListener('scroll', startAudio, { once: true });
-    window.addEventListener('keydown', startAudio, { once: true });
-    window.addEventListener('touchstart', startAudio, { once: true });
-
-    return () => {
-      window.removeEventListener('click', startAudio);
-      window.removeEventListener('scroll', startAudio);
-      window.removeEventListener('keydown', startAudio);
-      window.removeEventListener('touchstart', startAudio);
-    };
-  }, [buildEngine]);
-
-  // Visualizer + sway update loop
   const updateBars = useCallback(() => {
-    const e = engineRef.current;
+    const e = ambientRef.current;
     if (!e) return;
     const dataArray = new Uint8Array(e.analyser.frequencyBinCount);
     e.analyser.getByteFrequencyData(dataArray);
@@ -274,9 +254,8 @@ const MusicPlayer = () => {
     animFrameRef.current = requestAnimationFrame(updateBars);
   }, []);
 
-  // Start/stop visualizer when play state changes
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && !canUseSpotify) {
       updateBars();
     } else {
       cancelAnimationFrame(animFrameRef.current);
@@ -284,85 +263,85 @@ const MusicPlayer = () => {
       setSway(0);
     }
     return () => cancelAnimationFrame(animFrameRef.current);
-  }, [isPlaying, updateBars]);
+  }, [isPlaying, canUseSpotify, updateBars]);
 
-  const togglePlay = useCallback(() => {
+  const togglePlay = useCallback(async () => {
+    if (canUseSpotify) {
+      const ctrl = embedCtrlRef.current ?? (await ensureSpotifyEmbed());
+      if (!ctrl) return;
+      ctrl.togglePlay();
+      return;
+    }
+
     if (isPlaying) {
-      const e = engineRef.current;
+      const e = ambientRef.current;
       if (e) {
         e.gain.gain.linearRampToValueAtTime(0, e.ctx.currentTime + 0.5);
-        setTimeout(() => {
-          if (e.kind === 'preview') e.audio.pause();
-          e.ctx.suspend();
-        }, 550);
+        setTimeout(() => e.ctx.suspend(), 550);
       }
       setIsPlaying(false);
     } else {
-      if (!engineRef.current) {
-        engineRef.current = buildEngine();
-      }
-      const e = engineRef.current;
+      if (!ambientRef.current) ambientRef.current = createAmbientSynth();
+      const e = ambientRef.current;
       e.ctx.resume().then(() => {
-        if (e.kind === 'preview') e.audio.play().catch(() => null);
         e.gain.gain.linearRampToValueAtTime(volume, e.ctx.currentTime + 1);
       });
       setIsPlaying(true);
     }
-  }, [isPlaying, volume, buildEngine]);
+  }, [canUseSpotify, ensureSpotifyEmbed, isPlaying, volume]);
 
   const handleVolume = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const val = parseFloat(e.target.value);
       setVolume(val);
-      const engine = engineRef.current;
-      if (engine && isPlaying) {
+      const engine = ambientRef.current;
+      if (engine && isPlaying && !canUseSpotify) {
         engine.gain.gain.linearRampToValueAtTime(val, engine.ctx.currentTime + 0.1);
       }
     },
-    [isPlaying],
+    [isPlaying, canUseSpotify],
   );
 
-  const hasTrack = Boolean(track && !track.isFallback);
-  const label = !hasTrack
+  const label = !hasRealTrack
     ? 'AMBIENT'
     : track!.isPlaying
       ? 'NOW PLAYING'
       : 'LAST PLAYED';
-  const title = hasTrack ? track!.title : 'Cosmic Drift';
-  const artist = hasTrack ? track!.artist : null;
-  const albumArt = hasTrack ? track!.albumArt : null;
-  const titleHref = hasTrack ? track!.spotifyUrl : null;
-  const titleTooltip = hasTrack ? `${track!.title} — ${track!.artist}` : undefined;
+  const title = hasRealTrack ? track!.title : 'Cosmic Drift';
+  const artist = hasRealTrack ? track!.artist : null;
+  const albumArt = hasRealTrack ? track!.albumArt : null;
+  const titleHref = hasRealTrack ? track!.spotifyUrl : null;
+  const titleTooltip = hasRealTrack ? `${track!.title} — ${track!.artist}` : undefined;
 
   return (
     <div
       className={`music-player-v2 ${isPlaying ? 'mp-playing' : ''}`}
-      style={{ transform: isPlaying ? `translateX(${sway}px)` : undefined }}
+      style={{ transform: isPlaying && !canUseSpotify ? `translateX(${sway}px)` : undefined }}
     >
-      {/* Collapsible visualizer */}
-      <div className={`mp-visualizer ${showBars ? '' : 'mp-visualizer--hidden'}`}>
-        {bars.map((h, i) => (
-          <div
-            key={i}
-            className="mp-bar"
-            style={{
-              height: isPlaying ? `${Math.max(3, h * 32)}px` : '3px',
-              opacity: isPlaying ? 0.4 + h * 0.6 : 0.2,
-              background: `linear-gradient(to top, ${cosmic.cyan}, ${cosmic.blue})`,
-            }}
-          />
-        ))}
-      </div>
+      {!canUseSpotify && (
+        <div className={`mp-visualizer ${showBars ? '' : 'mp-visualizer--hidden'}`}>
+          {bars.map((h, i) => (
+            <div
+              key={i}
+              className="mp-bar"
+              style={{
+                height: isPlaying ? `${Math.max(3, h * 32)}px` : '3px',
+                opacity: isPlaying ? 0.4 + h * 0.6 : 0.2,
+                background: `linear-gradient(to top, ${cosmic.cyan}, ${cosmic.blue})`,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="mp-controls">
-        {albumArt && (
-          <img src={albumArt} alt="" className="mp-album-art" />
-        )}
+        {albumArt && <img src={albumArt} alt="" className="mp-album-art" />}
 
         <button
           className={`mp-play-btn ${isPlaying ? 'mp-play-btn--active' : ''}`}
           onClick={togglePlay}
           aria-label={isPlaying ? 'Pause music' : 'Play music'}
+          disabled={canUseSpotify && !embedReady && !embedCtrlRef.current}
         >
           {isPlaying ? (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -396,50 +375,63 @@ const MusicPlayer = () => {
           {artist && <span className="mp-artist">{artist}</span>}
         </div>
 
-        {/* Toggle visualizer button */}
-        <button
-          className="mp-toggle-bars"
-          onClick={() => setShowBars((prev) => !prev)}
-          aria-label={showBars ? 'Hide visualizer' : 'Show visualizer'}
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <rect x="1" y="6" width="2" height="4" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
-            <rect x="5" y="3" width="2" height="10" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
-            <rect x="9" y="5" width="2" height="6" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
-            <rect x="13" y="4" width="2" height="8" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
-          </svg>
-        </button>
+        {!canUseSpotify && (
+          <button
+            className="mp-toggle-bars"
+            onClick={() => setShowBars((prev) => !prev)}
+            aria-label={showBars ? 'Hide visualizer' : 'Show visualizer'}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="6" width="2" height="4" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
+              <rect x="5" y="3" width="2" height="10" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
+              <rect x="9" y="5" width="2" height="6" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
+              <rect x="13" y="4" width="2" height="8" rx="1" fill={showBars ? cosmic.cyan : cosmic.textSecondary} />
+            </svg>
+          </button>
+        )}
 
-        <div className="mp-volume-group">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="mp-volume-icon">
-            <path
-              d="M11 5L6 9H2v6h4l5 4V5z"
-              stroke={cosmic.textSecondary}
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {volume > 0 && (
+        {!canUseSpotify && (
+          <div className="mp-volume-group">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="mp-volume-icon">
               <path
-                d="M15.54 8.46a5 5 0 010 7.07"
+                d="M11 5L6 9H2v6h4l5 4V5z"
                 stroke={cosmic.textSecondary}
                 strokeWidth="2"
                 strokeLinecap="round"
+                strokeLinejoin="round"
               />
-            )}
-          </svg>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolume}
-            className="mp-volume"
-            aria-label="Volume"
-          />
-        </div>
+              {volume > 0 && (
+                <path
+                  d="M15.54 8.46a5 5 0 010 7.07"
+                  stroke={cosmic.textSecondary}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolume}
+              className="mp-volume"
+              aria-label="Volume"
+            />
+          </div>
+        )}
       </div>
+
+      {canUseSpotify && (
+        <div
+          ref={embedHostRef}
+          className="mp-spotify-embed"
+          onMouseEnter={() => {
+            if (!embedCtrlRef.current) ensureSpotifyEmbed();
+          }}
+        />
+      )}
     </div>
   );
 };
