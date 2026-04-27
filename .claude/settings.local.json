@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npm cache:*)",
       "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
-      "mcp__plugin_context-mode_context-mode__ctx_execute"
+      "mcp__plugin_context-mode_context-mode__ctx_execute",
+      "Skill(schedule)",
+      "Skill(schedule:*)",
+      "mcp__plugin_vercel_vercel__list_teams"
     ]
   }
 }
