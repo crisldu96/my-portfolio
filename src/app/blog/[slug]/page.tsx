@@ -1,20 +1,19 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import NextLink from 'next/link';
 import { evaluate } from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 import {
-  Button,
   Chip,
   Container,
   Divider,
   Stack,
 } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import AppBar from '@/components/layout/AppBar';
+import BlogBackButton from '@/components/blog/BlogBackButton';
+import BlogPostDate from '@/components/blog/BlogPostDate';
 import { getAllSlugs, getPostBySlug } from '@/lib/blog';
 
 const mdxComponents = {
@@ -172,15 +171,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <AppBar />
       <Container maxWidth="md" style={{ paddingTop: 112, paddingBottom: 96 }}>
         <div style={{ marginBottom: 40 }}>
-          <NextLink href="/blog" passHref legacyBehavior>
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon />}
-              className="blog-back-btn"
-            >
-              Back to Blog
-            </Button>
-          </NextLink>
+          <BlogBackButton />
         </div>
 
         <Stack
@@ -189,13 +180,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           alignItems="center"
           style={{ color: '#94A3B8', marginBottom: 16 }}
         >
-          <span style={{ fontSize: '0.75rem' }}>
-            {new Date(post.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </span>
+          <BlogPostDate date={post.date} />
           <span style={{ fontSize: '0.75rem' }}>·</span>
           <span style={{ fontSize: '0.75rem' }}>{post.readingTime}</span>
           <span style={{ fontSize: '0.75rem' }}>·</span>
@@ -246,15 +231,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <Divider className="blog-divider" />
         </div>
 
-        <NextLink href="/blog" passHref legacyBehavior>
-          <Button
-            component="a"
-            startIcon={<ArrowBackIcon />}
-            className="blog-back-btn"
-          >
-            Back to Blog
-          </Button>
-        </NextLink>
+        <BlogBackButton />
       </Container>
     </div>
   );

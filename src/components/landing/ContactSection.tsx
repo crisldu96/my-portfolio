@@ -11,39 +11,38 @@ import useLanguage from '@/hooks/useLanguage';
 import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 import { social, socialHandles, mailto } from '@/config/social';
 
-const contactMethods = [
-  {
-    id: 'linkedin',
-    title: 'LinkedIn',
-    url: social.linkedin,
-    icon: <IconBrandLinkedin size={24} />,
-    handle: socialHandles.linkedin,
-  },
-  {
-    id: 'github',
-    title: 'GitHub',
-    url: social.github,
-    icon: <IconBrandGithub size={24} />,
-    handle: socialHandles.github,
-  },
-  {
-    id: 'dev',
-    title: 'Dev Community',
-    url: social.devto,
-    icon: <IconBrandDeno size={24} />,
-    handle: socialHandles.devto,
-  },
-  {
-    id: 'email',
-    title: 'Email',
-    url: mailto,
-    icon: <IconMail size={24} />,
-    handle: social.email,
-  },
-];
-
 const ContactSection = () => {
   const { handleTranslation } = useLanguage();
+  const contactMethods = [
+    {
+      id: 'linkedin',
+      title: handleTranslation<string>('contactSection.methods.linkedin'),
+      url: social.linkedin,
+      icon: <IconBrandLinkedin size={24} />,
+      handle: socialHandles.linkedin,
+    },
+    {
+      id: 'github',
+      title: handleTranslation<string>('contactSection.methods.github'),
+      url: social.github,
+      icon: <IconBrandGithub size={24} />,
+      handle: socialHandles.github,
+    },
+    {
+      id: 'dev',
+      title: handleTranslation<string>('contactSection.methods.dev'),
+      url: social.devto,
+      icon: <IconBrandDeno size={24} />,
+      handle: socialHandles.devto,
+    },
+    {
+      id: 'email',
+      title: handleTranslation<string>('contactSection.methods.email'),
+      url: mailto,
+      icon: <IconMail size={24} />,
+      handle: social.email,
+    },
+  ];
   const gridRef = useGsapScrollTrigger<HTMLDivElement>({
     childSelector: '.contact-card',
     from: { opacity: 0, y: 30 },
@@ -55,7 +54,7 @@ const ContactSection = () => {
     <div className="project-info">
       <Container maxWidth="md">
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <SectionLabel number="05" label="Contact" />
+          <SectionLabel number="06" label={handleTranslation('contactSection.sectionLabel')} />
           <h2 className="section-headline" style={{ marginBottom: 16 }}>
             <span className="reveal-on-scroll">
               <span>{handleTranslation('contactSection.title')}</span>
@@ -71,8 +70,9 @@ const ContactSection = () => {
               marginTop: 0,
               marginBottom: 0,
             }}
+            suppressHydrationWarning
           >
-            Let&apos;s build something together. Reach out through any of the platforms below.
+            {handleTranslation('contactSection.description')}
           </p>
         </div>
 
@@ -118,6 +118,7 @@ const ContactSection = () => {
                         fontWeight: 600,
                         color: cosmic.textPrimary,
                       }}
+                      suppressHydrationWarning
                     >
                       {method.title}
                     </span>

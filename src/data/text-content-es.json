@@ -12,10 +12,11 @@
     "greeting": "Hola, soy",
     "name": "Cristopher",
     "surname": "Palacios",
-    "role": "Desarrollador Full Stack & AI",
+    "role": "Desarrollador Full Stack & IA",
     "description": "Construyo experiencias web escalables y soluciones inteligentes. Apasionado por transformar ideas complejas en productos limpios e impactantes.",
     "letsTalk": "HABLEMOS",
-    "scrollDown": "DESLIZA PARA EXPLORAR"
+    "scrollDown": "DESLIZA PARA EXPLORAR",
+    "available": "DISPONIBLE PARA TRABAJAR"
   },
   "headerSection": {
     "title": "Hola soy Cristopher",
@@ -29,16 +30,26 @@
     "typingEnd": "Este espacio fue desarrollado con las siguientes tecnologías:"
   },
   "aboutMeSection": {
+    "sectionLabel": "Sobre mí",
     "title": "Algo sobre mí...",
     "description": "La curiosidad es mi motor. Me encanta aprender cosas nuevas, desde los misterios del universo hasta los últimos avances tecnológicos. Me apasiona la naturaleza, los autos y el deporte. Disfruto explorar nuevos lugares, conocer gente y adquirir nuevas habilidades.",
     "card1Subtitle": "Habilidades Blandas",
     "card1Description": "Además de mis habilidades técnicas, soy una persona adaptable y con un fuerte sentido de colaboración. Disfruto trabajando en equipo y aportando soluciones creativas a los problemas. Mi experiencia en diversos proyectos me ha permitido desarrollar un pensamiento crítico que me ayuda a tomar decisiones informadas. La ética laboral y el liderazgo son valores fundamentales para mí, y creo que estas cualidades, combinadas con mi pasión por el deporte, me permiten mantener un equilibrio saludable entre mi vida profesional y personal.",
     "card2Subtitle": "Habilidades Duras",
-    "card2Description": "Con una sólida formación en programación y un amplio conjunto de habilidades técnicas, me considero un desarrollador versátil. Tengo dominio en diversos lenguajes de programación, frameworks y herramientas para el desarrollo de aplicaciones web y móviles. Creo firmemente en la importancia de diseñar sistemas escalables y mantenibles, por lo que implemento prácticas como TDD, control de versiones y metodologías ágiles. Mi experiencia con plataformas en la nube me capacita para crear soluciones robustas y escalables."
+    "card2Description": "Con una sólida formación en programación y un amplio conjunto de habilidades técnicas, me considero un desarrollador versátil. Tengo dominio en diversos lenguajes de programación, frameworks y herramientas para el desarrollo de aplicaciones web y móviles. Creo firmemente en la importancia de diseñar sistemas escalables y mantenibles, por lo que implemento prácticas como TDD, control de versiones y metodologías ágiles. Mi experiencia con plataformas en la nube me capacita para crear soluciones robustas y escalables.",
+    "stats": {
+      "years": "Años",
+      "projects": "Proyectos",
+      "bilingual": "Bilingüe"
+    },
+    "currentlyBuilding": "CONSTRUYENDO AHORA"
   },
   "experienceSection": {
+    "sectionLabel": "Experiencia",
     "title": "Mi experiencia",
-    "subtitle1": "Software Developer Specialist",
+    "year1": "2021 - Presente",
+    "year2": "2020 - 2021",
+    "subtitle1": "Especialista en Desarrollo de Software",
     "description1": "Llevo más de 3 años sumergido en el mundo del desarrollo web, creando experiencias digitales únicas. Me encanta encontrar soluciones innovadoras y transformar ideas en realidad",
     "items1": [
       "Impulsé la transformación digital de la empresa, implementando metodologías ágiles (SCRUM) y automatizando procesos en Google Cloud Platform (GCP).",
@@ -46,7 +57,7 @@
       "Lideré la adopción de Google Console como SaaS, reduciendo tiempos de desarrollo y despliegue en un 35%.",
       "Construí el portal web de empresa utilizando React para mostrar el portafolio de productos y generar el 80% de los ingresos anuales."
     ],
-    "subtitle2": "Full Stack Developer",
+    "subtitle2": "Desarrollador Full Stack",
     "description2": "Adquirí más de 1 año de conocimiento construyendo sistemas web completos, desde la parte visible para el usuario (front-end) hasta la lógica de negocio (back-end) para clientes particulares.",
     "items2": [
       "Aumenté la eficiencia de los procesos de análisis de datos en un [porcentaje] gracias al desarrollo de una plataforma personalizada.",
@@ -55,8 +66,15 @@
     ]
   },
   "skillsSection": {
+    "sectionLabel": "Habilidades",
     "title": "Habilidades",
     "subtitle": "Algunas de las herramientas con las que he trabajado",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "ai": "IA / ML",
+      "devops": "DevOps"
+    },
     "items": [
       {
         "src": "",
@@ -85,8 +103,32 @@
     ]
   },
   "projectSection": {
+    "sectionLabel": "Proyectos",
     "title": "Mis proyectos",
-    "description": "Conoce algunnos de los proyectos en los que he estado involucrado",
+    "description": "Conoce algunos de los proyectos en los que he estado involucrado",
+    "featured": "DESTACADO",
+    "projects": {
+      "portal": {
+        "title": "Portal de Recolección de Datos",
+        "caption": "Plataforma empresarial de recolección de datos con acceso por roles y analítica en tiempo real."
+      },
+      "kin": {
+        "title": "Kin Analytics",
+        "caption": "Plataforma web de business intelligence para visualización y reportes de datos actuariales."
+      },
+      "arupo": {
+        "title": "Arupo — Legaltech",
+        "caption": "Aplicación de automatización de procesos legales que agiliza los flujos documentales en estudios jurídicos."
+      },
+      "actuaria": {
+        "title": "Plataforma Actuarial",
+        "caption": "Plataforma completa de cálculo y reportes actuariales para compañías de seguros."
+      },
+      "provisions": {
+        "title": "App de Gestión de Datos",
+        "caption": "Sistema de gestión de provisiones y datos financieros con trazabilidad de auditoría y exportaciones."
+      }
+    },
     "items": [
       {
         "src": "",
@@ -111,6 +153,41 @@
     ]
   },
   "contactSection": {
-    "title": "Contáctame en:"
+    "sectionLabel": "Contacto",
+    "title": "Contáctame en:",
+    "description": "Construyamos algo juntos. Escríbeme en cualquiera de las plataformas de abajo.",
+    "methods": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "dev": "Comunidad Dev",
+      "email": "Correo"
+    }
+  },
+  "aboutPage": {
+    "backToHome": "Volver al inicio",
+    "role": "Desarrollador Full Stack",
+    "bio1": "Soy un desarrollador Full Stack con un fuerte enfoque en construir aplicaciones web escalables y mantenibles. Mi experiencia abarca todo el ciclo de desarrollo: desde diseñar interfaces intuitivas con React y Next.js hasta arquitecturar servicios backend robustos con Node.js e infraestructura en la nube.",
+    "bio2": "Me desenvuelvo mejor en entornos donde se valora el código limpio, la arquitectura reflexiva y la mejora continua. Ya sea optimizando consultas a bases de datos, implementando pipelines de CI/CD o creando interfaces pixel-perfect, aplico el mismo nivel de cuidado y precisión en cada capa del stack.",
+    "bio3": "Actualmente radicado en Ecuador, trabajo con equipos y clientes de todo el mundo, transformando requerimientos de negocio complejos en soluciones elegantes listas para producción.",
+    "techStackTitle": "Stack Tecnológico",
+    "connectLinkedIn": "Conéctate en LinkedIn",
+    "getInTouch": "Ponte en contacto"
+  },
+  "blogPage": {
+    "title": "Blog",
+    "subtitle": "Reflexiones sobre desarrollo web, IA e ingeniería de software.",
+    "empty": "Aún no se han publicado artículos.",
+    "backToBlog": "Volver al Blog",
+    "dateLocale": "es-ES"
+  },
+  "blogHighlightSection": {
+    "sectionLabel": "Blog",
+    "tag": "DESDE EL BLOG",
+    "title": "Últimos artículos",
+    "description": "Análisis a fondo sobre IA, desarrollo web e ingeniería de software — directo desde mi escritorio.",
+    "readMore": "Leer artículo",
+    "viewAll": "Ver todos los artículos",
+    "minutesRead": "min de lectura",
+    "empty": "Pronto nuevos artículos."
   }
 }

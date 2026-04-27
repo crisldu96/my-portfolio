@@ -19,8 +19,7 @@ import App4 from '../../assets/images/landing/projects/app-4-af.png';
 import App5 from '../../assets/images/landing/projects/app-5-provisiones.png';
 
 interface Project {
-  title: string;
-  caption: string;
+  slug: string;
   tags: string[];
   image: string;
   link: string;
@@ -29,38 +28,33 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'Data Collection Portal',
-    caption: 'Enterprise data collection platform with role-based access and real-time analytics.',
+    slug: 'portal',
     tags: ['React', 'Node.js', 'AWS'],
     image: App1.src,
     link: 'https://portal.actuaria.com/authentication/login',
     featured: true,
   },
   {
-    title: 'Kin Analytics',
-    caption: 'Business intelligence web platform for actuarial data visualization and reporting.',
+    slug: 'kin',
     tags: ['Next.js', 'TypeScript', 'D3.js'],
     image: App2.src,
     link: 'https://www.kinanalytics.com/',
     featured: true,
   },
   {
-    title: 'Arupo — Legaltech',
-    caption: 'Legal process automation app streamlining document workflows for law firms.',
+    slug: 'arupo',
     tags: ['React', 'Python', 'PostgreSQL'],
     image: App3.src,
     link: 'https://www.arupo.io',
   },
   {
-    title: 'Actuarial Platform',
-    caption: 'Full-featured actuarial calculation and reporting platform for insurance companies.',
+    slug: 'actuaria',
     tags: ['React', 'FastAPI', 'DynamoDB'],
     image: App4.src,
     link: 'https://actuaria.com',
   },
   {
-    title: 'Data Management App',
-    caption: 'Provisions and financial data management system with audit trails and exports.',
+    slug: 'provisions',
     tags: ['Next.js', 'NestJS', 'AWS'],
     image: App5.src,
     link: 'https://sistema-provisiones.actuaria.com.ec',
@@ -68,7 +62,10 @@ const projects: Project[] = [
 ];
 
 function ProjectCard({ project }: { project: Project }) {
+  const { handleTranslation } = useLanguage();
   const isFeatured = project.featured;
+  const title = handleTranslation<string>(`projectSection.projects.${project.slug}.title`);
+  const caption = handleTranslation<string>(`projectSection.projects.${project.slug}.caption`);
 
   return (
     <div
@@ -102,7 +99,7 @@ function ProjectCard({ project }: { project: Project }) {
           <img
             className="project-image"
             src={project.image}
-            alt={project.title}
+            alt={title}
             style={{
               width: '100%',
               height: '100%',
@@ -140,8 +137,9 @@ function ProjectCard({ project }: { project: Project }) {
                   letterSpacing: '0.1em',
                   fontWeight: 600,
                 }}
+                suppressHydrationWarning
               >
-                FEATURED
+                {handleTranslation('projectSection.featured')}
               </span>
             </div>
           )}
@@ -158,8 +156,9 @@ function ProjectCard({ project }: { project: Project }) {
                 color: cosmic.textPrimary,
                 margin: 0,
               }}
+              suppressHydrationWarning
             >
-              {project.title}
+              {title}
             </h3>
             <IconButton
               className="project-link-btn"
@@ -185,8 +184,9 @@ function ProjectCard({ project }: { project: Project }) {
               marginTop: 0,
               flex: 1,
             }}
+            suppressHydrationWarning
           >
-            {project.caption}
+            {caption}
           </p>
 
           <Stack direction="row" spacing={0.75} style={{ flexWrap: 'wrap', gap: 4 }}>
@@ -227,7 +227,7 @@ const ProjectsSection = () => {
         }
       `}</style>
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
-        <SectionLabel number="04" label="Projects" />
+        <SectionLabel number="04" label={handleTranslation('projectSection.sectionLabel')} />
         <h2 className="section-headline" style={{ marginBottom: 12 }}>
           <span className="reveal-on-scroll">
             <span>{handleTranslation('projectSection.title')}</span>
@@ -241,13 +241,13 @@ const ProjectsSection = () => {
       <Grid ref={gridRef} container spacing={3}>
         {/* Featured projects -- span 2 columns */}
         {featured.map((p) => (
-          <Grid key={p.title} item xs={12} md={6} className="project-card">
+          <Grid key={p.slug} item xs={12} md={6} className="project-card">
             <ProjectCard project={p} />
           </Grid>
         ))}
         {/* Regular projects */}
         {regular.map((p) => (
-          <Grid key={p.title} item xs={12} sm={6} md={4} className="project-card">
+          <Grid key={p.slug} item xs={12} sm={6} md={4} className="project-card">
             <ProjectCard project={p} />
           </Grid>
         ))}

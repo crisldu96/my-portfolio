@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { Archivo, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import { Analytics } from '@vercel/analytics/next';
 
 // project import
 import ThemeCustomization from '@/themes';
@@ -13,6 +14,7 @@ import CustomCursor from '@/components/cosmic/CustomCursor';
 import RevealController from '@/components/cosmic/RevealController';
 import LenisProvider from '@/components/cosmic/LenisProvider';
 import PageFold from '@/components/cosmic/PageFold';
+import PostHogProvider from '@/components/analytics/PostHogProvider';
 import { social } from '@/config/social';
 import Schema from './schema';
 import '@/styles/cosmic.css';
@@ -235,12 +237,15 @@ export default function RootLayout(props: { children: React.ReactNode; }) {
           <ConfigProvider>
             <LanguageProvider>
               <ThemeCustomization>
-                <LoadingRemover />
-                <CustomCursor />
-                <RevealController />
-                <LenisProvider />
-                <PageFold />
-                {props.children}
+                <PostHogProvider>
+                  <LoadingRemover />
+                  <CustomCursor />
+                  <RevealController />
+                  <LenisProvider />
+                  <PageFold />
+                  {props.children}
+                  <Analytics />
+                </PostHogProvider>
               </ThemeCustomization>
             </LanguageProvider>
           </ConfigProvider>

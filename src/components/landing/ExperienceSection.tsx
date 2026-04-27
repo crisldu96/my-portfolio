@@ -9,7 +9,7 @@ import useLanguage from '@/hooks/useLanguage';
 import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 
 interface TimelineEntry {
-  year: string;
+  yearKey: string;
   role: string;
   company: string;
   descriptionKey: string;
@@ -19,7 +19,7 @@ interface TimelineEntry {
 
 const timeline: TimelineEntry[] = [
   {
-    year: '2021 - Present',
+    yearKey: 'experienceSection.year1',
     role: 'experienceSection.subtitle1',
     company: 'Actuaria',
     descriptionKey: 'experienceSection.description1',
@@ -27,7 +27,7 @@ const timeline: TimelineEntry[] = [
     tech: ['React', 'TypeScript', 'GCP', 'Material-UI', 'SCRUM'],
   },
   {
-    year: '2020 - 2021',
+    yearKey: 'experienceSection.year2',
     role: 'experienceSection.subtitle2',
     company: 'Freelance',
     descriptionKey: 'experienceSection.description2',
@@ -48,7 +48,7 @@ const ExperienceSection = () => {
   return (
     <Container maxWidth="lg">
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
-        <SectionLabel number="02" label="Experience" />
+        <SectionLabel number="02" label={handleTranslation('experienceSection.sectionLabel')} />
         <h2 className="section-headline" style={{ marginBottom: 0 }}>
           <span className="reveal-on-scroll">
             <span>{handleTranslation('experienceSection.title')}</span>
@@ -75,8 +75,9 @@ const ExperienceSection = () => {
                     color: cosmic.cyan,
                     letterSpacing: '0.08em',
                   }}
+                  suppressHydrationWarning
                 >
-                  {entry.year}
+                  {handleTranslation(entry.yearKey)}
                 </span>
               </div>
 

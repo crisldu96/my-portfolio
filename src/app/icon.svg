@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="cpBg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="url(#cpBg)"/>
+  <rect x="1.5" y="1.5" width="29" height="29" rx="6.5" fill="none" stroke="#00D4FF" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="16" y="22" text-anchor="middle" font-family="'Space Grotesk', 'Segoe UI', system-ui, sans-serif" font-size="15" font-weight="700" fill="#F0F4FF" letter-spacing="0.4">CP</text>
+</svg>

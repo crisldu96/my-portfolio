@@ -15,7 +15,8 @@
     "role": "Full Stack & AI Developer",
     "description": "I build scalable web experiences and intelligent solutions. Passionate about turning complex ideas into clean, impactful products.",
     "letsTalk": "LET'S TALK",
-    "scrollDown": "SCROLL TO EXPLORE"
+    "scrollDown": "SCROLL TO EXPLORE",
+    "available": "AVAILABLE FOR WORK"
   },
   "headerSection": {
     "title": "Hello, I'm Cristopher",
@@ -29,15 +30,25 @@
     "typingEnd": "This space was developed with the following technologies:"
   },
   "aboutMeSection": {
+    "sectionLabel": "About",
     "title": "Something about me...",
     "description": "Curiosity is my engine. I love learning new things, from the mysteries of the universe to the latest technological advances. I am passionate about nature, cars and sports. I enjoy exploring new places, meeting people and acquiring new skills.",
     "card1Subtitle": "Soft Skills",
     "card1Description": "In addition to my technical skills, I am an adaptable person with a strong sense of collaboration. I enjoy working in a team and contributing creative solutions to problems. My experience in various projects has allowed me to develop critical thinking that helps me make informed decisions. Work ethic and leadership are fundamental values for me, and I believe that these qualities, combined with my passion for sports, allow me to maintain a healthy balance between my professional and personal life.",
     "card2Subtitle": "Hard Skills",
-    "card2Description": "With a solid background in programming and a wide range of technical skills, I consider myself a versatile developer. I have proficiency in various programming languages, frameworks and tools for web and mobile application development. I firmly believe in the importance of designing scalable and maintainable systems, so I implement practices such as TDD, version control and agile methodologies. My experience with cloud platforms enables me to create robust and scalable solutions."
+    "card2Description": "With a solid background in programming and a wide range of technical skills, I consider myself a versatile developer. I have proficiency in various programming languages, frameworks and tools for web and mobile application development. I firmly believe in the importance of designing scalable and maintainable systems, so I implement practices such as TDD, version control and agile methodologies. My experience with cloud platforms enables me to create robust and scalable solutions.",
+    "stats": {
+      "years": "Years",
+      "projects": "Projects",
+      "bilingual": "Bilingual"
+    },
+    "currentlyBuilding": "CURRENTLY BUILDING"
   },
   "experienceSection": {
+    "sectionLabel": "Experience",
     "title": "My Experience",
+    "year1": "2021 - Present",
+    "year2": "2020 - 2021",
     "subtitle1": "Software Developer Specialist",
     "description1": "I have been immersed in the world of web development for more than 3 years, creating unique digital experiences. I love finding innovative solutions and transforming ideas into reality.",
     "items1": [
@@ -55,8 +66,15 @@
     ]
   },
   "skillsSection": {
+    "sectionLabel": "Skills",
     "title": "Skills",
     "subtitle": "Some of the tools I have worked with",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "ai": "AI / ML",
+      "devops": "DevOps"
+    },
     "items": [
       {
         "src": "",
@@ -85,8 +103,32 @@
     ]
   },
   "projectSection": {
+    "sectionLabel": "Projects",
     "title": "My Projects",
     "description": "Get to know some of the projects I have been involved in",
+    "featured": "FEATURED",
+    "projects": {
+      "portal": {
+        "title": "Data Collection Portal",
+        "caption": "Enterprise data collection platform with role-based access and real-time analytics."
+      },
+      "kin": {
+        "title": "Kin Analytics",
+        "caption": "Business intelligence web platform for actuarial data visualization and reporting."
+      },
+      "arupo": {
+        "title": "Arupo — Legaltech",
+        "caption": "Legal process automation app streamlining document workflows for law firms."
+      },
+      "actuaria": {
+        "title": "Actuarial Platform",
+        "caption": "Full-featured actuarial calculation and reporting platform for insurance companies."
+      },
+      "provisions": {
+        "title": "Data Management App",
+        "caption": "Provisions and financial data management system with audit trails and exports."
+      }
+    },
     "items": [
       {
         "src": "",
@@ -111,6 +153,41 @@
     ]
   },
   "contactSection": {
-    "title": "Contact me at:"
+    "sectionLabel": "Contact",
+    "title": "Contact me at:",
+    "description": "Let's build something together. Reach out through any of the platforms below.",
+    "methods": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "dev": "Dev Community",
+      "email": "Email"
+    }
+  },
+  "aboutPage": {
+    "backToHome": "Back to Home",
+    "role": "Full Stack Developer",
+    "bio1": "I am a Full Stack Developer with a strong focus on building scalable, maintainable web applications. My experience spans the entire development lifecycle -- from designing intuitive user interfaces with React and Next.js to architecting robust backend services with Node.js and cloud infrastructure.",
+    "bio2": "I thrive in environments where clean code, thoughtful architecture, and continuous improvement are valued. Whether it is optimizing database queries, implementing CI/CD pipelines, or crafting pixel-perfect interfaces, I bring the same level of care and precision to every layer of the stack.",
+    "bio3": "Currently based in Ecuador, I work with teams and clients across the globe, turning complex business requirements into elegant, production-ready solutions.",
+    "techStackTitle": "Tech Stack",
+    "connectLinkedIn": "Connect on LinkedIn",
+    "getInTouch": "Get in Touch"
+  },
+  "blogPage": {
+    "title": "Blog",
+    "subtitle": "Thoughts on web development, AI, and software engineering.",
+    "empty": "No posts published yet.",
+    "backToBlog": "Back to Blog",
+    "dateLocale": "en-US"
+  },
+  "blogHighlightSection": {
+    "sectionLabel": "Blog",
+    "tag": "FROM THE BLOG",
+    "title": "Latest writings",
+    "description": "Deep dives on AI, web development, and software engineering — straight from my desk.",
+    "readMore": "Read article",
+    "viewAll": "View all posts",
+    "minutesRead": "min read",
+    "empty": "New posts coming soon."
   }
 }

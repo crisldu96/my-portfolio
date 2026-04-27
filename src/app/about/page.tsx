@@ -15,6 +15,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
 import { social } from '@/config/social';
+import useLanguage from '@/hooks/useLanguage';
 
 const techStack = [
   'React',
@@ -42,6 +43,7 @@ const fadeUp = {
 
 export default function About() {
   const theme = useTheme();
+  const { handleTranslation } = useLanguage();
   const isDark = theme.palette.mode === 'dark';
 
   return (
@@ -61,8 +63,9 @@ export default function About() {
               startIcon={<ArrowBackIcon />}
               className="about-back-btn"
               style={{ marginBottom: 32 }}
+              suppressHydrationWarning
             >
-              Back to Home
+              {handleTranslation('aboutPage.backToHome')}
             </Button>
           </NextLink>
         </motion.div>
@@ -88,8 +91,9 @@ export default function About() {
               margin: 0,
               marginBottom: 32,
             }}
+            suppressHydrationWarning
           >
-            Full Stack Developer
+            {handleTranslation('aboutPage.role')}
           </h4>
         </motion.div>
 
@@ -104,11 +108,9 @@ export default function About() {
                 textAlign: 'justify',
                 margin: 0,
               }}
+              suppressHydrationWarning
             >
-              I am a Full Stack Developer with a strong focus on building scalable,
-              maintainable web applications. My experience spans the entire development
-              lifecycle -- from designing intuitive user interfaces with React and Next.js
-              to architecting robust backend services with Node.js and cloud infrastructure.
+              {handleTranslation('aboutPage.bio1')}
             </p>
             <p
               style={{
@@ -118,11 +120,9 @@ export default function About() {
                 textAlign: 'justify',
                 margin: 0,
               }}
+              suppressHydrationWarning
             >
-              I thrive in environments where clean code, thoughtful architecture, and
-              continuous improvement are valued. Whether it is optimizing database queries,
-              implementing CI/CD pipelines, or crafting pixel-perfect interfaces, I bring
-              the same level of care and precision to every layer of the stack.
+              {handleTranslation('aboutPage.bio2')}
             </p>
             <p
               style={{
@@ -132,9 +132,9 @@ export default function About() {
                 textAlign: 'justify',
                 margin: 0,
               }}
+              suppressHydrationWarning
             >
-              Currently based in Ecuador, I work with teams and clients across the globe,
-              turning complex business requirements into elegant, production-ready solutions.
+              {handleTranslation('aboutPage.bio3')}
             </p>
           </Stack>
         </motion.div>
@@ -149,8 +149,9 @@ export default function About() {
               margin: 0,
               marginBottom: 16,
             }}
+            suppressHydrationWarning
           >
-            Tech Stack
+            {handleTranslation('aboutPage.techStackTitle')}
           </h5>
           <Grid container spacing={1} style={{ marginBottom: 48 }}>
             {techStack.map((tech) => (
@@ -189,8 +190,9 @@ export default function About() {
                 paddingLeft: 32,
                 paddingRight: 32,
               }}
+              suppressHydrationWarning
             >
-              Connect on LinkedIn
+              {handleTranslation('aboutPage.connectLinkedIn')}
             </Button>
             <NextLink href="/#contact" passHref legacyBehavior>
               <Button
@@ -206,8 +208,9 @@ export default function About() {
                   paddingLeft: 32,
                   paddingRight: 32,
                 }}
+                suppressHydrationWarning
               >
-                Get in Touch
+                {handleTranslation('aboutPage.getInTouch')}
               </Button>
             </NextLink>
           </Stack>

@@ -10,14 +10,13 @@ import { cosmic } from '@/themes/cosmicTokens';
 import useLanguage from '@/hooks/useLanguage';
 import { useGsapScrollTrigger } from '@/hooks/useGsapScrollTrigger';
 
-const statPills = [
-  { value: '5+', label: 'Years' },
-  { value: '20+', label: 'Projects' },
-  { value: 'EN/ES', label: 'Bilingual' },
-];
-
 const AboutMeSection = () => {
   const { handleTranslation } = useLanguage();
+  const statPills = [
+    { value: '5+', label: handleTranslation('aboutMeSection.stats.years') },
+    { value: '20+', label: handleTranslation('aboutMeSection.stats.projects') },
+    { value: 'EN/ES', label: handleTranslation('aboutMeSection.stats.bilingual') },
+  ];
   const sectionRef = useGsapScrollTrigger<HTMLDivElement>({
     childSelector: '.about-animate',
     from: { opacity: 0, y: 50 },
@@ -96,7 +95,7 @@ const AboutMeSection = () => {
 
         {/* Right: Content */}
         <Grid item xs={12} md={7} className="about-animate">
-          <SectionLabel number="01" label="About" />
+          <SectionLabel number="01" label={handleTranslation('aboutMeSection.sectionLabel')} />
           <h2 className="section-headline">
             <span className="reveal-on-scroll">
               <span>{handleTranslation('aboutMeSection.title')}</span>
@@ -178,8 +177,9 @@ const AboutMeSection = () => {
                 color: cosmic.textSecondary,
                 letterSpacing: '0.08em',
               }}
+              suppressHydrationWarning
             >
-              CURRENTLY BUILDING
+              {handleTranslation('aboutMeSection.currentlyBuilding')}
             </span>
           </Stack>
         </Grid>

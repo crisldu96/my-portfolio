@@ -44,7 +44,9 @@ export default function HeroOverlay() {
           className="hero-avail-badge"
         >
           <div className="hero-avail-dot" />
-          <span className="hero-avail-text">AVAILABLE FOR WORK</span>
+          <span className="hero-avail-text" suppressHydrationWarning>
+            {handleTranslation<string>('heroSection.available') || 'AVAILABLE FOR WORK'}
+          </span>
         </motion.div>
       </div>
 

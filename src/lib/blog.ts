@@ -68,3 +68,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
 export function getAllSlugs(): string[] {
   return getAllPosts().map((post) => post.slug);
 }
+
+export function getRecentPosts(limit = 3): BlogPost[] {
+  return getAllPosts().slice(0, limit);
+}

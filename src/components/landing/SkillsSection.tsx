@@ -19,7 +19,7 @@ interface SkillTag {
 }
 
 interface SkillCategory {
-  title: string;
+  titleKey: string;
   icon: React.ReactNode;
   tint: string;
   skills: SkillTag[];
@@ -27,7 +27,7 @@ interface SkillCategory {
 
 const categories: SkillCategory[] = [
   {
-    title: 'Frontend',
+    titleKey: 'skillsSection.categories.frontend',
     icon: <IconBrowser size={22} />,
     tint: cosmic.blue,
     skills: [
@@ -43,7 +43,7 @@ const categories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Backend',
+    titleKey: 'skillsSection.categories.backend',
     icon: <IconServer size={22} />,
     tint: cosmic.cyan,
     skills: [
@@ -56,7 +56,7 @@ const categories: SkillCategory[] = [
     ],
   },
   {
-    title: 'AI / ML',
+    titleKey: 'skillsSection.categories.ai',
     icon: <IconBrain size={22} />,
     tint: cosmic.violet,
     skills: [
@@ -68,7 +68,7 @@ const categories: SkillCategory[] = [
     ],
   },
   {
-    title: 'DevOps',
+    titleKey: 'skillsSection.categories.devops',
     icon: <IconCloud size={22} />,
     tint: cosmic.cyan,
     skills: [
@@ -125,7 +125,7 @@ const SkillsSection = () => {
   return (
     <Container maxWidth="lg">
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
-        <SectionLabel number="03" label="Skills" />
+        <SectionLabel number="03" label={handleTranslation('skillsSection.sectionLabel')} />
         <h2 className="section-headline" style={{ marginBottom: 12 }}>
           <span className="reveal-on-scroll">
             <span>{handleTranslation('skillsSection.title')}</span>
@@ -138,7 +138,7 @@ const SkillsSection = () => {
 
       <Grid ref={gridRef} container spacing={3}>
         {categories.map((cat) => (
-          <Grid key={cat.title} item xs={12} sm={6} lg={3} className="skill-card">
+          <Grid key={cat.titleKey} item xs={12} sm={6} lg={3} className="skill-card">
             <GlowCard style={{ height: '100%' }}>
               {/* Category header */}
               <Stack direction="row" alignItems="center" spacing={1.5} style={{ marginBottom: 24 }}>
@@ -164,8 +164,9 @@ const SkillsSection = () => {
                     fontWeight: 600,
                     color: cosmic.textPrimary,
                   }}
+                  suppressHydrationWarning
                 >
-                  {cat.title}
+                  {handleTranslation(cat.titleKey)}
                 </span>
               </Stack>
 

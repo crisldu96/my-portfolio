@@ -30,6 +30,7 @@ import LanguageSwitch from '../LanguageSwitch';
 import useConfig from '@/hooks/useConfig';
 import useLanguage from '@/hooks/useLanguage';
 import { social } from '@/config/social';
+import { trackEvent, ANALYTICS_EVENTS } from '@/lib/analytics';
 
 interface ElevationScrollProps {
   children: ReactElement;
@@ -135,6 +136,15 @@ const AppBar = ({ ...others }) => {
                 href={href}
                 className={`appbar-nav-link${activeSection === id ? ' appbar-nav-link--active' : ''}${id === 'blog' ? ' appbar-nav-link--blog' : ''}`}
                 suppressHydrationWarning
+                onClick={
+                  id === 'blog'
+                    ? () =>
+                        trackEvent(ANALYTICS_EVENTS.BLOG_HIGHLIGHT_CTA_CLICKED, {
+                          target: '/blog',
+                          source: 'appbar_desktop',
+                        })
+                    : undefined
+                }
               >
                 {id === 'blog' && <span className="appbar-nav-link__pulse" aria-hidden="true" />}
                 <span suppressHydrationWarning>{handleTranslation(labelKey)}</span>
@@ -192,7 +202,21 @@ const AppBar = ({ ...others }) => {
                 >
                   <List>
                     {navItems.map(({ href, id, labelKey, icon }) => (
-                      <a key={href} style={{ textDecoration: 'none' }} href={href} suppressHydrationWarning>
+                      <a
+                        key={href}
+                        style={{ textDecoration: 'none' }}
+                        href={href}
+                        suppressHydrationWarning
+                        onClick={
+                          id === 'blog'
+                            ? () =>
+                                trackEvent(ANALYTICS_EVENTS.BLOG_HIGHLIGHT_CTA_CLICKED, {
+                                  target: '/blog',
+                                  source: 'appbar_mobile',
+                                })
+                            : undefined
+                        }
+                      >
                         <ListItemButton component="span">
                           <div style={{ color: id === 'blog' ? cosmic.cyan : cosmic.textSecondary, minWidth: 36, display: 'flex' }}>
                             {icon}
