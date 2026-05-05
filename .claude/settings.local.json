@@ -6,7 +6,8 @@
       "mcp__plugin_context-mode_context-mode__ctx_execute",
       "Skill(schedule)",
       "Skill(schedule:*)",
-      "mcp__plugin_vercel_vercel__list_teams"
+      "mcp__plugin_vercel_vercel__list_teams",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page"
     ]
   }
 }
