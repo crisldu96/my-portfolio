@@ -177,8 +177,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <Stack
           direction="row"
           spacing={2}
-          alignItems="center"
-          style={{ color: '#94A3B8', marginBottom: 16 }}
+          sx={{ alignItems: 'center', color: '#94A3B8', mb: 2 }}
         >
           <BlogPostDate date={post.date} />
           <span style={{ fontSize: '0.75rem' }}>·</span>
@@ -207,7 +206,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </p>
 
         {post.tags && post.tags.length > 0 && (
-          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap style={{ marginBottom: 40 }}>
+          <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap', mb: 5 }}>
             {post.tags.map((tag) => (
               <Chip
                 key={tag}

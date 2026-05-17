@@ -138,10 +138,10 @@ const SkillsSection = () => {
 
       <Grid ref={gridRef} container spacing={3}>
         {categories.map((cat) => (
-          <Grid key={cat.titleKey} item xs={12} sm={6} lg={3} className="skill-card">
+          <Grid key={cat.titleKey} size={{ xs: 12, sm: 6, lg: 3 }} className="skill-card">
             <GlowCard style={{ height: '100%' }}>
               {/* Category header */}
-              <Stack direction="row" alignItems="center" spacing={1.5} style={{ marginBottom: 24 }}>
+              <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', mb: 3 }}>
                 <div
                   style={{
                     width: 40,

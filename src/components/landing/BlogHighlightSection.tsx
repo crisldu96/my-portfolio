@@ -170,9 +170,7 @@ const BlogHighlightSection = ({ posts }: BlogHighlightSectionProps) => {
           {posts.map((post) => (
             <Grid
               key={post.slug}
-              item
-              xs={12}
-              md={4}
+              size={{ xs: 12, md: 4 }}
               className="blog-highlight-card"
             >
               <NextLink

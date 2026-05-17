@@ -155,7 +155,7 @@ export default function About() {
           </h5>
           <Grid container spacing={1} style={{ marginBottom: 48 }}>
             {techStack.map((tech) => (
-              <Grid item key={tech}>
+              <Grid key={tech}>
                 <Chip
                   label={tech}
                   variant="outlined"

@@ -147,7 +147,7 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Meta */}
         <div style={{ padding: 24, flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" style={{ marginBottom: 8 }}>
+          <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
             <h3
               style={{
                 fontFamily: 'var(--font-space-grotesk), sans-serif',
@@ -241,13 +241,13 @@ const ProjectsSection = () => {
       <Grid ref={gridRef} container spacing={3}>
         {/* Featured projects -- span 2 columns */}
         {featured.map((p) => (
-          <Grid key={p.slug} item xs={12} md={6} className="project-card">
+          <Grid key={p.slug} size={{ xs: 12, md: 6 }} className="project-card">
             <ProjectCard project={p} />
           </Grid>
         ))}
         {/* Regular projects */}
         {regular.map((p) => (
-          <Grid key={p.slug} item xs={12} sm={6} md={4} className="project-card">
+          <Grid key={p.slug} size={{ xs: 12, sm: 6, md: 4 }} className="project-card">
             <ProjectCard project={p} />
           </Grid>
         ))}

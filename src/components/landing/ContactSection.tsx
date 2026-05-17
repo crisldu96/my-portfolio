@@ -78,7 +78,7 @@ const ContactSection = () => {
 
         <Grid ref={gridRef} container spacing={2}>
           {contactMethods.map((method) => (
-            <Grid key={method.id} item xs={12} sm={6} className="contact-card">
+            <Grid key={method.id} size={{ xs: 12, sm: 6 }} className="contact-card">
               <a
                 href={method.url}
                 target="_blank"

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Metadata } from 'next';
 import { Archivo, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
 import { Analytics } from '@vercel/analytics/next';
 
 // project import

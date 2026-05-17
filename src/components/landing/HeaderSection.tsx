@@ -38,10 +38,10 @@ const HeaderSection = () => {
 
   return (
     <Container sx={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: { xs: 10, sm: 6, md: 18.75 }, mb: { xs: 2.5, md: 10 } }}>
-        <Grid item xs={12} md={6}>
+      <Grid container sx={{ justifyContent: 'space-between', alignItems: 'center', mt: { xs: 10, sm: 6, md: 18.75 }, mb: { xs: 2.5, md: 10 } }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Grid container spacing={4}>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <motion.div
                 initial={{ opacity: 0, translateY: 550 }}
                 animate={{ opacity: 1, translateY: 0 }}
@@ -57,7 +57,7 @@ const HeaderSection = () => {
                 </Stack>
               </motion.div>
             </Grid>
-            <Grid item xs={12} sx={{ mt: -2.5, textAlign: { xs: 'center', md: 'left' } }}>
+            <Grid size={12} sx={{ mt: -2.5, textAlign: { xs: 'center', md: 'left' } }}>
               <motion.div
                 initial={{ opacity: 0, translateY: 550 }}
                 animate={{ opacity: 1, translateY: 0 }}
@@ -71,14 +71,14 @@ const HeaderSection = () => {
                 </p>
               </motion.div>
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <motion.div
                 initial={{ opacity: 0, translateY: 550 }}
                 animate={{ opacity: 1, translateY: 0 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 30, delay: 0.4 }}
               >
                 <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                  <Grid item>
+                  <Grid>
                     <AnimateButton>
                       <Button
                         component={Link}
@@ -93,7 +93,7 @@ const HeaderSection = () => {
                       </Button>
                     </AnimateButton>
                   </Grid>
-                  <Grid item>
+                  <Grid>
                     <Button
                       component={Link}
                       href="/assets/cv.pdf"
@@ -109,13 +109,13 @@ const HeaderSection = () => {
                 </Grid>
               </motion.div>
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <motion.div
                 initial={{ opacity: 0, translateY: 550 }}
                 animate={{ opacity: 1, translateY: 0 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 30, delay: 0.6 }}
               >
-                <Stack spacing={3} justifyContent={{ xs: 'center', md: 'flex-start' }}>
+                <Stack spacing={3} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
                   <TypeAnimation
                     style={{ fontSize: '1rem' }}
                     cursor={false}
@@ -141,7 +141,7 @@ const HeaderSection = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <Grid size={{ xs: 12, md: 6 }} sx={{ display: { xs: 'none', md: 'flex' } }}>
           <div style={{ position: 'relative', marginTop: 14, zIndex: 9 }}>
             <motion.div
               initial={{ opacity: 0, scale: 0 }}

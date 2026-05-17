@@ -26,9 +26,9 @@ const AboutMeSection = () => {
 
   return (
     <Container maxWidth="lg">
-      <Grid ref={sectionRef} container spacing={6} alignItems="center">
+      <Grid ref={sectionRef} container spacing={6} sx={{ alignItems: 'center' }}>
         {/* Left: Avatar card */}
-        <Grid item xs={12} md={5} className="about-animate">
+        <Grid size={{ xs: 12, md: 5 }} className="about-animate">
           <GlowCard gradient>
             <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '12px' }}>
               <img
@@ -94,7 +94,7 @@ const AboutMeSection = () => {
         </Grid>
 
         {/* Right: Content */}
-        <Grid item xs={12} md={7} className="about-animate">
+        <Grid size={{ xs: 12, md: 7 }} className="about-animate">
           <SectionLabel number="01" label={handleTranslation('aboutMeSection.sectionLabel')} />
           <h2 className="section-headline">
             <span className="reveal-on-scroll">
@@ -159,7 +159,7 @@ const AboutMeSection = () => {
           </Stack>
 
           {/* Currently building indicator */}
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
             <div
               style={{
                 width: 8,
@@ -185,7 +185,7 @@ const AboutMeSection = () => {
         </Grid>
 
         {/* Skill cards below */}
-        <Grid item xs={12} md={6} className="about-animate">
+        <Grid size={{ xs: 12, md: 6 }} className="about-animate">
           <GlowCard>
             <h3
               style={{
@@ -204,7 +204,7 @@ const AboutMeSection = () => {
             </p>
           </GlowCard>
         </Grid>
-        <Grid item xs={12} md={6} className="about-animate">
+        <Grid size={{ xs: 12, md: 6 }} className="about-animate">
           <GlowCard>
             <h3
               style={{
