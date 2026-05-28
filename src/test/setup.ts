@@ -69,6 +69,16 @@ vi.mock('react-slick', () => ({
     React.createElement('div', { 'data-testid': 'slick-slider' }, children),
 }))
 
+vi.mock('gsap/ScrollTrigger', () => ({
+  ScrollTrigger: {
+    create: vi.fn(),
+    refresh: vi.fn(),
+    kill: vi.fn(),
+    register: vi.fn(),
+    getAll: vi.fn(() => []),
+  },
+}))
+
 Object.defineProperty(window, 'localStorage', {
   value: {
     getItem: vi.fn(),
@@ -77,6 +87,20 @@ Object.defineProperty(window, 'localStorage', {
     clear: vi.fn(),
   },
   writable: true,
+})
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
 })
 
 const originalError = console.error
