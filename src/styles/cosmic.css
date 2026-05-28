@@ -393,25 +393,6 @@
   color: #00D4FF;
 }
 
-.hero-description {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #8899BB;
-  max-width: 480px;
-  margin: 0;
-}
-
-@media (min-width: 900px) {
-  .hero-description {
-    margin: 0;
-  }
-}
-
-@media (max-width: 899px) {
-  .hero-description {
-    margin: 0 auto;
-  }
-}
 
 /* Experience section interactive shader wallpaper */
 .experience-bg-3d {
@@ -1385,16 +1366,16 @@ a.mp-title--link:hover {
   font-weight: 800;
   line-height: 1.06;
   letter-spacing: -0.02em;
-  color: #F0F4FF;
+  color: var(--cosmic-text-0);
 }
 
 .hero-headline__lead,
 .hero-headline__tail {
-  color: #F0F4FF;
+  color: var(--cosmic-text-0);
 }
 
 .hero-headline__accent {
-  background: linear-gradient(135deg, #3B82F6, #7C3AED);
+  background: linear-gradient(135deg, var(--cosmic-blue), var(--cosmic-violet));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -1478,8 +1459,7 @@ a.mp-title--link:hover {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 28%, #2a3f7a, #0b1430 80%);
+  background: radial-gradient(circle at 32% 28%, #2a3f7a, #0b1430 80%);
   border: 2px solid rgba(0, 212, 255, 0.6);
   box-shadow: 0 0 60px rgba(0, 212, 255, 0.45), inset 0 0 26px rgba(0, 212, 255, 0.2);
   display: flex;
@@ -1488,10 +1468,7 @@ a.mp-title--link:hover {
   font-family: var(--font-space-grotesk), sans-serif;
   font-weight: 900;
   font-size: 60px;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(135deg, #3B82F6, #7C3AED);
+  color: var(--cosmic-text-0);
 }
 
 @media (max-width: 768px) {
