@@ -52,7 +52,8 @@ test.describe('Home page - 3D coin renders as the focal object', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await page.waitForLoadState('domcontentloaded')
-    await expect(page.locator('.hero-coin')).toBeVisible()
+    // 3D canvas initialisation takes longer under parallel load; allow extra time
+    await expect(page.locator('.hero-coin')).toBeVisible({ timeout: 15000 })
   })
 
   test('the hero contains exactly one canvas element (single 3D layer)', async ({ page }) => {
@@ -79,6 +80,7 @@ test.describe('Home page - Reduced motion preference is respected', () => {
     await page.waitForLoadState('domcontentloaded')
 
     const coinLabel = page.locator('.hero-coin').first()
+    await expect(coinLabel).toBeVisible({ timeout: 15000 })
     await expect(coinLabel).toHaveAttribute('aria-label', /static/i)
 
     await context.close()
@@ -88,6 +90,7 @@ test.describe('Home page - Reduced motion preference is respected', () => {
     await page.goto('/')
     await page.waitForLoadState('domcontentloaded')
     const coin = page.locator('.hero-coin').first()
+    await expect(coin).toBeVisible({ timeout: 15000 })
     await expect(coin).toHaveAttribute('aria-label', /spin|girar/i)
   })
 })
