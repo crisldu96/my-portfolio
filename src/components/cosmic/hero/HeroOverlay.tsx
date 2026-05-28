@@ -103,7 +103,9 @@ export default function HeroOverlay() {
             <span className="hero-chip">React</span>
             <span className="hero-chip">Next.js</span>
             <span className="hero-chip">Node</span>
-            <span className="hero-chip">IA / LLMs</span>
+            <span className="hero-chip">
+              {handleTranslation<string>('heroSection.chipTechAi') || 'AI / LLMs'}
+            </span>
           </motion.div>
 
           <motion.div
