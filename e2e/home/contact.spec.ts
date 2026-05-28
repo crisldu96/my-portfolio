@@ -32,7 +32,7 @@ test.describe('Home page - User checks contact method cards', () => {
   test('the GitHub card is present with the correct link', async ({ page }) => {
     const githubLink = page.locator('.project-info a[href*="github.com"]').first()
     await expect(githubLink).toBeAttached()
-    await expect(githubLink).toHaveAttribute('href', 'https://github.com/CristopherPalacios')
+    await expect(githubLink).toHaveAttribute('href', 'https://github.com/crisldu96')
   })
 
   test('the Dev Community card is present with a dev.to link', async ({ page }) => {

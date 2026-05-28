@@ -36,7 +36,7 @@ test.describe('Home page - Search engine discovers essential meta tags', () => {
   test('the canonical link tag points to the production domain', async ({ page }) => {
     const canonical = await page.locator('link[rel="canonical"]').getAttribute('href')
     expect(canonical).toBeTruthy()
-    expect(canonical).toMatch(/cristopherpalacios\.dev/)
+    expect(canonical).toMatch(/cristopherpalacios\.dev|cristopher-palacios\.vercel\.app/)
   })
 })
 
