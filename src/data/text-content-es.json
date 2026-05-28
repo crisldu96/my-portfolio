@@ -10,7 +10,7 @@
   },
   "heroSection": {
     "eyebrow": "Cristopher Palacios",
-    "role": "Full Stack & AI Developer",
+    "role": "Desarrollador Full Stack & IA",
     "available": "DISPONIBLE PARA TRABAJAR",
     "headlinePart1": "Construyo apps web",
     "headlineAccent": "rápidas y escalables",
@@ -20,8 +20,8 @@
     "chipProjects": "10+ proyectos",
     "letsTalk": "HABLEMOS",
     "viewProjects": "Ver proyectos",
-    "scrollDown": "DESPLAZAR PARA EXPLORAR",
-    "coinHint": "Clic o arrastrá para girar"
+    "scrollDown": "DESLIZA PARA EXPLORAR",
+    "coinHint": "Haz clic o arrastra para girar"
   },
   "headerSection": {
     "title": "Hola soy Cristopher",
