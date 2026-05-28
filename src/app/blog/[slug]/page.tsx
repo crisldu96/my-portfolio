@@ -15,6 +15,7 @@ import AppBar from '@/components/layout/AppBar';
 import BlogBackButton from '@/components/blog/BlogBackButton';
 import BlogPostDate from '@/components/blog/BlogPostDate';
 import { getAllSlugs, getPostBySlug } from '@/lib/blog';
+import { siteUrl } from '@/lib/site';
 
 const mdxComponents = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -127,16 +128,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Post Not Found' };
   }
 
+  const postUrl = siteUrl(`/blog/${post.slug}`);
+
   return {
     title: post.title,
     description: post.description,
     alternates: {
-      canonical: `https://cristopherpalacios.dev/blog/${post.slug}`,
+      canonical: postUrl,
     },
     openGraph: {
       title: `${post.title} | Cristopher Palacios`,
       description: post.description,
-      url: `https://cristopherpalacios.dev/blog/${post.slug}`,
+      url: postUrl,
       type: 'article',
       publishedTime: post.date,
       ...(post.image && { images: [{ url: post.image }] }),
@@ -159,7 +162,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     description: post.description,
     datePublished: post.date,
     author: { '@type': 'Person', name: post.author },
-    url: `https://cristopherpalacios.dev/blog/${post.slug}`,
+    url: siteUrl(`/blog/${post.slug}`),
   };
 
   return (
@@ -186,8 +189,9 @@ export default async function BlogPostPage({ params }: PageProps) {
           <span style={{ fontSize: '0.75rem' }}>{post.author}</span>
         </Stack>
 
-        <h2
+        <h1
           style={{
+            fontSize: '2.5rem',
             fontWeight: 700,
             fontFamily: 'var(--font-archivo), sans-serif',
             color: '#FAFAFA',
@@ -197,7 +201,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           }}
         >
           {post.title}
-        </h2>
+        </h1>
 
         <p
           style={{ color: '#94A3B8', marginBottom: 24, fontSize: '1.1rem', lineHeight: 1.7 }}

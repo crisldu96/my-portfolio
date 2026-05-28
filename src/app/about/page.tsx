@@ -84,8 +84,9 @@ export default function About() {
           >
             Cristopher Palacios
           </h1>
-          <h4
+          <p
             style={{
+              fontSize: '1.25rem',
               fontWeight: 500,
               color: theme.palette.primary.main,
               margin: 0,
@@ -94,11 +95,24 @@ export default function About() {
             suppressHydrationWarning
           >
             {handleTranslation('aboutPage.role')}
-          </h4>
+          </p>
         </motion.div>
 
         {/* Bio */}
         <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }}>
+          <h2
+            style={{
+              fontSize: '1.75rem',
+              fontWeight: 600,
+              fontFamily: 'var(--font-archivo), sans-serif',
+              color: isDark ? '#FAFAFA' : '#18181B',
+              margin: 0,
+              marginBottom: 16,
+            }}
+            suppressHydrationWarning
+          >
+            {handleTranslation('aboutPage.sectionAbout')}
+          </h2>
           <Stack spacing={2.5} style={{ marginBottom: 48 }}>
             <p
               style={{
@@ -141,8 +155,9 @@ export default function About() {
 
         {/* Tech Stack */}
         <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.3 }}>
-          <h5
+          <h2
             style={{
+              fontSize: '1.75rem',
               fontWeight: 600,
               fontFamily: 'var(--font-archivo), sans-serif',
               color: isDark ? '#FAFAFA' : '#18181B',
@@ -152,7 +167,7 @@ export default function About() {
             suppressHydrationWarning
           >
             {handleTranslation('aboutPage.techStackTitle')}
-          </h5>
+          </h2>
           <Grid container spacing={1} style={{ marginBottom: 48 }}>
             {techStack.map((tech) => (
               <Grid key={tech}>
@@ -174,6 +189,19 @@ export default function About() {
 
         {/* CTA */}
         <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.4 }}>
+          <h2
+            style={{
+              fontSize: '1.75rem',
+              fontWeight: 600,
+              fontFamily: 'var(--font-archivo), sans-serif',
+              color: isDark ? '#FAFAFA' : '#18181B',
+              margin: 0,
+              marginBottom: 16,
+            }}
+            suppressHydrationWarning
+          >
+            {handleTranslation('aboutPage.sectionConnect')}
+          </h2>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <Button
               component={Link}

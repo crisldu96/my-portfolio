@@ -18,8 +18,9 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', paddingTop: 112, paddingBottom: 80, paddingLeft: 24, paddingRight: 24 }}>
-      <h2
+      <h1
         style={{
+          fontSize: '2.5rem',
           fontWeight: 700,
           fontFamily: 'var(--font-archivo), sans-serif',
           color: '#FAFAFA',
@@ -29,7 +30,7 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
         suppressHydrationWarning
       >
         {handleTranslation('blogPage.title')}
-      </h2>
+      </h1>
       <p style={{ color: '#94A3B8', marginBottom: 48 }} suppressHydrationWarning>
         {handleTranslation('blogPage.subtitle')}
       </p>

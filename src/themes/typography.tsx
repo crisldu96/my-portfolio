@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material/styles';
-import { TypographyOptions } from '@mui/material/styles/createTypography';
+import { TypographyVariantsOptions } from '@mui/material/styles';
 
-const Typography = (theme: Theme, borderRadius: number, fontFamily: string): TypographyOptions => ({
+const Typography = (theme: Theme, borderRadius: number, fontFamily: string): TypographyVariantsOptions => ({
   fontFamily: 'var(--font-space-grotesk), var(--font-archivo), sans-serif',
   h6: {
     fontWeight: 500,

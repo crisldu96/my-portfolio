@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://cristopherpalacios.dev</loc>
+<lastmod>2026-05-17T13:24:48.741Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://cristopherpalacios.dev/about</loc>
+<lastmod>2026-05-17T13:24:48.741Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://cristopherpalacios.dev/blog</loc>
+<lastmod>2026-05-17T13:24:48.741Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://cristopherpalacios.dev/blog/cooperativas-ecuador-plazo-fijo-riesgo-rentabilidad</loc>
+<lastmod>2025-07-15T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://cristopherpalacios.dev/blog/building-fullstack-app-nextjs-ai</loc>
+<lastmod>2025-04-10T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+</urlset>

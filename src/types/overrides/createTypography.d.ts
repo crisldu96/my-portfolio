@@ -1,56 +1,33 @@
-// eslint-disable-next-line
-import * as createTypography from '@mui/material/styles/createTypography';
+import type { CSSObject } from '@mui/system';
 
-declare module '@mui/material/styles/createTypography' {
-  export interface FontStyle
-    extends Required<{
-      textTransform: TextTransform;
-      fontSize: string | number; // added string
-    }> {}
-  export interface FontStyleOptions extends Partial<FontStyle> {
-    fontSize?: string | number; // added string
-  }
-  export type Variant =
-    | 'customInput'
-    | 'mainContent'
-    | 'menuCaption'
-    | 'subMenuCaption'
-    | 'commonAvatar'
-    | 'smallAvatar'
-    | 'mediumAvatar'
-    | 'largeAvatar'
-    | 'sectionLabel'
-    | 'heroHeading'
-    | 'sectionHeading'
-    | 'mono';
-
-  export interface TypographyOptions extends Partial<Record<Variant, TypographyStyleOptions> & FontStyleOptions> {
-    customInput?: TypographyStyleOptions;
-    mainContent?: TypographyStyleOptions;
-    menuCaption?: TypographyStyleOptions;
-    subMenuCaption?: TypographyStyleOptions;
-    commonAvatar?: TypographyStyleOptions;
-    smallAvatar?: TypographyStyleOptions;
-    mediumAvatar?: TypographyStyleOptions;
-    largeAvatar?: TypographyStyleOptions;
-    sectionLabel?: TypographyStyleOptions;
-    heroHeading?: TypographyStyleOptions;
-    sectionHeading?: TypographyStyleOptions;
-    mono?: TypographyStyleOptions;
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    customInput: CSSObject;
+    mainContent: CSSObject;
+    menuCaption: CSSObject;
+    subMenuCaption: CSSObject;
+    commonAvatar: CSSObject;
+    smallAvatar: CSSObject;
+    mediumAvatar: CSSObject;
+    largeAvatar: CSSObject;
+    sectionLabel: CSSObject;
+    heroHeading: CSSObject;
+    sectionHeading: CSSObject;
+    mono: CSSObject;
   }
 
-  export interface Typography extends Record<Variant, TypographyStyle>, FontStyle, TypographyUtils {
-    customInput: TypographyStyle;
-    mainContent: TypographyStyle;
-    menuCaption: TypographyStyleOptions;
-    subMenuCaption: TypographyStyleOptions;
-    commonAvatar: TypographyStyle;
-    smallAvatar: TypographyStyle;
-    mediumAvatar: TypographyStyle;
-    largeAvatar: TypographyStyle;
-    sectionLabel: TypographyStyle;
-    heroHeading: TypographyStyle;
-    sectionHeading: TypographyStyle;
-    mono: TypographyStyle;
+  interface TypographyVariantsOptions {
+    customInput?: CSSObject;
+    mainContent?: CSSObject;
+    menuCaption?: CSSObject;
+    subMenuCaption?: CSSObject;
+    commonAvatar?: CSSObject;
+    smallAvatar?: CSSObject;
+    mediumAvatar?: CSSObject;
+    largeAvatar?: CSSObject;
+    sectionLabel?: CSSObject;
+    heroHeading?: CSSObject;
+    sectionHeading?: CSSObject;
+    mono?: CSSObject;
   }
 }

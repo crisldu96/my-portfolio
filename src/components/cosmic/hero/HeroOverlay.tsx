@@ -67,10 +67,12 @@ export default function HeroOverlay() {
             animate="visible"
             variants={fadeUp(0.4)}
             className="hero-name"
+            aria-label="Cristopher Palacios — Full Stack & AI Developer"
           >
             <span className="hero-name__first">
               {handleTranslation<string>('heroSection.name') || 'Cristopher'}
             </span>
+            {' '}
             <span className="hero-name__last">
               {handleTranslation<string>('heroSection.surname') || 'Palacios'}
             </span>

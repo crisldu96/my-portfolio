@@ -1,11 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/blog';
+import { SITE_URL } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://cristopherpalacios.dev';
-
   const blogPosts = getAllPosts().map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
@@ -13,19 +12,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: baseUrl,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${SITE_URL}/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${SITE_URL}/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,

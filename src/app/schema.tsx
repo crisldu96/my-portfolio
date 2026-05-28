@@ -1,14 +1,15 @@
 import { social } from '@/config/social';
+import { SITE_URL, siteUrl } from '@/lib/site';
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Cristopher Palacios',
-  url: 'https://cristopherpalacios.dev',
+  url: SITE_URL,
   jobTitle: 'Full Stack & AI Developer',
   description:
     'Full Stack and AI Developer from Ecuador specializing in React, Next.js, Node.js, TypeScript, and AI-powered applications.',
-  image: 'https://cristopherpalacios.dev/assets/images/og-image.png',
+  image: siteUrl('/assets/images/og-image.png'),
   sameAs: [social.linkedin, social.github, social.devto],
   knowsAbout: [
     'React',
@@ -42,35 +43,27 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Cristopher Palacios Portfolio',
-  url: 'https://cristopherpalacios.dev',
+  url: SITE_URL,
   description:
     'Portfolio of Cristopher Palacios, Full Stack & AI Developer from Ecuador.',
   author: {
     '@type': 'Person',
     name: 'Cristopher Palacios',
   },
-  inLanguage: ['en', 'es'],
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://cristopherpalacios.dev/?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
-  },
+  inLanguage: 'en',
 };
 
 const profilePageSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
   name: 'Cristopher Palacios | Full Stack & AI Developer',
-  url: 'https://cristopherpalacios.dev',
+  url: SITE_URL,
   description:
     'Professional portfolio of Cristopher Palacios, a Full Stack and AI Developer based in Ecuador.',
   mainEntity: {
     '@type': 'Person',
     name: 'Cristopher Palacios',
-    url: 'https://cristopherpalacios.dev',
+    url: SITE_URL,
   },
 };
 

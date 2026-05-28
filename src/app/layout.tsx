@@ -16,6 +16,7 @@ import LenisProvider from '@/components/cosmic/LenisProvider';
 import PageFold from '@/components/cosmic/PageFold';
 import PostHogProvider from '@/components/analytics/PostHogProvider';
 import { social } from '@/config/social';
+import { SITE_URL } from '@/lib/site';
 import Schema from './schema';
 import '@/styles/cosmic.css';
 
@@ -38,7 +39,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://cristopherpalacios.dev'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Cristopher Palacios | Full Stack & AI Developer',
     template: '%s | Cristopher Palacios',
@@ -79,7 +80,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     alternateLocale: 'es_EC',
-    url: 'https://cristopherpalacios.dev',
+    url: SITE_URL,
     siteName: 'Cristopher Palacios Portfolio',
     title: 'Cristopher Palacios | Full Stack & AI Developer',
     description:
@@ -113,7 +114,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://cristopherpalacios.dev',
+    canonical: SITE_URL,
   },
   verification: {
     google: 'mNj4jfVE8P-OKKx9NxV7VpIqedtbaxvAPbTvjzgPiwk',

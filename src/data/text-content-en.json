@@ -171,7 +171,9 @@
     "bio3": "Currently based in Ecuador, I work with teams and clients across the globe, turning complex business requirements into elegant, production-ready solutions.",
     "techStackTitle": "Tech Stack",
     "connectLinkedIn": "Connect on LinkedIn",
-    "getInTouch": "Get in Touch"
+    "getInTouch": "Get in Touch",
+    "sectionAbout": "About me",
+    "sectionConnect": "Let's connect"
   },
   "blogPage": {
     "title": "Blog",

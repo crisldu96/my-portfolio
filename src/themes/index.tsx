@@ -17,7 +17,7 @@ import customShadows from './shadows';
 
 // types
 import { CustomShadowProps } from '../types/default-theme';
-import { TypographyOptions } from '@mui/material/styles/createTypography';
+import { TypographyVariantsOptions } from '@mui/material/styles';
 
 interface Props {
   children: ReactNode;
@@ -31,7 +31,7 @@ export default function ThemeCustomization({ children }: Props) {
   const theme: Theme = useMemo<Theme>(() => Palette(navType, presetColor), [navType, presetColor]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const themeTypography: TypographyOptions = useMemo<TypographyOptions>(
+  const themeTypography: TypographyVariantsOptions = useMemo<TypographyVariantsOptions>(
     () => Typography(theme, borderRadius, fontFamily),
     [theme, borderRadius, fontFamily]
   );

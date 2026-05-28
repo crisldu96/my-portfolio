@@ -287,7 +287,7 @@ export default function componentStyleOverrides(theme: Theme, borderRadius: numb
     },
     MuiTabs: {
       styleOverrides: {
-        flexContainer: {
+        list: {
           borderBottom: '1px solid',
           borderColor: mode === 'dark' ? theme.palette.text.primary + 20 : theme.palette.grey[200]
         }
