@@ -47,17 +47,19 @@ test.describe('Home page - User lands on the hero section', () => {
 })
 
 test.describe('Home page - 3D coin renders as the focal object', () => {
-  test('the hero contains exactly one canvas element (single 3D layer)', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('/')
-    await page.waitForLoadState('networkidle')
-    const heroCanvases = page.locator('.hero-overlay').locator('xpath=ancestor::*[1]').locator('canvas')
-    await expect(heroCanvases).toHaveCount(1)
+    await page.waitForLoadState('domcontentloaded')
+    await expect(page.locator('.hero-coin')).toBeVisible()
+  })
+
+  test('the hero contains exactly one canvas element (single 3D layer)', async ({ page }) => {
+    const canvases = page.getByTestId('hero-section').locator('canvas')
+    await expect(canvases).toHaveCount(1)
   })
 
   test('the coin canvas exposes an accessible role and label', async ({ page }) => {
-    await page.goto('/')
-    await page.waitForLoadState('networkidle')
-    const coin = page.locator('.hero-coin')
+    const coin = page.locator('.hero-coin').first()
     await expect(coin).toHaveAttribute('aria-label', /spin|girar/i)
   })
 })
