@@ -18,8 +18,9 @@ test.describe('Home page - User lands on the hero section', () => {
   })
 
   test('shows the social-proof chips for years and projects', async ({ page }) => {
-    await expect(page.getByText(/5\+\s*(years|años)/i)).toBeVisible()
-    await expect(page.getByText(/10\+\s*(projects|proyectos)/i)).toBeVisible()
+    const hero = page.getByTestId('hero-section')
+    await expect(hero.getByText(/5\+\s*(years|años)/i)).toBeVisible()
+    await expect(hero.getByText(/10\+\s*(projects|proyectos)/i)).toBeVisible()
   })
 
   test('shows the tech stack chips', async ({ page }) => {
