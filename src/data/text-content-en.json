@@ -9,14 +9,19 @@
     "item7": "Blog"
   },
   "heroSection": {
-    "greeting": "Hello, I'm",
-    "name": "Cristopher",
-    "surname": "Palacios",
+    "eyebrow": "Cristopher Palacios",
     "role": "Full Stack & AI Developer",
-    "description": "I build scalable web experiences and intelligent solutions. Passionate about turning complex ideas into clean, impactful products.",
+    "available": "AVAILABLE FOR WORK",
+    "headlinePart1": "I build",
+    "headlineAccent": "fast, scalable web apps",
+    "headlinePart2": ", and AI-powered products.",
+    "description": "I work with teams and startups around the world, turning ideas into digital products that scale.",
+    "chipYears": "5+ years",
+    "chipProjects": "10+ projects",
     "letsTalk": "LET'S TALK",
+    "viewProjects": "View projects",
     "scrollDown": "SCROLL TO EXPLORE",
-    "available": "AVAILABLE FOR WORK"
+    "coinHint": "Click or drag to spin"
   },
   "headerSection": {
     "title": "Hello, I'm Cristopher",
