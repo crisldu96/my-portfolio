@@ -38,7 +38,10 @@ function Coin({ frontSrc, reducedMotion }: CoinProps) {
   const front = useLoader(THREE.TextureLoader, frontSrc);
   const back = useMemo(() => createMonogramTexture(512), []);
 
-  const [spinVel, setSpinVel] = useState(0);
+  useEffect(() => () => { back.dispose(); }, [back]);
+  useEffect(() => () => { front.dispose(); }, [front]);
+
+  const spinVel = useRef(0);
   const dragging = useRef(false);
   const lastPointer = useRef<{ x: number; y: number } | null>(null);
   const targetRot = useRef({ x: 0, y: 0 });
@@ -49,8 +52,8 @@ function Coin({ frontSrc, reducedMotion }: CoinProps) {
     idleFloat.current += dt;
 
     if (!dragging.current) {
-      targetRot.current.y += spinVel * dt;
-      setSpinVel((v) => v * Math.pow(0.18, dt));
+      targetRot.current.y += spinVel.current * dt;
+      spinVel.current *= Math.pow(0.18, dt);
       if (!reducedMotion) {
         targetRot.current.y += 0.25 * dt;
         targetRot.current.x += Math.sin(idleFloat.current * 0.6) * 0.002;
@@ -87,7 +90,7 @@ function Coin({ frontSrc, reducedMotion }: CoinProps) {
 
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    setSpinVel((v) => v + 14);
+    spinVel.current += 14;
   };
 
   return (
