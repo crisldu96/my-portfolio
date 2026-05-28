@@ -64,3 +64,29 @@ test.describe('Home page - 3D coin renders as the focal object', () => {
     await expect(coin).toHaveAttribute('aria-label', /spin|girar/i)
   })
 })
+
+test.describe('Home page - Reduced motion preference is respected', () => {
+  test.use({ colorScheme: 'dark' })
+
+  test('the coin does not auto-rotate when prefers-reduced-motion is set', async ({ browser }) => {
+    const context = await browser.newContext({
+      reducedMotion: 'reduce',
+      viewport: { width: 1280, height: 720 },
+    })
+    const page = await context.newPage()
+    await page.goto('/')
+    await page.waitForLoadState('domcontentloaded')
+
+    const coinLabel = page.locator('.hero-coin').first()
+    await expect(coinLabel).toHaveAttribute('aria-label', /static/i)
+
+    await context.close()
+  })
+
+  test('the coin announces interactive label when reduced-motion is not requested', async ({ page }) => {
+    await page.goto('/')
+    await page.waitForLoadState('domcontentloaded')
+    const coin = page.locator('.hero-coin').first()
+    await expect(coin).toHaveAttribute('aria-label', /spin|girar/i)
+  })
+})
