@@ -24,9 +24,10 @@ test.describe('Home page - User lands on the hero section', () => {
   })
 
   test('shows the tech stack chips', async ({ page }) => {
-    for (const tech of ['React', 'Next.js', 'Node', 'IA / LLMs']) {
+    for (const tech of ['React', 'Next.js', 'Node']) {
       await expect(page.getByText(tech, { exact: true }).first()).toBeVisible()
     }
+    await expect(page.getByText(/^(AI|IA) \/ LLMs$/).first()).toBeVisible()
   })
 
   test('shows the role pill and the AVAILABLE FOR WORK badge', async ({ page }) => {
@@ -88,5 +89,43 @@ test.describe('Home page - Reduced motion preference is respected', () => {
     await page.waitForLoadState('domcontentloaded')
     const coin = page.locator('.hero-coin').first()
     await expect(coin).toHaveAttribute('aria-label', /spin|girar/i)
+  })
+})
+
+test.describe('Home page - Hero i18n switch', () => {
+  test('shows Spanish headline accent when locale is Spanish', async ({ page }) => {
+    await page.goto('/')
+    await page.waitForLoadState('domcontentloaded')
+
+    await page.evaluate(() => {
+      const cfg = JSON.parse(localStorage.getItem('jp-config-ts') || '{}')
+      cfg.locale = 'es'
+      localStorage.setItem('jp-config-ts', JSON.stringify(cfg))
+    })
+    await page.reload()
+    await page.waitForLoadState('domcontentloaded')
+
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('rápidas y escalables')
+    const hero = page.getByTestId('hero-section')
+    await expect(hero.getByText(/10\+\s*proyectos/i)).toBeVisible()
+    await expect(hero.getByText('IA / LLMs', { exact: true })).toBeVisible()
+  })
+
+  test('shows English headline accent when locale is English', async ({ page }) => {
+    await page.goto('/')
+    await page.waitForLoadState('domcontentloaded')
+
+    await page.evaluate(() => {
+      const cfg = JSON.parse(localStorage.getItem('jp-config-ts') || '{}')
+      cfg.locale = 'en'
+      localStorage.setItem('jp-config-ts', JSON.stringify(cfg))
+    })
+    await page.reload()
+    await page.waitForLoadState('domcontentloaded')
+
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('fast, scalable')
+    const hero = page.getByTestId('hero-section')
+    await expect(hero.getByText(/10\+\s*projects/i)).toBeVisible()
+    await expect(hero.getByText('AI / LLMs', { exact: true })).toBeVisible()
   })
 })
