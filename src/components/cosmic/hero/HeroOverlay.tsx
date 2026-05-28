@@ -23,7 +23,6 @@ export default function HeroOverlay() {
 
   return (
     <div className="hero-overlay">
-      {/* Top: minimal status pill (left) + availability (right) */}
       <div className="hero-overlay-top">
         <motion.div
           initial="hidden"
@@ -50,31 +49,32 @@ export default function HeroOverlay() {
         </motion.div>
       </div>
 
-      {/* Center: intentionally empty so the 3D canvas breathes */}
       <div className="hero-content" style={{ pointerEvents: 'auto' }}>
         <div className="hero-text">
           <motion.span
             initial="hidden"
             animate="visible"
             variants={fadeUp(0.25)}
-            className="hero-greeting"
+            className="hero-eyebrow"
           >
-            {handleTranslation<string>('heroSection.greeting') || "Hello, I'm"}
+            {handleTranslation<string>('heroSection.eyebrow') || 'Cristopher Palacios'}
           </motion.span>
 
           <motion.h1
             initial="hidden"
             animate="visible"
             variants={fadeUp(0.4)}
-            className="hero-name"
+            className="hero-headline"
             aria-label="Cristopher Palacios — Full Stack & AI Developer"
           >
-            <span className="hero-name__first">
-              {handleTranslation<string>('heroSection.name') || 'Cristopher'}
+            <span className="hero-headline__lead">
+              {handleTranslation<string>('heroSection.headlinePart1') || 'I build'}
+            </span>{' '}
+            <span className="hero-headline__accent">
+              {handleTranslation<string>('heroSection.headlineAccent') || 'fast, scalable web apps'}
             </span>
-            {' '}
-            <span className="hero-name__last">
-              {handleTranslation<string>('heroSection.surname') || 'Palacios'}
+            <span className="hero-headline__tail">
+              {handleTranslation<string>('heroSection.headlinePart2') || ', and AI-powered products.'}
             </span>
           </motion.h1>
 
@@ -85,14 +85,32 @@ export default function HeroOverlay() {
             className="hero-description"
           >
             {handleTranslation<string>('heroSection.description') ||
-              'I build scalable web experiences and intelligent solutions.'}
+              'I work with teams and startups around the world, turning ideas into digital products that scale.'}
           </motion.p>
 
           <motion.div
             initial="hidden"
             animate="visible"
+            variants={fadeUp(0.62)}
+            className="hero-chips"
+          >
+            <span className="hero-chip hero-chip--accent">
+              {handleTranslation<string>('heroSection.chipYears') || '5+ years'}
+            </span>
+            <span className="hero-chip hero-chip--accent">
+              {handleTranslation<string>('heroSection.chipProjects') || '10+ projects'}
+            </span>
+            <span className="hero-chip">React</span>
+            <span className="hero-chip">Next.js</span>
+            <span className="hero-chip">Node</span>
+            <span className="hero-chip">IA / LLMs</span>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            animate="visible"
             variants={fadeUp(0.7)}
-            style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginTop: 12 }}
+            style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginTop: 16 }}
           >
             <PillButton
               variant="contained"
@@ -103,7 +121,7 @@ export default function HeroOverlay() {
                 fontSize: '0.8125rem',
                 letterSpacing: '0.04em',
                 fontFamily: 'var(--font-space-grotesk), sans-serif',
-                fontWeight: 600,
+                fontWeight: 700,
                 py: 1.25,
                 px: 3.5,
               }}
@@ -124,7 +142,7 @@ export default function HeroOverlay() {
                 px: 3.5,
               }}
             >
-              {handleTranslation<string>('appBar.item5') || 'My Projects'}
+              {handleTranslation<string>('heroSection.viewProjects') || 'View projects'}
             </PillButton>
           </motion.div>
         </div>
@@ -133,13 +151,16 @@ export default function HeroOverlay() {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          style={{ pointerEvents: 'auto' }}
+          style={{ pointerEvents: 'auto', position: 'relative' }}
         >
+          <div className="hero-glow-halo" aria-hidden />
           <HeroCoin />
+          <span className="hero-coin-hint" aria-hidden>
+            {handleTranslation<string>('heroSection.coinHint') || 'Click or drag to spin'}
+          </span>
         </motion.div>
       </div>
 
-      {/* Bottom: scroll indicator */}
       <div
         className="hero-bottom"
         style={{
