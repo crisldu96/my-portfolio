@@ -38,20 +38,19 @@ test.describe('Home page - Hero section content', () => {
   })
 
   test('the hero displays the developer name and surname', async ({ page }) => {
-    const hero = page.locator('.hero-overlay')
-    await expect(hero.locator('.hero-name__first')).toBeVisible()
-    await expect(hero.locator('.hero-name__first')).toContainText('Cristopher')
-    await expect(hero.locator('.hero-name__last')).toContainText('Palacios')
+    const eyebrow = page.locator('.hero-eyebrow')
+    await expect(eyebrow).toBeVisible()
+    await expect(eyebrow).toContainText('Cristopher')
+    await expect(eyebrow).toContainText('Palacios')
   })
 
   test('the hero shows the role pill with the developer title', async ({ page }) => {
     await expect(page.getByText('Full Stack & AI Developer')).toBeVisible()
   })
 
-  test('the hero shows a profile photo of the developer', async ({ page }) => {
-    const photo = page.locator('.hero-photo')
-    await expect(photo).toBeVisible()
-    await expect(photo).toHaveAttribute('alt', 'Cristopher Palacios')
+  test('the hero shows the 3D coin visual', async ({ page }) => {
+    const coin = page.locator('.hero-coin')
+    await expect(coin).toBeAttached()
   })
 
   test('the LET\'S TALK button links to the contact section', async ({ page }) => {
