@@ -70,3 +70,7 @@ scripts/
 
 # Claude local settings
 .claude/settings.local.json
+
+# Superpowers brainstorm visual companion
+.superpowers/
+seo-audit/
