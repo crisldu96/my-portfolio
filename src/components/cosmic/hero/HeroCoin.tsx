@@ -1,19 +1,42 @@
 'use client';
 
-import { useRef, useState, Suspense } from 'react';
+import { useRef, useState, useMemo, Suspense, useEffect } from 'react';
 import { Canvas, useFrame, useLoader, ThreeEvent } from '@react-three/fiber';
-import { TextureLoader, Group, RepeatWrapping } from 'three';
+import * as THREE from 'three';
 
 interface CoinProps {
   frontSrc: string;
-  backSrc: string;
+  reducedMotion: boolean;
 }
 
-function Coin({ frontSrc, backSrc }: CoinProps) {
-  const groupRef = useRef<Group>(null);
-  const [front, back] = useLoader(TextureLoader, [frontSrc, backSrc]);
-  back.wrapS = RepeatWrapping;
-  back.repeat.x = -1;
+function createMonogramTexture(size = 512): THREE.CanvasTexture {
+  const c = document.createElement('canvas');
+  c.width = c.height = size;
+  const ctx = c.getContext('2d')!;
+  const bg = ctx.createRadialGradient(size * 0.32, size * 0.28, 10, size / 2, size / 2, size / 2);
+  bg.addColorStop(0, '#2a3f7a');
+  bg.addColorStop(1, '#0b1430');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+  ctx.fill();
+  const grad = ctx.createLinearGradient(0, 0, size, size);
+  grad.addColorStop(0, '#3B82F6');
+  grad.addColorStop(1, '#7C3AED');
+  ctx.fillStyle = grad;
+  ctx.font = `900 ${size * 0.55}px 'Space Grotesk', system-ui, sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('CP', size / 2, size / 2 + size * 0.02);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function Coin({ frontSrc, reducedMotion }: CoinProps) {
+  const groupRef = useRef<THREE.Group>(null);
+  const front = useLoader(THREE.TextureLoader, frontSrc);
+  const back = useMemo(() => createMonogramTexture(512), []);
 
   const [spinVel, setSpinVel] = useState(0);
   const dragging = useRef(false);
@@ -28,13 +51,15 @@ function Coin({ frontSrc, backSrc }: CoinProps) {
     if (!dragging.current) {
       targetRot.current.y += spinVel * dt;
       setSpinVel((v) => v * Math.pow(0.18, dt));
-      targetRot.current.y += 0.25 * dt;
-      targetRot.current.x += Math.sin(idleFloat.current * 0.6) * 0.002;
+      if (!reducedMotion) {
+        targetRot.current.y += 0.25 * dt;
+        targetRot.current.x += Math.sin(idleFloat.current * 0.6) * 0.002;
+      }
     }
 
     groupRef.current.rotation.y += (targetRot.current.y - groupRef.current.rotation.y) * Math.min(1, dt * 10);
     groupRef.current.rotation.x += (targetRot.current.x - groupRef.current.rotation.x) * Math.min(1, dt * 10);
-    groupRef.current.position.y = Math.sin(idleFloat.current * 1.4) * 0.05;
+    groupRef.current.position.y = reducedMotion ? 0 : Math.sin(idleFloat.current * 1.4) * 0.05;
   });
 
   const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
@@ -98,9 +123,55 @@ function Coin({ frontSrc, backSrc }: CoinProps) {
   );
 }
 
-export default function HeroCoin({ frontSrc = '/assets/images/header-1.png', backSrc = '/assets/images/header-1.png' }: Partial<CoinProps>) {
+function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+  return reduced;
+}
+
+function useWebGLSupported(): boolean {
+  const [supported, setSupported] = useState(true);
+  useEffect(() => {
+    try {
+      const c = document.createElement('canvas');
+      const gl = c.getContext('webgl2') || c.getContext('webgl');
+      setSupported(!!gl);
+    } catch {
+      setSupported(false);
+    }
+  }, []);
+  return supported;
+}
+
+export default function HeroCoin({ frontSrc = '/assets/images/header-1.png' }: Partial<{ frontSrc: string }>) {
+  const reducedMotion = usePrefersReducedMotion();
+  const webglOk = useWebGLSupported();
+
+  if (!webglOk) {
+    return (
+      <div
+        className="hero-coin hero-coin-fallback"
+        role="img"
+        aria-label="Cristopher Palacios — monogram"
+      >
+        CP
+      </div>
+    );
+  }
+
   return (
-    <div className="hero-coin" aria-label="Cristopher Palacios — clic o arrastra para girar">
+    <div
+      className="hero-coin"
+      role="img"
+      aria-label={reducedMotion ? 'Cristopher Palacios coin (static)' : 'Cristopher Palacios coin — click or drag to spin'}
+    >
       <Canvas
         camera={{ position: [0, 0, 4.2], fov: 32 }}
         dpr={[1, 2]}
@@ -110,8 +181,9 @@ export default function HeroCoin({ frontSrc = '/assets/images/header-1.png', bac
         <directionalLight position={[3, 3, 5]} intensity={1.4} color="#F0F4FF" />
         <directionalLight position={[-3, 2, 2]} intensity={0.8} color="#00D4FF" />
         <pointLight position={[0, -2, 3]} intensity={0.6} color="#7C3AED" />
+        <directionalLight position={[-2, -1.5, -2]} intensity={0.5} color="#00D4FF" />
         <Suspense fallback={null}>
-          <Coin frontSrc={frontSrc} backSrc={backSrc} />
+          <Coin frontSrc={frontSrc} reducedMotion={reducedMotion} />
         </Suspense>
       </Canvas>
     </div>
