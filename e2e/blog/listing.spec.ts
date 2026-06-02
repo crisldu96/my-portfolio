@@ -7,7 +7,7 @@ test.describe('Blog listing - User arrives at the blog page', () => {
 
   test('the blog listing page loads with a title containing "Blog" and "Cristopher Palacios"', async ({ page }) => {
     await expect(page).toHaveTitle(/Blog.*Cristopher Palacios/)
-    await expect(page.locator('h2')).toContainText('Blog')
+    await expect(page.locator('h1')).toContainText('Blog')
   })
 
   test('the AppBar includes a Blog navigation link', async ({ page }) => {
@@ -27,20 +27,20 @@ test.describe('Blog listing - User browses available posts', () => {
   })
 
   test('at least one post card is visible on the listing page', async ({ page }) => {
-    const cards = page.locator('[class*="MuiCard-root"]')
+    const cards = page.locator('.blog-list-card')
     await expect(cards.first()).toBeVisible()
   })
 
   test('the first post card shows a title, reading time, and tags', async ({ page }) => {
-    const card = page.locator('[class*="MuiCard-root"]').first()
+    const card = page.locator('.blog-list-card').first()
     await expect(card).toContainText('min read')
-    await expect(card.locator('[class*="MuiChip-root"]').first()).toBeVisible()
+    await expect(card.locator('.blog-list-chip').first()).toBeVisible()
   })
 
   test('clicking a post card navigates to the post page', async ({ page }) => {
-    const firstLink = page.locator('a[href*="/blog/"]').first()
+    const firstLink = page.locator('a[href^="/blog/"]').first()
     await firstLink.click()
     await page.waitForURL('**/blog/**')
-    await expect(page.locator('h2').first()).toBeVisible()
+    await expect(page.locator('h1').first()).toBeVisible()
   })
 })

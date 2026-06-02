@@ -8,7 +8,7 @@ test.describe('Blog post - User reads a blog article', () => {
   })
 
   test('the post page displays the article title and content sections', async ({ page }) => {
-    await expect(page.locator('h2').first()).toContainText('How I Built a Full Stack App')
+    await expect(page.locator('h1').first()).toContainText('How I Built a Full Stack App')
     await expect(page.locator('body')).toContainText('The Vision')
     await expect(page.locator('body')).toContainText('Architecture Decisions')
   })
