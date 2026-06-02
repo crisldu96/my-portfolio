@@ -129,6 +129,10 @@ jobs:
           allure_history: allure-history
           keep_reports: 20
 
+      - name: Strip root-owned .git from allure-history
+        if: github.ref == 'refs/heads/master'
+        run: sudo rm -rf allure-history/.git
+
       - name: Publish Allure report to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
