@@ -12,7 +12,9 @@ test.describe('Home page - User views the Contact section', () => {
     await expect(contact).toContainText('Contact me at:')
   })
 
-  test('the contact section shows the 05 / Contact label', async ({ page }) => {
+  // TODO: re-enable when the section-number prefixes ("05 / Contact") return to the
+  // contact section header. Removed during the cosmic redesign.
+  test.skip('the contact section shows the 05 / Contact label', async ({ page }) => {
     await expect(page.getByText('05 / Contact')).toBeAttached()
   })
 })
