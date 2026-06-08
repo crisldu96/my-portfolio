@@ -23,7 +23,7 @@ import {
 import CpMonogram from '../cosmic/CpMonogram';
 import { cosmic } from '@/themes/cosmicTokens';
 
-import { IconHome2, IconUser, IconBriefcase, IconCode, IconDeviceLaptop, IconMail, IconArticle } from '@tabler/icons-react';
+import { IconHome2, IconUser, IconRoute2, IconBriefcase, IconCode, IconDeviceLaptop, IconMail, IconArticle } from '@tabler/icons-react';
 import { IconBrandLinkedin, IconBrandGithub, IconBrandDeno } from '@tabler/icons-react';
 import MenuIcon from '@mui/icons-material/Menu';
 import LanguageSwitch from '../LanguageSwitch';
@@ -75,7 +75,7 @@ const AppBar = ({ ...others }) => {
   };
 
   useEffect(() => {
-    const sectionIds = ['contact', 'projects', 'skills', 'experience', 'about', 'home'];
+    const sectionIds = ['contact', 'projects', 'skills', 'experience', 'proceso', 'about', 'home'];
     const handleScroll = () => {
       const scrollPos = window.scrollY + 120;
       for (const id of sectionIds) {
@@ -95,6 +95,7 @@ const AppBar = ({ ...others }) => {
   const navItems = [
     { href: '/#home', id: 'home', labelKey: 'appBar.item1', icon: <IconHome2 /> },
     { href: '/#about', id: 'about', labelKey: 'appBar.item2', icon: <IconUser /> },
+    { href: '/#proceso', id: 'proceso', labelKey: 'appBar.proceso', icon: <IconRoute2 /> },
     { href: '/#experience', id: 'experience', labelKey: 'appBar.item3', icon: <IconBriefcase /> },
     { href: '/#skills', id: 'skills', labelKey: 'appBar.item4', icon: <IconCode /> },
     { href: '/#projects', id: 'projects', labelKey: 'appBar.item5', icon: <IconDeviceLaptop /> },
