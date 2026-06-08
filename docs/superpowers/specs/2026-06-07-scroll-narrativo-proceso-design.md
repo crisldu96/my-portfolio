@@ -76,16 +76,18 @@ const ProcessBackground3D = dynamic(
   () => import('@/components/cosmic/ProcessBackground3D'),
   { ssr: false }
 );
-// ...después del SectionWrapper de "about":
-<SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={24} />
+// ...después del SectionWrapper de "about" (bg1):
+<SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={24} /> {/* about(bg1) -> proceso(bg0) */}
 <SectionWrapper id="proceso" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
   <div className="cosmic-ambient" data-accent="violet" />
   <ProcessBackground3D />
   <div className="dotgrid" />
   <div className="section-content"><ProcessSection /></div>
 </SectionWrapper>
-<SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg1} height={24} />
+<SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg0} height={24} /> {/* proceso(bg0) -> experience(bg0): plano */}
 ```
+
+> **Coherencia de color:** Proceso usa `bg0` (como Experience). El divider que **originalmente** precedía a Experience era `bg1→bg0`; al insertar Proceso, ese divider se **reubica** delante de Proceso. Entre Proceso y Experience el divider va `bg0→bg0` para no introducir un "blip" a `bg1`. No cambiamos el `bgcolor` de Experience ni de las secciones siguientes (fuera de alcance).
 
 ## 5. Flujo de datos (progreso → escena, sin re-render de React)
 
@@ -137,7 +139,7 @@ Añadir a `text-content-en.json` y `text-content-es.json`:
 "processSection": {
   "sectionLabel": "Mi proceso",          // EN: "My process"
   "title": "Cómo trabajo, paso a paso",  // EN: "How I work, step by step"
-  "subtitle": "...",
+  "subtitle": "De la idea al despliegue: un método claro, probado y repetible.", // EN: "From idea to deployment: a clear, tested, repeatable method."
   "skipLabel": "Saltar animación e ir a la siguiente sección",
   "steps": [
     { "title": "Descubrir", "description": "Entiendo el problema, el usuario y las restricciones antes de escribir una línea de código." },
@@ -149,9 +151,11 @@ Añadir a `text-content-en.json` y `text-content-es.json`:
 }
 ```
 
-Acceso vía `useLanguage().handleTranslation('processSection.steps.0.title')` (lodash `_.get`).
+Acceso vía `useLanguage().handleTranslation('processSection.steps.0.title')` (lodash `_.get`). El método correcto es **`handleTranslation`** (verificado en `src/contexts/LanguageContext.tsx`; el `handleTraslation` del `CLAUDE.md` es un typo de la doc). Soporta genérico para arrays: `handleTranslation<{title:string;description:string}[]>('processSection.steps')`.
 
-> Reindexado: las etiquetas numéricas de sección (`01`, `02`, …) están hardcoded por componente. Al insertar "Proceso" entre About (01) y Experience (02) hay que reindexar las posteriores (Experience→03, Skills→04, …). Tarea mecánica incluida en el plan.
+> **Reindexado:** las etiquetas numéricas de sección (`01`, `02`, …) están hardcoded por componente. Al insertar "Proceso" entre About (01) y Experience (02) hay que reindexar las posteriores (Experience→03, Skills→04, …). Tarea mecánica incluida en el plan.
+
+> **Nav "Proceso":** los labels viven como `appBar.item1..item6` en `text-content-{en,es}.json` y se renderizan en `src/components/layout/AppBar.tsx`. Añadir el ancla `#proceso` implica una clave nueva (`appBar.itemX`) + su entrada en el menú, manteniendo el orden visual. Reversible.
 
 ## 8. Responsividad y reduced-motion (gate único)
 
@@ -162,7 +166,9 @@ gsap.matchMedia().add(
   () => { /* pin + scrub + 3D; crear los ScrollTrigger AQUÍ dentro */ }
 );
 ```
-Rama móvil / reduced-motion / coarse-pointer: **no** se crea pin ni scrub. El mismo DOM (5 `<article>` apilados) se muestra estático, con **póster de fondo** (gradiente cosmic con `aspect-ratio` reservado para CLS<0.1); el Canvas 3D no se monta. `gsap.matchMedia` revierte automáticamente todo al cambiar la condición.
+Rama móvil / reduced-motion / coarse-pointer: **no** se crea pin ni scrub. El mismo DOM (5 `<article>` apilados) se muestra estático, con **póster de fondo**; el Canvas 3D no se monta. `gsap.matchMedia` revierte automáticamente todo al cambiar la condición.
+
+> **Póster y CLS:** el póster inicial es un **gradiente cosmic CSS** (sin `<img>` → sin riesgo de CLS por carga). La nota de "reservar `aspect-ratio`/dimensiones para CLS<0.1" aplica solo si en el futuro se sustituye por un `<img>` con un frame 3D real capturado.
 
 ## 9. Accesibilidad — criterios de aceptación
 
