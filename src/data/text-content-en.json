@@ -6,7 +6,8 @@
     "item4": "Skills",
     "item5": "My Projects",
     "item6": "Contact Me",
-    "item7": "Blog"
+    "item7": "Blog",
+    "proceso": "Process"
   },
   "heroSection": {
     "eyebrow": "Cristopher Palacios",
@@ -49,6 +50,20 @@
       "bilingual": "Bilingual"
     },
     "currentlyBuilding": "CURRENTLY BUILDING"
+  },
+  "processSection": {
+    "sectionLabel": "My process",
+    "title": "How I work, step by step",
+    "subtitle": "From idea to deployment: a clear, tested, repeatable method.",
+    "skipLabel": "Skip animation and jump to the next section",
+    "liveTemplate": "Step {n} of {total}: {title}",
+    "steps": [
+      { "title": "Discover", "description": "I dig into the problem, the user, and the constraints before writing a single line of code." },
+      { "title": "Design", "description": "I shape the architecture, the contracts, and the experience, separating reusable patterns from domain-specific logic." },
+      { "title": "Build", "description": "I implement in small, typed increments that follow the project's conventions." },
+      { "title": "Test", "description": "I cover it with unit and E2E tests, validating accessibility and performance, not just the happy path." },
+      { "title": "Ship", "description": "I deploy with green CI, monitoring, and clear user feedback at every state." }
+    ]
   },
   "experienceSection": {
     "sectionLabel": "Experience",

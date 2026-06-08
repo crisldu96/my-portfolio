@@ -6,7 +6,8 @@
     "item4": "Habilidades",
     "item5": "Mis Proyectos",
     "item6": "Contactame",
-    "item7": "Blog"
+    "item7": "Blog",
+    "proceso": "Proceso"
   },
   "heroSection": {
     "eyebrow": "Cristopher Palacios",
@@ -49,6 +50,20 @@
       "bilingual": "Bilingüe"
     },
     "currentlyBuilding": "CONSTRUYENDO AHORA"
+  },
+  "processSection": {
+    "sectionLabel": "Mi proceso",
+    "title": "Cómo trabajo, paso a paso",
+    "subtitle": "De la idea al despliegue: un método claro, probado y repetible.",
+    "skipLabel": "Saltar animación e ir a la siguiente sección",
+    "liveTemplate": "Paso {n} de {total}: {title}",
+    "steps": [
+      { "title": "Descubrir", "description": "Entiendo el problema, el usuario y las restricciones antes de escribir una línea de código." },
+      { "title": "Diseñar", "description": "Defino arquitectura, contratos y experiencia: separo lo reutilizable de lo específico del dominio." },
+      { "title": "Construir", "description": "Implemento en incrementos pequeños y tipados, siguiendo las convenciones del proyecto." },
+      { "title": "Probar", "description": "Cubro con pruebas unitarias y E2E; valido accesibilidad y rendimiento, no solo el happy path." },
+      { "title": "Desplegar", "description": "Despliego con CI en verde, monitoreo y feedback claro al usuario en cada estado." }
+    ]
   },
   "experienceSection": {
     "sectionLabel": "Experiencia",
