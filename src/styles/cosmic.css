@@ -387,6 +387,177 @@
   .about-bg-3d { display: none; }
 }
 
+/* ===== "Mi proceso" scrollytelling ===== */
+
+/* 3D backdrop + static gradient poster (poster visible on mobile/reduced-motion) */
+.process-bg-3d {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  background:
+    radial-gradient(60% 60% at 35% 40%, rgba(0, 212, 255, 0.18), transparent 70%),
+    radial-gradient(55% 55% at 72% 70%, rgba(124, 58, 237, 0.20), transparent 70%);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+}
+
+/* Pinned stage: full viewport, panels overlaid (desktop motion branch) */
+.process-pin {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.process-stage {
+  position: relative;
+  min-height: 50vh;
+}
+
+/* Each step panel overlaps in the same spot; GSAP crossfades opacity/y */
+.process-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Scrim: keeps text AA-legible over the animated 3D scene */
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(8, 12, 26, 0.55), rgba(8, 12, 26, 0.45));
+}
+
+.process-step__index {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #00D4FF;
+}
+
+.process-step__title {
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: #F0F4FF;
+  margin: 8px 0 12px;
+}
+
+.process-step__desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #C7D2E8;
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* Progress dots: keyboard-operable, >=44px, non-color cue (ring + scale + number) */
+.process-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 2;
+}
+
+.process-dot {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid rgba(136, 153, 187, 0.5);
+  background: rgba(8, 12, 26, 0.6);
+  color: #8899BB;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.process-dot:hover {
+  border-color: #00D4FF;
+}
+
+.process-dot:focus-visible {
+  outline: 3px solid #00D4FF;
+  outline-offset: 2px;
+}
+
+.process-dot--active {
+  transform: scale(1.15);
+  border-color: #00D4FF;
+  color: #F0F4FF;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.25);
+}
+
+/* Skip link: first focusable element of the block */
+.process-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 5;
+}
+
+.process-skip-link:focus {
+  left: 16px;
+  top: 16px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #0D1530;
+  color: #F0F4FF;
+  border: 1px solid #00D4FF;
+}
+
+/* Visually-hidden live region */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mobile / reduced-motion: stacked static cards, no pin/overlap */
+@media (max-width: 767px), (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .process-pin {
+    min-height: auto;
+    display: block;
+  }
+  .process-stage {
+    min-height: auto;
+  }
+  .process-step {
+    position: relative;
+    inset: auto;
+    opacity: 1 !important;
+    transform: none !important;
+    margin-bottom: 24px;
+  }
+  .process-dots {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin: 16px auto 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-bg-3d { opacity: 0.35; }
+}
+
 /* Hero coin (3D) */
 .hero-coin {
   position: absolute;
