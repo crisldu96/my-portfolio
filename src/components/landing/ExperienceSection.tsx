@@ -48,7 +48,7 @@ const ExperienceSection = () => {
   return (
     <Container maxWidth="lg">
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
-        <SectionLabel number="02" label={handleTranslation('experienceSection.sectionLabel')} />
+        <SectionLabel number="03" label={handleTranslation('experienceSection.sectionLabel')} />
         <h2 className="section-headline" style={{ marginBottom: 0 }}>
           <span className="reveal-on-scroll">
             <span>{handleTranslation('experienceSection.title')}</span>

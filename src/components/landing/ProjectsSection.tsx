@@ -227,7 +227,7 @@ const ProjectsSection = () => {
         }
       `}</style>
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
-        <SectionLabel number="04" label={handleTranslation('projectSection.sectionLabel')} />
+        <SectionLabel number="05" label={handleTranslation('projectSection.sectionLabel')} />
         <h2 className="section-headline" style={{ marginBottom: 12 }}>
           <span className="reveal-on-scroll">
             <span>{handleTranslation('projectSection.title')}</span>

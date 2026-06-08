@@ -125,7 +125,7 @@ const SkillsSection = () => {
   return (
     <Container maxWidth="lg">
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
-        <SectionLabel number="03" label={handleTranslation('skillsSection.sectionLabel')} />
+        <SectionLabel number="04" label={handleTranslation('skillsSection.sectionLabel')} />
         <h2 className="section-headline" style={{ marginBottom: 12 }}>
           <span className="reveal-on-scroll">
             <span>{handleTranslation('skillsSection.title')}</span>

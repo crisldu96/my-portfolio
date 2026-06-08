@@ -133,7 +133,7 @@ const BlogHighlightSection = ({ posts }: BlogHighlightSectionProps) => {
 
       <div style={{ textAlign: 'center', marginBottom: 64 }}>
         <SectionLabel
-          number="05"
+          number="06"
           label={handleTranslation('blogHighlightSection.sectionLabel')}
         />
         <h2 className="section-headline" style={{ marginBottom: 12 }}>

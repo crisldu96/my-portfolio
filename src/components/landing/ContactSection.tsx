@@ -54,7 +54,7 @@ const ContactSection = () => {
     <div className="project-info">
       <Container maxWidth="md">
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <SectionLabel number="06" label={handleTranslation('contactSection.sectionLabel')} />
+          <SectionLabel number="07" label={handleTranslation('contactSection.sectionLabel')} />
           <h2 className="section-headline" style={{ marginBottom: 16 }}>
             <span className="reveal-on-scroll">
               <span>{handleTranslation('contactSection.title')}</span>
