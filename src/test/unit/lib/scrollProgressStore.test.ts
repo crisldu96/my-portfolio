@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import {
   scrollProgressStore,
   progressToActiveStep,
@@ -6,6 +6,12 @@ import {
 } from '@/lib/scrollProgressStore';
 
 describe('scrollProgressStore', () => {
+  const cleanups: Array<() => void> = [];
+  afterEach(() => {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+  });
+
   beforeEach(() => {
     scrollProgressStore.set(0);
   });
@@ -20,6 +26,7 @@ describe('scrollProgressStore', () => {
     const unsubscribe = scrollProgressStore.subscribe(() => {
       calls += 1;
     });
+    cleanups.push(unsubscribe);
     scrollProgressStore.set(0.1);
     scrollProgressStore.set(0.2);
     expect(calls).toBe(2);
@@ -31,6 +38,7 @@ describe('scrollProgressStore', () => {
     const unsubscribe = scrollProgressStore.subscribe(() => {
       calls += 1;
     });
+    cleanups.push(unsubscribe);
     unsubscribe();
     scrollProgressStore.set(0.5);
     expect(calls).toBe(0);
@@ -57,5 +65,9 @@ describe('progressToActiveStep', () => {
 
   it('devuelve 0 ante NaN', () => {
     expect(progressToActiveStep(Number.NaN)).toBe(0);
+  });
+
+  it('clampa Infinity al último paso', () => {
+    expect(progressToActiveStep(Infinity)).toBe(PROCESS_STEP_COUNT - 1);
   });
 });
