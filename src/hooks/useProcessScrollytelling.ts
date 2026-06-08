@@ -8,6 +8,8 @@ import {
   scrollProgressStore,
   progressToActiveStep,
   PROCESS_STEP_COUNT,
+  PROCESS_DESKTOP_QUERY,
+  PROCESS_FALLBACK_QUERY,
 } from '@/lib/scrollProgressStore';
 import { getLenis } from '@/lib/lenisInstance';
 
@@ -21,6 +23,7 @@ interface Options {
   pinRef: RefObject<HTMLDivElement | null>;
   stepCount?: number;
   panelSelector?: string;
+  stepIdPrefix?: string;
   onStepChange: (step: number) => void;
 }
 
@@ -29,6 +32,7 @@ export function useProcessScrollytelling({
   pinRef,
   stepCount = PROCESS_STEP_COUNT,
   panelSelector = '.process-step',
+  stepIdPrefix = 'proceso-step-',
   onStepChange,
 }: Options) {
   const stRef = useRef<ScrollTrigger | null>(null);
@@ -39,7 +43,7 @@ export function useProcessScrollytelling({
       const mm = gsap.matchMedia();
 
       mm.add(
-        '(min-width: 768px) and (prefers-reduced-motion: no-preference) and (pointer: fine)',
+        PROCESS_DESKTOP_QUERY,
         () => {
           const panels = gsap.utils.toArray<HTMLElement>(panelSelector, rootRef.current!);
           if (!panels.length) return;
@@ -75,14 +79,16 @@ export function useProcessScrollytelling({
           });
 
           stRef.current = tl.scrollTrigger ?? null;
+          lastStep.current = 0;
           onStepChange(0);
         }
       );
 
-      mm.add('(max-width: 767px), (prefers-reduced-motion: reduce), (pointer: coarse)', () => {
+      mm.add(PROCESS_FALLBACK_QUERY, () => {
         // Static baseline: scene at a representative frame; no pin/scrub.
         scrollProgressStore.set(1);
         stRef.current = null;
+        lastStep.current = 0;
         onStepChange(0);
       });
     },
@@ -91,15 +97,17 @@ export function useProcessScrollytelling({
 
   const scrollToStep = (i: number) => {
     const st = stRef.current;
+    const desktop =
+      typeof window !== 'undefined' && window.matchMedia(PROCESS_DESKTOP_QUERY).matches;
     const lenis = getLenis();
-    if (st) {
+    if (st && desktop) {
       const target = st.start + (st.end - st.start) * ((i + 0.5) / stepCount);
       if (lenis) lenis.scrollTo(target, { duration: 1 });
       else window.scrollTo({ top: target, behavior: 'smooth' });
       return;
     }
-    // Fallback (mobile/reduced): scroll the step article into view.
-    const el = document.getElementById(`proceso-step-${i}`);
+    // Fallback (mobile/reduced or reverted trigger): scroll the step article into view.
+    const el = document.getElementById(`${stepIdPrefix}${i}`);
     el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 

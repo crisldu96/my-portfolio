@@ -26,3 +26,9 @@ export function progressToActiveStep(p: number, steps = PROCESS_STEP_COUNT): num
   const clamped = Math.min(Math.max(p, 0), 1);
   return Math.min(steps - 1, Math.floor(clamped * steps));
 }
+
+export const PROCESS_DESKTOP_QUERY =
+  '(min-width: 768px) and (prefers-reduced-motion: no-preference) and (pointer: fine)';
+
+export const PROCESS_FALLBACK_QUERY =
+  '(max-width: 767px), (prefers-reduced-motion: reduce), (pointer: coarse)';
