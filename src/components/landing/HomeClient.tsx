@@ -17,6 +17,7 @@ import ExperienceSection from '@/components/landing/ExperienceSection';
 import SkillsSection from '@/components/landing/SkillsSection';
 import ProjectsSection from '@/components/landing/ProjectsSection';
 import AboutMeSection from '@/components/landing/AboutMeSection';
+import ProcessSection from '@/components/landing/ProcessSection';
 import ContactSection from '@/components/landing/ContactSection';
 import BlogHighlightSection from '@/components/landing/BlogHighlightSection';
 import { cosmic } from '@/themes/cosmicTokens';
@@ -28,6 +29,10 @@ const AboutBackground3D = dynamic(
 );
 const ExperienceBackground3D = dynamic(
   () => import('@/components/cosmic/ExperienceBackground3D'),
+  { ssr: false }
+);
+const ProcessBackground3D = dynamic(
+  () => import('@/components/cosmic/ProcessBackground3D'),
   { ssr: false }
 );
 
@@ -55,6 +60,15 @@ export default function HomeClient({ recentPosts }: HomeClientProps) {
       </SectionWrapper>
 
       <SectionDivider fromColor={cosmic.bg1} toColor={cosmic.bg0} height={24} />
+
+      <SectionWrapper id="proceso" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
+        <div className="cosmic-ambient" data-accent="violet" />
+        <ProcessBackground3D />
+        <div className="dotgrid" />
+        <div className="section-content"><ProcessSection /></div>
+      </SectionWrapper>
+
+      <SectionDivider fromColor={cosmic.bg0} toColor={cosmic.bg0} height={24} />
 
       <SectionWrapper id="experience" sx={{ bgcolor: cosmic.bg0, position: 'relative', overflow: 'hidden' }}>
         <ExperienceBackground3D />
