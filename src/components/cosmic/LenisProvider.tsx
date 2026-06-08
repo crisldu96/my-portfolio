@@ -2,12 +2,17 @@
 
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { setLenis } from '@/lib/lenisInstance';
 
 export default function LenisProvider() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) return;
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
       duration: 1.1,
@@ -16,13 +21,13 @@ export default function LenisProvider() {
       wheelMultiplier: 1,
       touchMultiplier: 1.2,
     });
+    setLenis(lenis);
 
-    let rafId = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
+    // Single clock: drive Lenis from the GSAP ticker and keep ScrollTrigger in sync.
+    lenis.on('scroll', ScrollTrigger.update);
+    const update = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(update);
+    gsap.ticker.lagSmoothing(0);
 
     // Hash anchor scroll via Lenis for in-page navigation
     const onAnchorClick = (e: MouseEvent) => {
@@ -45,10 +50,16 @@ export default function LenisProvider() {
     };
     document.addEventListener('click', onAnchorClick);
 
+    // Pin start/end are measured from layout: refresh after first paint settles.
+    const refreshId = window.setTimeout(() => ScrollTrigger.refresh(), 400);
+
     return () => {
-      cancelAnimationFrame(rafId);
+      window.clearTimeout(refreshId);
+      gsap.ticker.remove(update);
+      lenis.off('scroll', ScrollTrigger.update);
       document.removeEventListener('click', onAnchorClick);
       lenis.destroy();
+      setLenis(null);
     };
   }, []);
 
