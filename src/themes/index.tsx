@@ -2,10 +2,8 @@
 import { useMemo, ReactNode } from 'react';
 
 // material-ui
-import { CssBaseline, StyledEngineProvider } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { createTheme, ThemeOptions, ThemeProvider, Theme } from '@mui/material/styles';
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
 
 // project import
 import useConfig from '../hooks/useConfig';
@@ -22,8 +20,6 @@ import { TypographyVariantsOptions } from '@mui/material/styles';
 interface Props {
   children: ReactNode;
 }
-
-const cache = createCache({ key: 'css', prepend: true });
 
 export default function ThemeCustomization({ children }: Props) {
   const { borderRadius, fontFamily, navType, outlinedFilled, presetColor, rtlLayout } = useConfig();
@@ -60,13 +56,9 @@ export default function ThemeCustomization({ children }: Props) {
   themes.components = useMemo(() => componentStyleOverrides(themes, borderRadius, outlinedFilled), [themes, borderRadius, outlinedFilled]);
 
   return (
-    <StyledEngineProvider injectFirst>
-      <CacheProvider value={cache}>
-        <ThemeProvider theme={themes}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
-      </CacheProvider>
-    </StyledEngineProvider>
+    <ThemeProvider theme={themes}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 }
